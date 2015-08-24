@@ -1,5 +1,5 @@
 {
-  "name": "Project",
+  "name": "Plugin",
   "base": "PersistedModel",
   "strict": false,
   "idInjection": false,
@@ -7,20 +7,27 @@
     "validateUpsert": true
   },
   "properties": {
-    "admin_id": {
-      "type": "number",
-      "required": true
-    },
-    "title": {
-      "type": "string",
-      "id": false,
-      "required": true
-    },
     "id": {
       "type": "number",
       "id": true,
       "required": true,
       "index": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "npm_repo": {
+      "type": "string",
+      "required": true
+    },
+    "version_code": {
+      "type": "string",
+      "required": true
+    },
+    "comment": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

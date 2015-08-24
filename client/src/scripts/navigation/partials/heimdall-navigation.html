@@ -1,0 +1,13 @@
+<nav class="navigation" ng-if="isActive()">
+
+    <!--<div class="icon-profile"><span class="glyphicon glyphicon-user"></span></div>-->
+    <div class="icon-profile"><img ng-src="{{getAvatar()}}"></div>
+    <div>{{account.firstname}} {{account.name}}</div>
+
+    <ul>
+        <li><a ui-sref="home"><span class="glyphicon glyphicon-home"></span>{{'Home' | translate}}</a></li>
+        <li><a ui-sref="project"><span class="glyphicon glyphicon-star"></span>{{'Projects' | translate}}</a></li>
+        <li><a ui-sref="build"><span class="glyphicon glyphicon-briefcase"></span>{{'Builds' | translate}}</a></li>
+        <li><a ui-sref="user"><span class="glyphicon glyphicon-user"></span>{{'Users' | translate}}</a></li>
+    </ul>
+</nav>
