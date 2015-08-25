@@ -1,30 +1,30 @@
 {
-    "name": "Build",
-    "base": "PersistedModel",
-    "strict": false,
-    "idInjection": false,
-    "options": {
-        "validateUpsert": true
+  "name": "Build",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "project_id": {
+      "type": "number",
+      "id": true,
+      "required": true
     },
-    "properties": {
-        "id": {
-            "type": "number",
-            "id": true,
-            "required": true,
-            "index": true
-        },
-        "project_id": {
-            "type": "number",
-            "id": true,
-            "required": true
-        },
-        "title": {
-            "type": "string",
-            "required": true
-        }
+    "title": {
+      "type": "string",
+      "required": true
     },
-    "validations": [],
-    "relations": {},
-    "acls": [],
-    "methods": []
+    "id": {
+      "type": "number",
+      "id": true,
+      "required": false,
+      "index": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
 }

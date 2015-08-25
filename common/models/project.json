@@ -19,7 +19,7 @@
     "id": {
       "type": "number",
       "id": true,
-      "required": true,
+      "required": false,
       "index": true
     }
   },

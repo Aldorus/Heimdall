@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     config = require('../GulpConfig');
 
 module.exports = function (done) {
-    console.log(__dirname);
+
     if (gutil.env.notest) {
         gutil.log(gutil.colors.yellow('Warning : Tests karma are skipped'));
         return;

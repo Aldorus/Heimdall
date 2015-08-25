@@ -1,5 +1,48 @@
 @import "../../../styles/values";
 
-.page-auth {
-    background: white;
+.page-auth, .page-root {
+    background: url('../assets/home.jpg');
+    background-size: cover;
+    background-position: 100%;
+    background-repeat: no-repeat;
+    font-size: 1.5rem;
+
+    #wrapper {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .auth-form {
+        display: inline-block;
+        width: 40%;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 5px;
+        text-align: left;
+
+        form {
+            margin: 10px 0;
+            .form-group {
+                input {
+                    display: inline-block;
+                    width: 100%;
+                    margin: 0 0 7px 0;
+                }
+            }
+
+            .form-button {
+                .no-account {
+                    padding-left: 2px;
+                    width: 70%;
+                    font-size: 1rem;
+                    text-align: left;
+                    float: left;
+                }
+                text-align: right;
+                margin-top: 10px;
+            }
+        }
+    }
 }

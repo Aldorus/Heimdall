@@ -4,14 +4,15 @@
     background: $menuColor;
     display: block;
     float: left;
-    width: 15%;
+    width: $menuWidth;
     height: 100%;
     color: $lightTextColor;
     box-shadow: inset -5px 0px 8px rgba(0,0,0,0.3);
     text-align: center;
+    position: fixed;
 
     .icon-profile {
-        border: 1px solid $primaryColor;
+        border: 2px solid $primaryColor;
         border-radius: 10000px;
         margin: 25px 0 10px 0;
         display: inline-block;
@@ -19,8 +20,8 @@
         .glyphicon-user, img {
             display: inline-block;
             border-radius: 10000px;
-            width: 100%;
-            height: 100%;
+            width: 90px;
+            height: 90px;
             padding: 5px;
             font-size: 5rem;
             position: relative;
@@ -47,10 +48,18 @@
 
             .glyphicon {
                 margin-right: 10px;
+                transition: all 0.1s ease;
+                font-size: 0.8rem;
+                position: relative;
+                top: 0px;
             }
 
-            &:hover {
+            &:hover, .active {
                 background: $primaryColor;
+
+                .glyphicon {
+                    margin-right: 15px;
+                }
             }
         }
     }

@@ -1,8 +1,0 @@
-node_modules/
-build/
-app/components/
-i18n/*.json
-doc/
-src/vendor/
-.idea/
-Kiwapp_GulpFile/node_modules/

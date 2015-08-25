@@ -1,35 +1,42 @@
 {
-    "name": "Heimdall",
-    "version": "1.0.0",
-    "homepage": "https://github.com/Aldorus/Heimdall",
-    "authors": [
-        "Guillaume <roussel.guillaume.gr@gmail.com>"
-    ],
-    "license": "MIT",
-    "private": true,
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "src/vendor",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "angular": "~1.4.4",
-        "angular-mocks": "~1.4.4",
-        "angular-sanitize": "~1.4.4",
-        "angular-touch": "~1.4.4",
-        "angular-ui-router": "~0.2.15",
-        "moment": "~2.10.6",
-        "normalize-css": "normalize.css#~3.0.3",
-        "angular-translate": "~2.7.0",
-        "angular-translate-loader-static-files": "~2.7.0",
-        "cryptojslib": "~3.1.2"
-    },
-    "overrides": {
-        "cryptojslib": {
-            "main": ["rollups/md5.js", "components/core.js"]
-        }
+  "name": "Heimdall",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Aldorus/Heimdall",
+  "authors": [
+    "Guillaume <roussel.guillaume.gr@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.4",
+    "angular-mocks": "~1.4.4",
+    "angular-sanitize": "~1.4.4",
+    "angular-touch": "~1.4.4",
+    "angular-ui-router": "~0.2.15",
+    "moment": "~2.10.6",
+    "normalize-css": "normalize.css#~3.0.3",
+    "angular-translate": "~2.7.0",
+    "angular-translate-loader-static-files": "~2.7.0",
+    "cryptojslib": "~3.1.2",
+    "v-button": "~1.1.0"
+  },
+  "overrides": {
+    "cryptojslib": {
+      "main": [
+        "rollups/md5.js",
+        "components/core.js"
+      ]
     }
+  },
+  "resolutions": {
+    "angular": "~1.4.4"
+  }
 }

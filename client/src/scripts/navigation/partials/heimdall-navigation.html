@@ -1,13 +1,13 @@
-<nav class="navigation" ng-if="isActive()">
+<nav class="navigation" ng-if="navigationActive()" ng-init="appear()">
 
     <!--<div class="icon-profile"><span class="glyphicon glyphicon-user"></span></div>-->
     <div class="icon-profile"><img ng-src="{{getAvatar()}}"></div>
-    <div>{{account.firstname}} {{account.name}}</div>
+    <div>{{account.firstname}} {{account.name}} | <a href="#" ng-click="logout()">{{'Logout' | translate}}</a></div>
 
     <ul>
-        <li><a ui-sref="home"><span class="glyphicon glyphicon-home"></span>{{'Home' | translate}}</a></li>
-        <li><a ui-sref="project"><span class="glyphicon glyphicon-star"></span>{{'Projects' | translate}}</a></li>
-        <li><a ui-sref="build"><span class="glyphicon glyphicon-briefcase"></span>{{'Builds' | translate}}</a></li>
-        <li><a ui-sref="user"><span class="glyphicon glyphicon-user"></span>{{'Users' | translate}}</a></li>
+        <li><a ui-sref="home" ng-class="{'active': itemIsSelected('home')}"><span class="glyphicon glyphicon-home"></span>{{'Home' | translate}}</a></li>
+        <li><a ui-sref="project" ng-class="{'active': itemIsSelected('project')}"><span class="glyphicon glyphicon-star"></span>{{'Projects' | translate}}</a></li>
+        <li><a ui-sref="version" ng-class="{'active': itemIsSelected('version')}"><span class="glyphicon glyphicon-briefcase"></span>{{'Version' | translate}}</a></li>
+        <li><a ui-sref="user" ng-class="{'active': itemIsSelected('user')}"><span class="glyphicon glyphicon-user"></span>{{'Users' | translate}}</a></li>
     </ul>
 </nav>

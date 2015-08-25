@@ -1,9 +1,10 @@
 'use strict';
 
-require('../build/build');
 require('../auth/auth');
-require('../user/user');
+require('../home/home');
 require('../project/project');
+require('../version/version');
+require('../user/user');
 require('../navigation/navigation');
 
 angular.module('heimdall', [
@@ -11,21 +12,25 @@ angular.module('heimdall', [
     'ngSanitize',
     'ui.router',
     'pascalprecht.translate',
-    'build', 'auth', 'project', 'navigation', 'user'])
-    .constant('WS_ROOT_URL', 'http://localhost:3000/')
+    'vButton',
+    'home', 'version', 'auth', 'project', 'navigation', 'user'])
+    .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
+    .directive('loader', require('./directives/loader'))
+    .service('loading', require('./services/loading'))
+
     .config(function ($urlRouterProvider, $translateProvider) {
         $urlRouterProvider.otherwise('/auth');
 
         /**
-         * The provider the the traductor module
+         * The provider the the traducer module
          */
         $translateProvider.useStaticFilesLoader({
             prefix: 'i18n/',
             suffix: '.json'
         });
         $translateProvider.useSanitizeValueStrategy('escaped');
-        $translateProvider.preferredLanguage('en_US');
+        $translateProvider.preferredLanguage('fr_FR');
     })
 ;
 
