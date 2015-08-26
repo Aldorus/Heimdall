@@ -1,10 +1,14 @@
 <div class="projects-container full-screen">
     <div class="form-project" ng-class="{'open':open}">
         <span class="glyphicon glyphicon-remove" ng-click="closeProject()"></span>
+
         <h1>{{'Create New Project' | translate}}</h1>
+
         <p>{{'Create Project Help' | translate}}</p>
+
         <form novalidate name="newProjectForm">
-            <input type="text" id="title" name="title" ng-model="newProject.title" placeholder="{{'Project Name' | translate}}" required/>
+            <input type="text" id="title" name="title" ng-model="newProject.title"
+                   placeholder="{{'Project Name' | translate}}" required/>
 
             <div class="form-button">
                 <button v-busy="createLoading" ng-click="createProject()" v-pressable>Create Project</button>
@@ -12,9 +16,13 @@
         </form>
     </div>
     <div class="list-project full-screen" ng-class="{'open':open}">
-        <div class="project new-project" ng-click="newProject()">
+        <a href="#" class="project new-project" ng-click="newProject()">
             <div class="glyphicon glyphicon-plus"></div>
             <div class="new-project-label">{{'New Project' | translate}}</div>
+        </a>
+        <div class="help-empty-project" ng-if="projects.length === 0">
+            <div class="arrow"></div>
+            <div class="text">{{'Help Empty Project' | translate}}</div>
         </div>
         <div class="project" ng-repeat="project in projects">
             <div class="desc">1/2</div>

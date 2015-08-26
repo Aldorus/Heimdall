@@ -931,49 +931,6 @@ form.ng-submitted input.ng-invalid {
   content: "\e260"; }
 
 
-.page-auth, .page-root {
-  background: url('../assets/home.jpg');
-  background-size: cover;
-  background-position: 100%;
-  background-repeat: no-repeat;
-  font-size: 1.5rem; }
-  .page-auth #wrapper, .page-root #wrapper {
-    margin: 0;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center; }
-  .page-auth .auth-form, .page-root .auth-form {
-    display: inline-block;
-    width: 40%;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    text-align: left; }
-    .page-auth .auth-form form, .page-root .auth-form form {
-      margin: 10px 0; }
-      .page-auth .auth-form form .form-group input, .page-root .auth-form form .form-group input {
-        display: inline-block;
-        width: 100%;
-        margin: 0 0 7px 0; }
-      .page-auth .auth-form form .form-button, .page-root .auth-form form .form-button {
-        text-align: right;
-        margin-top: 10px; }
-        .page-auth .auth-form form .form-button .no-account, .page-root .auth-form form .form-button .no-account {
-          padding-left: 2px;
-          width: 70%;
-          font-size: 1rem;
-          text-align: left;
-          float: left; }
-
 .loader {
   position: absolute;
   top: 0;
@@ -1071,6 +1028,49 @@ form.ng-submitted input.ng-invalid {
     -webkit-transform: perspective(140px) rotateY(180deg);
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
+
+.page-auth, .page-root {
+  background: url('../assets/home.jpg');
+  background-size: cover;
+  background-position: 100%;
+  background-repeat: no-repeat;
+  font-size: 1.5rem; }
+  .page-auth #wrapper, .page-root #wrapper {
+    margin: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .page-auth .auth-form, .page-root .auth-form {
+    display: inline-block;
+    width: 500px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    text-align: left; }
+    .page-auth .auth-form form, .page-root .auth-form form {
+      margin: 10px 0; }
+      .page-auth .auth-form form .form-group input, .page-root .auth-form form .form-group input {
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 7px 0; }
+      .page-auth .auth-form form .form-button, .page-root .auth-form form .form-button {
+        text-align: right;
+        margin-top: 10px; }
+        .page-auth .auth-form form .form-button .no-account, .page-root .auth-form form .form-button .no-account {
+          padding-left: 2px;
+          width: 70%;
+          font-size: 1rem;
+          text-align: left;
+          float: left; }
 
 .navigation {
   background: #2b2f3e;
@@ -1173,10 +1173,10 @@ form.ng-submitted input.ng-invalid {
       position: absolute;
       opacity: 0.5; }
   .page-project .list-project .project {
-    width: 250px;
+    width: 30.5%;
     height: 250px;
     float: left;
-    margin: 20px 0 0 20px;
+    margin: 2% 0 0 2%;
     border: 1px solid #00AC6B;
     border-radius: 3px;
     position: relative; }
@@ -1196,20 +1196,36 @@ form.ng-submitted input.ng-invalid {
       -webkit-transform: translate3d(0, 0, 0);
               transform: translate3d(0, 0, 0);
       position: absolute;
-      bottom: 0;
-      z-index: 10; }
+      bottom: 0; }
     .page-project .list-project .project .desc {
       -webkit-transform: translate3d(0, 0, 0);
               transform: translate3d(0, 0, 0);
       -webkit-transition: all 0.3s ease;
               transition: all 0.3s ease;
-      z-index: 1; }
+      font-size: 10rem;
+      color: #00AC6B; }
     .page-project .list-project .project:hover .title {
       -webkit-transform: translate3d(0, -190px, 0);
               transform: translate3d(0, -190px, 0); }
     .page-project .list-project .project:hover .desc {
       -webkit-transform: translate3d(0, 60px, 0);
               transform: translate3d(0, 60px, 0); }
+  .page-project .list-project .help-empty-project {
+    position: absolute;
+    top: 150px;
+    left: 35%;
+    color: #bab2ac; }
+    .page-project .list-project .help-empty-project .arrow {
+      width: 70px;
+      height: 70px;
+      background: #bab2ac;
+      -webkit-transform: rotate(200deg);
+          -ms-transform: rotate(200deg);
+              transform: rotate(200deg);
+      -webkit-mask: url(../assets/arrow-35.svg) center/contain no-repeat; }
+    .page-project .list-project .help-empty-project .text {
+      margin-left: 50px;
+      margin-top: 10px; }
   .page-project .list-project .new-project {
     text-align: center;
     -webkit-transition: all 0.3s ease;

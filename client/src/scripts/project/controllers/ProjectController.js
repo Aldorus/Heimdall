@@ -36,6 +36,7 @@ module.exports = function($scope, projects, account) {
         projects.createProject(account.getUser(), $scope.newProject)
             .then(function() {
                 $scope.createLoading = false;
+                $scope.open = false;
             }, function() {
                 $scope.createLoading = false;
             });
