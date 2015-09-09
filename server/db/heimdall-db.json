@@ -4,9 +4,22 @@
       "name": "Admin",
       "email": "admin@peashooter.com",
       "password": "admin",
-      "id": "9d6262be-66e1-4f78-a4f5-738dca60bd93"
+      "role": "admin",
+      "id": "9a37fc47-efca-40c7-b1ae-5d1e6af76224"
+    },
+    {
+      "name": "Guillaume",
+      "email": "rousselguillaume@hotmail.fr",
+      "password": "370095aa",
+      "role": "admin",
+      "id": "ad9c5976-6434-4793-86f7-c3e5e0e30a02"
     }
   ],
-  "project": [],
-  "songs": []
+  "project": [
+    {
+      "admin_id": "dbc2c6b7-0a13-4de3-bc11-77cb1eed4080",
+      "title": "Toto",
+      "id": "a653ffb3-09e2-4cdb-841d-d6fc449e214c"
+    }
+  ]
 }

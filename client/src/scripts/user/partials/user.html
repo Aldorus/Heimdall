@@ -1,4 +1,59 @@
-<div>
-    <h1>User</h1>
+<div class="full-screen">
+    <div class="form-user" ng-class="{'open':open}">
+        <span class="glyphicon glyphicon-remove" ng-click="open=false"></span>
 
+        <h1>{{'Create New User' | translate}}</h1>
+
+        <form novalidate name="newUserForm">
+            <input type="hidden" id="id" name="id" ng-model="newUser.id" />
+
+            <input type="text" id="name" name="name" ng-model="newUser.name"
+                   placeholder="{{'Name' | translate}}" required/>
+
+            <input type="email" id="email" name="email" ng-model="newUser.email"
+                   placeholder="{{'Email' | translate}}" required/>
+
+            <input type="password" id="password" name="password" ng-model="newUser.password"
+                   placeholder="{{'Password' | translate}}" required/>
+
+            <select name="role" ng-model="newUser.role" required>
+                <option value="">{{'Choose Role'|translate}}</option>
+                <option value="admin">{{'Admin'|translate}}</option>
+                <option value="developer">{{'Developer'|translate}}</option>
+                <option value="user">{{'User'|translate}}</option>
+            </select>
+
+            <div class="form-button">
+                <button ng-click="cancelEditUser()" type="button" ng-if="newUser.id" v-pressable>Cancel</button>
+                <button v-busy="createLoading" ng-click="validEditUser()" ng-if="newUser.id" v-pressable>Edit User</button>
+                <button v-busy="createLoading" ng-click="createUser()" ng-if="!newUser.id" v-pressable>Create User</button>
+            </div>
+        </form>
+    </div>
+    <div class="list-user full-screen" ng-class="{'open':open}">
+
+        <button class="button-add" ng-click="openNewUser()" type="button" v-pressable>
+            <span class="glyphicon glyphicon-plus"></span>
+            {{'New User' | translate}}
+        </button>
+        <h1>{{'User List' | translate}}</h1>
+
+        <table>
+            <tr class="header">
+                <th class="name">{{'Name'| translate}}</th>
+                <th class="email">{{'Email'| translate}}</th>
+                <th class="role">{{'Role'| translate}}</th>
+                <th class="action">{{'Actions'| translate}}</th>
+            </tr>
+            <tr class="user-row" ng-repeat="user in users" ng-class="{'current-user': isCurrentUser(user)}">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
+                <td>
+                    <span class="glyphicon glyphicon-edit" ng-click="editUser(user)"></span>
+                    <span class="glyphicon glyphicon-trash" ng-click="removeUser(user)" ng-if="!isCurrentUser(user)"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

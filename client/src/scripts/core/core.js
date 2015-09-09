@@ -4,6 +4,7 @@ require('../auth/auth');
 require('../home/home');
 require('../project/project');
 require('../version/version');
+require('../build/build');
 require('../user/user');
 require('../navigation/navigation');
 
@@ -12,14 +13,19 @@ angular.module('heimdall', [
     'ngSanitize',
     'ui.router',
     'pascalprecht.translate',
-    'vButton',
-    'home', 'version', 'auth', 'project', 'navigation', 'user'])
+    'vButton','vModal',
+    'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
     .service('loading', require('./services/loading'))
+    .factory('modal', require('./factories/modal'))
 
-    .config(function ($urlRouterProvider, $translateProvider) {
+    .config(function ($urlRouterProvider, $translateProvider, $animateProvider) {
+
+        // Remove animation on all ng-if and ng-repeat
+        $animateProvider.classNameFilter(/bi-animate/);
+
         $urlRouterProvider.otherwise('/auth');
 
         /**

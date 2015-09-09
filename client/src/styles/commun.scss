@@ -42,6 +42,7 @@ a:hover {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    outline: none;
 }
 
 h1 {
@@ -106,6 +107,12 @@ input {
         border-bottom: 1px solid transparent;
         box-shadow: 0px 3px $primaryColor;
     }
+}
+
+select {
+    padding: 10px 15px;
+    border-radius: 3px;
+    border: 1px solid $greyColor;
 }
 
 form.ng-submitted {

@@ -11,6 +11,13 @@
     align-items: center;
     background: #ffffff;
 
+    span{
+        display: inline-block;
+        color: $primaryColor;
+        font-size: 1.8rem;
+        padding-bottom: 35px;
+    }
+
     .sk-folding-cube {
         margin: 20px auto;
         width: 80px;

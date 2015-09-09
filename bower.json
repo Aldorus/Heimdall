@@ -20,13 +20,14 @@
     "angular-mocks": "~1.4.4",
     "angular-sanitize": "~1.4.4",
     "angular-touch": "~1.4.4",
-    "angular-ui-router": "~0.2.15",
-    "moment": "~2.10.6",
-    "normalize-css": "normalize.css#~3.0.3",
     "angular-translate": "~2.7.0",
     "angular-translate-loader-static-files": "~2.7.0",
+    "angular-ui-router": "~0.2.15",
     "cryptojslib": "~3.1.2",
-    "v-button": "~1.1.0"
+    "moment": "~2.10.6",
+    "normalize-css": "normalize.css#~3.0.3",
+    "v-button": "~1.1.0",
+    "v-modal": "~1.3.4"
   },
   "overrides": {
     "cryptojslib": {
@@ -37,6 +38,6 @@
     }
   },
   "resolutions": {
-    "angular": "~1.4.4"
+    "angular": "1.4.5"
   }
 }

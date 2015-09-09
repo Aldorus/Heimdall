@@ -33,7 +33,8 @@ router.post('/auth', function(req, res) {
         var user = {
             name: 'Admin',
             email: 'admin@peashooter.com',
-            password: 'admin'
+            password: 'admin',
+            role: 'admin'
         };
         models.User.save(user);
     }

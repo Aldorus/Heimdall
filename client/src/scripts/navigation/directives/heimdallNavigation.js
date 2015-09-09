@@ -6,7 +6,6 @@ module.exports = function (account) {
         controllerAs: 'NavigationController',
         controller: function($scope, $state){
 
-
             /**
              * Test if the menu navigation must be displayed on this state
              * @returns {boolean}

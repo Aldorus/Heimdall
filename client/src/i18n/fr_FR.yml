@@ -3,3 +3,20 @@ Generality: L'intégration continue est un sujet important pour une entreprise. 
 No Account: Si vous n'avez pas encore de compte, veuillez contacter votre administrateur.
 Create Version Help: Maintenant que vous avez nommé votre projet, indiquer les builds que vous souhaiter pour ce projet
 Help Empty Project: Vous n'avez pas encore de projet ?<br/>Cliquez sur ce bouton et indiquez<br/>simplement son nom pour commencer.
+Wait for a moment please: Vos données sont en cours de chargement...
+Count project: Nombre de projets
+Count version: Nombre moyen de version par projet
+Count build: Nombre moyen de type de build par projet
+User List: Liste des utilisateurs
+New User: Nouvel Utilisateur
+Admin: Administrateur
+Developer: Développeur
+User: Utilisateur
+Name: Nom
+Email: Email
+Role: Rôle
+Choose Role: Choisir un rôle
+Password: Mot de passe
+Remove user, are you sure ?: Êtez-vous sûre de vouloir supprimer cet utilisateur?
+Yes: Oui
+No: Non

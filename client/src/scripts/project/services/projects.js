@@ -1,7 +1,7 @@
 'use strict';
 
 /*@ngInject*/
-module.exports = function($http, $q, WS_ROOT_URL) {
+module.exports = function($http, $q, WS_ROOT_URL, account) {
     var service = {};
     var url = WS_ROOT_URL + 'projects/';
     var projects;
@@ -9,8 +9,13 @@ module.exports = function($http, $q, WS_ROOT_URL) {
     service.getProjects = function getProjects(user) {
         var deferred = $q.defer();
 
+        if(!user) {
+            user = account.getUser();
+        }
+
         if(projects) {
             deferred.resolve(projects);
+            return deferred.promise;
         }
 
         $http({
