@@ -22,7 +22,7 @@
         </a>
         <div class="help-empty-project" ng-if="projects.length === 0">
             <div class="arrow"></div>
-            <div class="text">{{'Help Empty Project' | translate}}</div>
+            <div class="text" ng-bind-html="'Help Empty Project' | translate"></div>
         </div>
         <div class="project" ng-repeat="project in projects">
             <div class="desc">1/2</div>

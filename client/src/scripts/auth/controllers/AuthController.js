@@ -4,8 +4,8 @@
 module.exports = function($scope, $state, account) {
 
     $scope.user = {
-        email: 'roussel.guillaume.gr@gmail.com',
-        password: '370095'
+        email: 'admin@peashooter.com',
+        password: 'admin'
     };
 
     $scope.submit = function submit() {

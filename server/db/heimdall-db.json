@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "name": "Admin",
+      "email": "admin@peashooter.com",
+      "password": "admin",
+      "id": "9d6262be-66e1-4f78-a4f5-738dca60bd93"
+    }
+  ],
+  "project": [],
+  "songs": []
+}

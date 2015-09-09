@@ -74,7 +74,7 @@ button {
 input {
   padding: 10px 15px;
   border-radius: 3px;
-  border: 1px solid #bab2ac;
+  border: 1px solid #8a837e;
   outline: none;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease; }
@@ -85,7 +85,7 @@ input {
 form.ng-submitted input.ng-invalid {
   border: 1px solid brown; }
   form.ng-submitted input.ng-invalid:focus {
-    border: 1px solid #bab2ac;
+    border: 1px solid #8a837e;
     border-bottom: 1px solid transparent; }
 
 /* latin */
@@ -931,6 +931,52 @@ form.ng-submitted input.ng-invalid {
   content: "\e260"; }
 
 
+.page-auth, .page-root {
+  background: url('../assets/home.jpg');
+  background-size: cover;
+  background-position: 100%;
+  background-repeat: no-repeat;
+  font-size: 1.5rem; }
+  .page-auth #wrapper, .page-root #wrapper {
+    margin: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .page-auth .auth-form, .page-root .auth-form {
+    display: inline-block;
+    width: 500px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    text-align: left; }
+    .page-auth .auth-form .generality, .page-root .auth-form .generality {
+      font-size: 1rem;
+      text-align: justify; }
+    .page-auth .auth-form form, .page-root .auth-form form {
+      margin: 10px 0; }
+      .page-auth .auth-form form .form-group input, .page-root .auth-form form .form-group input {
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 7px 0; }
+      .page-auth .auth-form form .form-button, .page-root .auth-form form .form-button {
+        text-align: right;
+        margin-top: 10px; }
+        .page-auth .auth-form form .form-button .no-account, .page-root .auth-form form .form-button .no-account {
+          padding-left: 2px;
+          width: 70%;
+          font-size: 1rem;
+          text-align: left;
+          float: left; }
+
 .loader {
   position: absolute;
   top: 0;
@@ -1029,48 +1075,137 @@ form.ng-submitted input.ng-invalid {
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
 
-.page-auth, .page-root {
-  background: url('../assets/home.jpg');
-  background-size: cover;
-  background-position: 100%;
-  background-repeat: no-repeat;
-  font-size: 1.5rem; }
-  .page-auth #wrapper, .page-root #wrapper {
-    margin: 0;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center; }
-  .page-auth .auth-form, .page-root .auth-form {
-    display: inline-block;
-    width: 500px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
-    text-align: left; }
-    .page-auth .auth-form form, .page-root .auth-form form {
-      margin: 10px 0; }
-      .page-auth .auth-form form .form-group input, .page-root .auth-form form .form-group input {
-        display: inline-block;
-        width: 100%;
-        margin: 0 0 7px 0; }
-      .page-auth .auth-form form .form-button, .page-root .auth-form form .form-button {
-        text-align: right;
-        margin-top: 10px; }
-        .page-auth .auth-form form .form-button .no-account, .page-root .auth-form form .form-button .no-account {
-          padding-left: 2px;
-          width: 70%;
-          font-size: 1rem;
-          text-align: left;
-          float: left; }
+.page-project .projects-container {
+  position: relative; }
+.page-project .form-project {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  padding: 20px;
+  opacity: 0;
+  width: 450px;
+  -webkit-transition: all 1.5s ease;
+          transition: all 1.5s ease;
+  box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
+  .page-project .form-project.open {
+    opacity: 1; }
+  .page-project .form-project .glyphicon-remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #00AC6B;
+    font-size: 2rem;
+    border-radius: 5000px;
+    border: 2px solid #00AC6B;
+    padding: 5px 5px 3px 5px;
+    margin: 10px; }
+  .page-project .form-project p {
+    margin: 40px 0 10px 0; }
+  .page-project .form-project input {
+    width: 100%; }
+  .page-project .form-project .form-button {
+    text-align: right;
+    margin-top: 10px; }
+.page-project .list-project {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+  background: white; }
+  .page-project .list-project.open {
+    -webkit-transform: translate3d(450px, 0, 0);
+            transform: translate3d(450px, 0, 0); }
+    .page-project .list-project.open::after {
+      display: block;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background: #8a837e;
+      position: absolute;
+      opacity: 0.5; }
+  .page-project .list-project .project {
+    width: 30.5%;
+    height: 250px;
+    float: left;
+    margin: 2% 0 0 2%;
+    border: 1px solid #00AC6B;
+    border-radius: 3px;
+    position: relative; }
+    .page-project .list-project .project .title {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #00AC6B;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      padding: 20px 0;
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease;
+      font-size: 1rem;
+      height: 60px;
+      font-weight: 700;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+      position: absolute;
+      bottom: 0; }
+    .page-project .list-project .project .desc {
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease;
+      font-size: 10rem;
+      color: #00AC6B; }
+    .page-project .list-project .project:hover .title {
+      -webkit-transform: translate3d(0, -190px, 0);
+              transform: translate3d(0, -190px, 0); }
+    .page-project .list-project .project:hover .desc {
+      -webkit-transform: translate3d(0, 60px, 0);
+              transform: translate3d(0, 60px, 0); }
+  .page-project .list-project .help-empty-project {
+    position: absolute;
+    top: 150px;
+    left: 35%;
+    color: #8a837e; }
+    .page-project .list-project .help-empty-project .arrow {
+      width: 70px;
+      height: 70px;
+      background: #8a837e;
+      -webkit-transform: rotate(200deg);
+          -ms-transform: rotate(200deg);
+              transform: rotate(200deg);
+      -webkit-mask: url(../assets/arrow-35.svg) center/contain no-repeat; }
+    .page-project .list-project .help-empty-project .text {
+      margin-left: 50px;
+      margin-top: 10px; }
+  .page-project .list-project .new-project {
+    text-align: center;
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease; }
+    .page-project .list-project .new-project .glyphicon-plus {
+      border-radius: 50px;
+      border: 2px solid #00AC6B;
+      color: #00AC6B;
+      font-size: 3rem;
+      padding: 20px;
+      margin-top: 70px;
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease; }
+    .page-project .list-project .new-project .new-project-label {
+      color: #00AC6B;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 10px;
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease; }
+    .page-project .list-project .new-project:hover {
+      background: #00AC6B; }
+      .page-project .list-project .new-project:hover .glyphicon-plus {
+        border: 1px solid #FFFFFF;
+        color: #FFFFFF; }
+      .page-project .list-project .new-project:hover .new-project-label {
+        color: #FFFFFF; }
 
 .navigation {
   background: #2b2f3e;
@@ -1121,135 +1256,3 @@ form.ng-submitted input.ng-invalid {
         background: #00AC6B; }
         .navigation ul li:hover .glyphicon, .navigation ul li .active .glyphicon {
           margin-right: 15px; }
-
-.page-project .projects-container {
-  position: relative; }
-.page-project .form-project {
-  position: absolute;
-  left: 0;
-  height: 100%;
-  padding: 20px;
-  opacity: 0;
-  width: 450px;
-  -webkit-transition: all 1.5s ease;
-          transition: all 1.5s ease;
-  box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
-  .page-project .form-project.open {
-    opacity: 1; }
-  .page-project .form-project .glyphicon-remove {
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: #00AC6B;
-    font-size: 2rem;
-    border-radius: 5000px;
-    border: 2px solid #00AC6B;
-    padding: 5px 5px 3px 5px;
-    margin: 10px; }
-  .page-project .form-project p {
-    margin: 40px 0 10px 0; }
-  .page-project .form-project input {
-    width: 100%; }
-  .page-project .form-project .form-button {
-    text-align: right;
-    margin-top: 10px; }
-.page-project .list-project {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
-  background: white; }
-  .page-project .list-project.open {
-    -webkit-transform: translate3d(450px, 0, 0);
-            transform: translate3d(450px, 0, 0); }
-    .page-project .list-project.open::after {
-      display: block;
-      width: 100%;
-      height: 100%;
-      content: '';
-      background: #bab2ac;
-      position: absolute;
-      opacity: 0.5; }
-  .page-project .list-project .project {
-    width: 30.5%;
-    height: 250px;
-    float: left;
-    margin: 2% 0 0 2%;
-    border: 1px solid #00AC6B;
-    border-radius: 3px;
-    position: relative; }
-    .page-project .list-project .project .title {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: #00AC6B;
-      color: #FFFFFF;
-      text-transform: uppercase;
-      padding: 20px 0;
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease;
-      font-size: 1rem;
-      height: 60px;
-      font-weight: 700;
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-      position: absolute;
-      bottom: 0; }
-    .page-project .list-project .project .desc {
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease;
-      font-size: 10rem;
-      color: #00AC6B; }
-    .page-project .list-project .project:hover .title {
-      -webkit-transform: translate3d(0, -190px, 0);
-              transform: translate3d(0, -190px, 0); }
-    .page-project .list-project .project:hover .desc {
-      -webkit-transform: translate3d(0, 60px, 0);
-              transform: translate3d(0, 60px, 0); }
-  .page-project .list-project .help-empty-project {
-    position: absolute;
-    top: 150px;
-    left: 35%;
-    color: #bab2ac; }
-    .page-project .list-project .help-empty-project .arrow {
-      width: 70px;
-      height: 70px;
-      background: #bab2ac;
-      -webkit-transform: rotate(200deg);
-          -ms-transform: rotate(200deg);
-              transform: rotate(200deg);
-      -webkit-mask: url(../assets/arrow-35.svg) center/contain no-repeat; }
-    .page-project .list-project .help-empty-project .text {
-      margin-left: 50px;
-      margin-top: 10px; }
-  .page-project .list-project .new-project {
-    text-align: center;
-    -webkit-transition: all 0.3s ease;
-            transition: all 0.3s ease; }
-    .page-project .list-project .new-project .glyphicon-plus {
-      border-radius: 50px;
-      border: 2px solid #00AC6B;
-      color: #00AC6B;
-      font-size: 3rem;
-      padding: 20px;
-      margin-top: 70px;
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease; }
-    .page-project .list-project .new-project .new-project-label {
-      color: #00AC6B;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-top: 10px;
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease; }
-    .page-project .list-project .new-project:hover {
-      background: #00AC6B; }
-      .page-project .list-project .new-project:hover .glyphicon-plus {
-        border: 1px solid #FFFFFF;
-        color: #FFFFFF; }
-      .page-project .list-project .new-project:hover .new-project-label {
-        color: #FFFFFF; }

@@ -3,21 +3,17 @@
   "author": "Aldorus",
   "private": true,
   "version": "1.0.0",
-  "main": "server/server.js",
+  "main": "server/app.js",
   "scripts": {
-    "pretest": "jshint ."
+    "pretest": "jshint .",
+    "start": "node server/app.js"
   },
   "dependencies": {
-    "compression": "^1.0.3",
-    "cors": "^2.5.2",
-    "errorhandler": "^1.1.1",
-    "loopback": "^2.14.0",
-    "loopback-boot": "^2.6.5",
-    "loopback-component-oauth2": "^2.3.5",
-    "loopback-datasource-juggler": "^2.19.0",
-    "loopback-explorer": "^1.1.0",
-    "loopback-oauth2orize": "^2.0.1",
-    "serve-favicon": "^2.3.0"
+    "body-parser": "^1.13.3",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "lowdb": "^0.10.2",
+    "uuid": "^2.0.1"
   },
   "devDependencies": {
     "jshint": "^2.5.6",

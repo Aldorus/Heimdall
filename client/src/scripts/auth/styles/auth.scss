@@ -22,6 +22,11 @@
         border-radius: 5px;
         text-align: left;
 
+        .generality {
+            font-size: 1.0rem;
+            text-align: justify;
+        }
+
         form {
             margin: 10px 0;
             .form-group {

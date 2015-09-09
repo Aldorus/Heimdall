@@ -3,7 +3,7 @@
 /*@ngInject*/
 module.exports = function ($http, $q, WS_ROOT_URL) {
     var service = {};
-    var urlAuh = WS_ROOT_URL + 'auth/';
+    var urlAuh = WS_ROOT_URL + 'users/auth/';
     var user;
 
     // Get the user if exist in localstorage
@@ -27,25 +27,15 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
     service.authUser = function authUser(email, password) {
         var deferred = $q.defer();
 
-        // Mock
-        service.saveLocalStorage({
-            id: 1,
-            name: 'Roussel',
-            firstname: 'Guillaume',
-            email: email,
-            password: password
-        });
-
-        deferred.resolve(service.getUser());
-
-        // No Mock
         $http({
+            method: 'POST',
             url: urlAuh,
             data: {
                 email: email,
                 password: password
             }
         }).then(function(response) {
+            service.saveLocalStorage(response.data);
             deferred.resolve(response.data);
         }, function() {
             deferred.reject();

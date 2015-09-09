@@ -1,4 +1,5 @@
 Create Project Help: Pour commencer, donnez simplement un nom à votre projet.
+Generality: L'intégration continue est un sujet important pour une entreprise. Face aux mastodontes Jenkins, compliqué à configurer et Travis, qui fonctionne en Sass et qui peut devenir couteux; Peashooter se veut résolument simple. <strong>Connectez-vous, vous allez voir.</strong><br/>Si il s'agit de votre première connexion vous pouvez utiliser l'utilisateur 'admin@peashooter.com' et le mot de passe 'admin'
 No Account: Si vous n'avez pas encore de compte, veuillez contacter votre administrateur.
 Create Version Help: Maintenant que vous avez nommé votre projet, indiquer les builds que vous souhaiter pour ce projet
-Help Empty Project: Test
+Help Empty Project: Vous n'avez pas encore de projet ?<br/>Cliquez sur ce bouton et indiquez<br/>simplement son nom pour commencer.
