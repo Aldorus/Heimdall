@@ -20,7 +20,7 @@ function logger(req,res,next){
 app.use(logger);
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // Routes/Controllers
 app.use('/api', routes);

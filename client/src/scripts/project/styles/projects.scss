@@ -76,37 +76,23 @@
             border-radius: 3px;
             position: relative;
 
+            .desc {
+                font-size: 8rem;
+                color: $primaryColor;
+            }
+
             .title {
-                display: block;
-                width: 100%;
+                width: 101%;
                 text-align: center;
                 background: $primaryColor;
                 color: $lightTextColor;
                 text-transform: uppercase;
                 padding: 20px 0;
-                transition: all 0.3s ease;
                 font-size: 1.0rem;
-                height: 60px;
                 font-weight: 700;
-                transform: translate3d(0, 0, 0);
                 position: absolute;
                 bottom: 0;
-            }
-            .desc {
-                transform: translate3d(0, 0, 0);
-                transition: all 0.3s ease;
-                font-size: 10rem;
-                color: $primaryColor;
-            }
-
-            &:hover {
-                .title {
-                    transform: translate3d(0, -190px, 0);
-                }
-
-                .desc {
-                    transform: translate3d(0,  60px, 0);
-                }
+                margin: 0;
             }
         }
 

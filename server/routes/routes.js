@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-router.options
 router.use('/users', require('./users'));
 router.use('/projects', require('./projects'));
 router.use('/versions', require('./versions'));

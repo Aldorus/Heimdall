@@ -6,27 +6,27 @@ var uuid = require('uuid');
 
 var Project = {};
 
-Project.save = function save(user) {
-    if (user.id) {
-        return db('project').chain().find({id: user.id}).assign(user).value();
+Project.save = function save(project) {
+    if (project.id) {
+        return db('project').chain().find({id: project.id}).assign(user).value();
     }
 
-    user.id = uuid();
-    db('project').push(user);
+    project.id = uuid();
+    db('project').push(project);
 
-    return db('project').find({id: user.id});
+    return db('project').find({id: project.id});
 };
 
 Project.all = function all() {
     return db('project');
 };
 
-Project.get = function get(userId) {
-    return db('project').find({id: userId});
+Project.get = function get(projectId) {
+    return db('project').find({id: projectId});
 };
 
-Project.remove = function remove(userId) {
-    return db('project').remove({id: userId});
+Project.remove = function remove(projectId) {
+    return db('project').remove({id: projectId});
 };
 
 module.exports = Project;

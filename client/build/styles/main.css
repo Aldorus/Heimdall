@@ -1192,6 +1192,13 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
         background: #00AC6B; }
         .navigation ul li:hover .glyphicon, .navigation ul li .active .glyphicon {
           margin-right: 15px; }
+  .navigation .version {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.8rem;
+    opacity: 0.7; }
 
 .page-project .projects-container {
   position: relative; }
@@ -1251,36 +1258,21 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
     background: white;
     border-radius: 3px;
     position: relative; }
+    .page-project .list-project .project .desc {
+      font-size: 8rem;
+      color: #00AC6B; }
     .page-project .list-project .project .title {
-      display: block;
-      width: 100%;
+      width: 101%;
       text-align: center;
       background: #00AC6B;
       color: #FFFFFF;
       text-transform: uppercase;
       padding: 20px 0;
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease;
       font-size: 1rem;
-      height: 60px;
       font-weight: 700;
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
       position: absolute;
-      bottom: 0; }
-    .page-project .list-project .project .desc {
-      -webkit-transform: translate3d(0, 0, 0);
-              transform: translate3d(0, 0, 0);
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease;
-      font-size: 10rem;
-      color: #00AC6B; }
-    .page-project .list-project .project:hover .title {
-      -webkit-transform: translate3d(0, -190px, 0);
-              transform: translate3d(0, -190px, 0); }
-    .page-project .list-project .project:hover .desc {
-      -webkit-transform: translate3d(0, 60px, 0);
-              transform: translate3d(0, 60px, 0); }
+      bottom: 0;
+      margin: 0; }
   .page-project .list-project .help-empty-project {
     position: absolute;
     top: 150px;

@@ -23,6 +23,10 @@ module.exports = function($scope, projects, account) {
         $scope.open = false;
     };
 
+    $scope.goBuild = function(build) {
+        $state.go('build');
+    };
+
     /**
      * Create project
      */

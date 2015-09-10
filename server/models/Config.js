@@ -4,29 +4,29 @@ var low = require('lowdb');
 var db = low('./server/db/heimdall-db.json');
 var uuid = require('uuid');
 
-var Project = {};
+var config = {};
 
-Project.save = function save(user) {
-    if (user.id) {
-        return db('project').chain().find({id: user.id}).assign(user).value();
+config.save = function save(config) {
+    if (config.id) {
+        return db('config').chain().find({id: config.id}).assign(config).value();
     }
 
-    user.id = uuid();
-    db('project').push(user);
+    config.id = uuid();
+    db('config').push(config);
 
-    return db('project').find({id: user.id});
+    return db('config').find({id: config.id});
 };
 
-Project.all = function all() {
-    return db('project');
+config.all = function all() {
+    return db('config');
 };
 
-Project.get = function get(userId) {
-    return db('project').find({id: userId});
+config.get = function get(configId) {
+    return db('config').find({id: configId});
 };
 
-Project.remove = function remove(userId) {
-    return db('project').remove({id: userId});
+config.remove = function remove(configId) {
+    return db('config').remove({id: configId});
 };
 
-module.exports = Project;
+module.exports = config;
