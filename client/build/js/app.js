@@ -259,6 +259,24 @@ module.exports = function($http, $q, WS_ROOT_URL) {
         return agreBuilds;
     };
 
+    service.createBuild = function createBuild(build, project) {
+        var deferred = $q.defer();
+
+        build.projectId = project.id;
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: build
+        }).then(function(response) {
+            deferred.resolve(response.data);
+            builds.push(response.data);
+        }, function() {
+        });
+
+        return deferred.promise;
+    };
+
     return service;
 };
 module.exports.$inject = ["$http", "$q", "WS_ROOT_URL"];
@@ -585,7 +603,7 @@ angular.module('navigation', [])
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, projects, account) {
+module.exports = function($scope, projects, account, builds) {
 
     $scope.newProject = {};
 
@@ -621,16 +639,27 @@ module.exports = function($scope, projects, account) {
         }
 
         $scope.createLoading = true;
-        projects.createProject(account.getUser(), $scope.newProject)
-            .then(function() {
-                $scope.createLoading = false;
-                $scope.open = false;
+        projects.createProject($scope.newProject, account.getUser())
+            .then(function(project) {
+
+                // Build the build object to save
+                var build = {
+                    name: 'Default',
+                    config: ''
+                };
+                builds.createBuild(build, project).then(function() {
+                    $scope.createLoading = false;
+                    $scope.open = false;
+
+                }, function() {
+                    $scope.createLoading = false;
+                });
             }, function() {
                 $scope.createLoading = false;
             });
     };
 };
-module.exports.$inject = ["$scope", "projects", "account"];
+module.exports.$inject = ["$scope", "projects", "account", "builds"];
 
 },{}],18:[function(require,module,exports){
 'use strict';
@@ -686,7 +715,7 @@ module.exports = function($http, $q, WS_ROOT_URL, account) {
         return deferred.promise;
     };
 
-    service.createProject = function createProject(user, project) {
+    service.createProject = function createProject(project, user) {
         var deferred = $q.defer();
 
         $http({
@@ -698,9 +727,12 @@ module.exports = function($http, $q, WS_ROOT_URL, account) {
                 title: project.title
             }
         }).then(function(response) {
-            deferred.resolve(response.data);
+
             projects.push(response.data);
+            deferred.resolve(response.data);
+
         }, function() {
+            deferred.reject();
         });
 
         return deferred.promise;

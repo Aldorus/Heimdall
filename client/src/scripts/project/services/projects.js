@@ -35,7 +35,7 @@ module.exports = function($http, $q, WS_ROOT_URL, account) {
         return deferred.promise;
     };
 
-    service.createProject = function createProject(user, project) {
+    service.createProject = function createProject(project, user) {
         var deferred = $q.defer();
 
         $http({
@@ -47,9 +47,12 @@ module.exports = function($http, $q, WS_ROOT_URL, account) {
                 title: project.title
             }
         }).then(function(response) {
-            deferred.resolve(response.data);
+
             projects.push(response.data);
+            deferred.resolve(response.data);
+
         }, function() {
+            deferred.reject();
         });
 
         return deferred.promise;

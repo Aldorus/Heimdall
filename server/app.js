@@ -22,7 +22,14 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname+'/../client/build/'));
+app.set('views', __dirname+'/../client/build/');
+app.engine('html', require('ejs').renderFile);
+
 // Routes/Controllers
+app.get('/', function(req, res){
+    res.render('index.html');
+});
 app.use('/api', routes);
 
 

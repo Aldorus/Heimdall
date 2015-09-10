@@ -27,7 +27,19 @@
       "admin_id": "dbc2c6b7-0a13-4de3-bc11-77cb1eed4080",
       "title": "Toto",
       "id": "a653ffb3-09e2-4cdb-841d-d6fc449e214c"
+    },
+    {
+      "admin_id": "9a37fc47-efca-40c7-b1ae-5d1e6af76224",
+      "title": "Test",
+      "id": "c073f2a9-8978-4850-8e29-3eb354697e7c"
     }
   ],
-  "build": []
+  "build": [
+    {
+      "name": "Default",
+      "config": "",
+      "projectId": "417284e4-76d5-4203-b4ad-4814f645c1bf",
+      "id": "2035abf4-0270-4fe0-b3ea-543f62d124e5"
+    }
+  ]
 }

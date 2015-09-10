@@ -1253,7 +1253,7 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
     width: 250px;
     height: 250px;
     float: left;
-    margin: 0 20px 0 0;
+    margin: 0 20px 20px 0;
     border: 1px solid #00AC6B;
     background: white;
     border-radius: 3px;

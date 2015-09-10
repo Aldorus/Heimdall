@@ -47,5 +47,23 @@ module.exports = function($http, $q, WS_ROOT_URL) {
         return agreBuilds;
     };
 
+    service.createBuild = function createBuild(build, project) {
+        var deferred = $q.defer();
+
+        build.projectId = project.id;
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: build
+        }).then(function(response) {
+            deferred.resolve(response.data);
+            builds.push(response.data);
+        }, function() {
+        });
+
+        return deferred.promise;
+    };
+
     return service;
 };

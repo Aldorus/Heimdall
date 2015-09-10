@@ -1,7 +1,7 @@
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, projects, account) {
+module.exports = function($scope, projects, account, builds) {
 
     $scope.newProject = {};
 
@@ -37,10 +37,21 @@ module.exports = function($scope, projects, account) {
         }
 
         $scope.createLoading = true;
-        projects.createProject(account.getUser(), $scope.newProject)
-            .then(function() {
-                $scope.createLoading = false;
-                $scope.open = false;
+        projects.createProject($scope.newProject, account.getUser())
+            .then(function(project) {
+
+                // Build the build object to save
+                var build = {
+                    name: 'Default',
+                    config: ''
+                };
+                builds.createBuild(build, project).then(function() {
+                    $scope.createLoading = false;
+                    $scope.open = false;
+
+                }, function() {
+                    $scope.createLoading = false;
+                });
             }, function() {
                 $scope.createLoading = false;
             });
