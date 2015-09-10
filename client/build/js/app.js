@@ -916,7 +916,7 @@ angular.module('user', [])
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
 module.exports=require(7)
-},{"C:\\cygwin64\\home\\Guillaume\\dev\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
+},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
