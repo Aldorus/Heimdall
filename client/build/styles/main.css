@@ -71,6 +71,9 @@ button {
     color: #FFFFFF; }
     button.secondary:hover {
       background: #970026; }
+  button.cancel {
+    background: #8a837e;
+    color: #FFFFFF; }
 
 input {
   padding: 10px 15px;
@@ -88,9 +91,17 @@ select {
   border-radius: 3px;
   border: 1px solid #8a837e; }
 
-form.ng-submitted input.ng-invalid {
-  border: 1px solid brown; }
-  form.ng-submitted input.ng-invalid:focus {
+form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng-submitted textarea.ng-invalid {
+  border: 1px solid #E9003A; }
+  form.ng-submitted input.ng-invalid::-webkit-input-placeholder, form.ng-submitted select.ng-invalid::-webkit-input-placeholder, form.ng-submitted textarea.ng-invalid::-webkit-input-placeholder {
+    color: #E9003A; }
+  form.ng-submitted input.ng-invalid::-moz-placeholder, form.ng-submitted select.ng-invalid::-moz-placeholder, form.ng-submitted textarea.ng-invalid::-moz-placeholder {
+    color: #E9003A; }
+  form.ng-submitted input.ng-invalid:-ms-input-placeholder, form.ng-submitted select.ng-invalid:-ms-input-placeholder, form.ng-submitted textarea.ng-invalid:-ms-input-placeholder {
+    color: #E9003A; }
+  form.ng-submitted input.ng-invalid::placeholder, form.ng-submitted select.ng-invalid::placeholder, form.ng-submitted textarea.ng-invalid::placeholder {
+    color: #E9003A; }
+  form.ng-submitted input.ng-invalid:focus, form.ng-submitted select.ng-invalid:focus, form.ng-submitted textarea.ng-invalid:focus {
     border: 1px solid #8a837e;
     border-bottom: 1px solid transparent; }
 
@@ -943,6 +954,10 @@ form.ng-submitted input.ng-invalid {
   background-position: 100%;
   background-repeat: no-repeat;
   font-size: 1.5rem; }
+  .page-auth h1, .page-root h1 {
+    text-align: left;
+    margin: 0;
+    top: 0; }
   .page-auth #wrapper, .page-root #wrapper {
     margin: 0;
     display: -webkit-box;
@@ -1090,10 +1105,10 @@ form.ng-submitted input.ng-invalid {
   float: left;
   display: inline-block;
   padding: 20px;
-  border: 3px solid #8a837e;
+  border: 1px solid #00AC6B;
+  border-radius: 3px;
   color: #00AC6B;
-  margin: 20px 0 0 20px;
-  box-shadow: 1px 1px 1px #8a837e; }
+  margin: 20px 0 0 20px; }
   .page-home .box.small-box {
     width: 250px;
     height: 250px; }
@@ -1110,7 +1125,9 @@ form.ng-submitted input.ng-invalid {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
         -ms-flex-pack: center;
-            justify-content: center; }
+            justify-content: center;
+    -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease; }
     .page-home .box.count-box h2 {
       text-align: center;
       font-size: 1.2rem;
@@ -1121,6 +1138,10 @@ form.ng-submitted input.ng-invalid {
           -ms-flex-item-align: center;
               align-self: center;
       color: #00AC6B; }
+    .page-home .box.count-box:hover {
+      background: #00AC6B; }
+      .page-home .box.count-box:hover h2, .page-home .box.count-box:hover span {
+        color: #FFFFFF; }
 
 .navigation {
   background: #2b2f3e;
@@ -1211,16 +1232,23 @@ form.ng-submitted input.ng-invalid {
   height: 100%;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
-  background: white; }
+  background: white;
+  padding: 20px 20px; }
   .page-project .list-project.open {
     -webkit-transform: translate3d(450px, 0, 0);
             transform: translate3d(450px, 0, 0); }
+  .page-project .list-project h1 {
+    color: #00AC6B;
+    position: relative;
+    left: -1px;
+    margin-bottom: 15px; }
   .page-project .list-project .project {
-    width: 30.5%;
+    width: 250px;
     height: 250px;
     float: left;
-    margin: 2% 0 0 2%;
+    margin: 0 20px 0 0;
     border: 1px solid #00AC6B;
+    background: white;
     border-radius: 3px;
     position: relative; }
     .page-project .list-project .project .title {
@@ -1307,22 +1335,19 @@ form.ng-submitted input.ng-invalid {
     -webkit-transition: all 0.3s ease;
             transition: all 0.3s ease;
     background: white;
-    padding: 20px 10px; }
+    padding: 20px 20px; }
     .page-user .wrapper .list-user.open {
       -webkit-transform: translate3d(450px, 0, 0);
               transform: translate3d(450px, 0, 0); }
     .page-user .wrapper .list-user .button-add {
-      float: left;
-      margin-bottom: 25px; }
+      float: right;
+      margin-bottom: 10px; }
       .page-user .wrapper .list-user .button-add .glyphicon-plus {
-        padding-right: 10px; }
+        padding-right: 15px; }
     .page-user .wrapper .list-user h1 {
-      text-align: right;
-      color: #00AC6B;
-      position: relative;
-      top: 37px; }
+      text-align: left;
+      color: #00AC6B; }
     .page-user .wrapper .list-user table {
-      margin-top: 10px;
       width: 100%; }
       .page-user .wrapper .list-user table .header {
         background: #00AC6B;
@@ -1378,9 +1403,7 @@ form.ng-submitted input.ng-invalid {
       width: 100%;
       margin-bottom: 10px; }
     .page-user .wrapper .form-user select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #8a837e; }
+      width: 100%; }
     .page-user .wrapper .form-user .form-button {
       text-align: right;
       margin-top: 10px; }

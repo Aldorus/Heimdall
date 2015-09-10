@@ -14,25 +14,22 @@
             transform: translate3d($widthForm, 0, 0);
         }
 
-        padding: 20px 10px;
+        padding: 20px 20px;
 
         .button-add {
-            float: left;
-            margin-bottom: 25px;
+            float: right;
+            margin-bottom: 10px;
             .glyphicon-plus {
-                padding-right: 10px;
+                padding-right: 15px;
             }
         }
 
         h1 {
-            text-align: right;
+            text-align: left;
             color: $primaryColor;
-            position: relative;
-            top: 37px;
         }
 
         table {
-            margin-top: 10px;
             width: 100%;
 
             .header {
@@ -118,8 +115,6 @@
 
         select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid $greyColor;
         }
 
         .form-button {

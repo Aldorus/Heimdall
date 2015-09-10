@@ -94,6 +94,11 @@ button {
             background: $darkSecondaryColor;
         }
     }
+
+    &.cancel {
+        background: $greyColor;
+        color: $lightTextColor;
+    }
 }
 
 input {
@@ -116,11 +121,15 @@ select {
 }
 
 form.ng-submitted {
-    input.ng-invalid {
-        border: 1px solid brown;
+    input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+        border: 1px solid $secondaryColor;
+        &::placeholder {
+            color: $secondaryColor;
+        }
         &:focus {
             border: 1px solid $greyColor;
             border-bottom: 1px solid transparent;
         }
     }
 }
+

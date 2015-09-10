@@ -13,6 +13,13 @@
       "password": "370095aa",
       "role": "admin",
       "id": "ad9c5976-6434-4793-86f7-c3e5e0e30a02"
+    },
+    {
+      "name": "Guillaume",
+      "email": "roussel.guillaume.gr@gmail.com",
+      "password": "370095aa",
+      "role": "admin",
+      "id": "6d8553e5-a710-4074-8ff0-5c2821ba023a"
     }
   ],
   "project": [

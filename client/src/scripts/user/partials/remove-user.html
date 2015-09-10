@@ -2,8 +2,8 @@
     <v-dialog medium middle>
         <div>{{'Remove user, are you sure ?'|translate}}</div>
         <div class="buttons">
-            <button ng-click="confirm()">{{'Yes'|translate}}</button>
-            <button ng-click="close()">{{'No'|translate}}</button>
+            <button v-pressable class="cancel" ng-click="close()">{{'No'|translate}}</button>
+            <button v-pressable ng-click="confirm()">{{'Yes'|translate}}</button>
         </div>
     </v-dialog>
 </v-modal>

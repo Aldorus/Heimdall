@@ -54,17 +54,25 @@
         height: 100%;
         transition: all 0.3s ease;
         background: white;
-
+        padding: 20px 20px;
         &.open {
             transform: translate3d($widthForm, 0, 0);
         }
 
+        h1 {
+            color: $primaryColor;
+            position: relative;
+            left: -1px;
+            margin-bottom: 15px;
+        }
+
         .project {
-            width: 30.5%;
+            width: 250px;
             height: 250px;
             float: left;
-            margin: 2% 0 0 2%;
+            margin: 0 20px 0 0;
             border: 1px solid $primaryColor;
+            background: white;
             border-radius: 3px;
             position: relative;
 
