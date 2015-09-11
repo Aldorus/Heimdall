@@ -4,6 +4,11 @@ module.exports = function (vModal) {
     var service = {};
     service.model = {};
 
+    /**
+     * Init the view for the modal
+     * @param params
+     * @returns {*}
+     */
     service.view = function(params) {
 
         if(params) {

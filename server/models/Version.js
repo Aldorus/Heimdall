@@ -1,7 +1,7 @@
 'use strict';
 
 var low = require('lowdb');
-var db = low('./server/db/heimdall-db.json');
+var db = low('./server/db/heimdall-db-version.json');
 var uuid = require('uuid');
 
 var Version = {};

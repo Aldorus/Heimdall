@@ -5,7 +5,8 @@ module.exports = function ($q, account, projects, versions, builds, users) {
     var service = {};
 
     /**
-     * Init all the service
+     * Load all the data
+     * @returns {Promise}
      */
     service.init = function init() {
 

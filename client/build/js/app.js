@@ -167,6 +167,11 @@ module.exports.$inject = ["$http", "$q", "WS_ROOT_URL"];
 module.exports = function ($rootScope, $state, account) {
     var service = {};
 
+    /**
+     * Init the session service
+     * This service listen all the change state, and check if the user has a current session
+     * If the user has not session, he will be redirected to the auth state
+     */
     service.init = function init() {
         service.checkAndRedirect($state.current.name);
         $rootScope.$on('$stateChangeStart', function (event, toState) {
@@ -174,6 +179,10 @@ module.exports = function ($rootScope, $state, account) {
         });
     };
 
+    /**
+     * Check the session and redirect the user to the auth
+     * @param stateName
+     */
     service.checkAndRedirect = function checkAndRedirect(stateName) {
         // Check if a user exist in the session
         if(!account.getUser() && stateName !== 'auth') {
@@ -185,6 +194,7 @@ module.exports = function ($rootScope, $state, account) {
     return service;
 };
 module.exports.$inject = ["$rootScope", "$state", "account"];
+
 },{}],6:[function(require,module,exports){
 'use strict';
 
@@ -370,6 +380,11 @@ module.exports = function (vModal) {
     var service = {};
     service.model = {};
 
+    /**
+     * Init the view for the modal
+     * @param params
+     * @returns {*}
+     */
     service.view = function(params) {
 
         if(params) {
@@ -393,7 +408,8 @@ module.exports = function ($q, account, projects, versions, builds, users) {
     var service = {};
 
     /**
-     * Init all the service
+     * Load all the data
+     * @returns {Promise}
      */
     service.init = function init() {
 
@@ -507,7 +523,7 @@ module.exports = function($scope, projects, versions, builds) {
     projects.getProjects().then(function(projects) {
         $scope.countProject = projects.length;
         if($scope.countProject) {
-            $scope.countVersion = versions.getAllVersions().length / $scope.countProject;
+            $scope.countVersion = versions.getAllVersions().length / $scope.countProject * 100 / 100;
             $scope.countBuild = builds.getAllBuilds().length / $scope.countProject;
         } else {
             $scope.countVersion = 0;
@@ -775,6 +791,8 @@ module.exports = function ($scope, users, account, modal) {
     });
 
     $scope.isCurrentUser = function isCurrentUser(user) {
+        console.log('is current');
+
         if (account.getUser().id === user.id) {
             return true;
         }
@@ -948,7 +966,7 @@ angular.module('user', [])
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
 module.exports=require(7)
-},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
+},{"C:\\cygwin64\\home\\Guillaume\\dev\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
