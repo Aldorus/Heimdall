@@ -11,7 +11,8 @@
         background: white;
 
         &.open {
-            transform: translate3d($widthForm, 0, 0);
+            left: $widthForm;
+            //transform: translate3d($widthForm, 0, 0); No use transform because click hover doen't work properly
         }
 
         padding: 20px 20px;

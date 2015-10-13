@@ -105,6 +105,10 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
     border: 1px solid #8a837e;
     border-bottom: 1px solid transparent; }
 
+.helper-message {
+  font-family: "Gloria Hallelujah";
+  color: #8a837e; }
+
 /* latin */
 @font-face {
   font-family: 'Raleway';
@@ -144,6 +148,12 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
   font-weight: 700;
   src: url('../assets/fonts/raleway/Raleway-Bold.ttf'), url(http://fonts.gstatic.com/s/raleway/v9/JbtMzqLaYbbbCL9X6EvaI_k_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
   unicode-range: U0 0FF, U131, U152 -153, U2C6, U2DA, U2DC, U2000 -206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
+
+@font-face {
+  font-family: 'Gloria Hallelujah';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/gloria/GloriaHallelujah.ttf'); }
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -1242,8 +1252,7 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
   background: white;
   padding: 20px 20px; }
   .page-project .list-project.open {
-    -webkit-transform: translate3d(450px, 0, 0);
-            transform: translate3d(450px, 0, 0); }
+    left: 450px; }
   .page-project .list-project h1 {
     color: #00AC6B;
     position: relative;
@@ -1276,8 +1285,7 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
   .page-project .list-project .help-empty-project {
     position: absolute;
     top: 150px;
-    left: 35%;
-    color: #8a837e; }
+    left: 35%; }
     .page-project .list-project .help-empty-project .arrow {
       width: 70px;
       height: 70px;
@@ -1329,8 +1337,7 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
     background: white;
     padding: 20px 20px; }
     .page-user .wrapper .list-user.open {
-      -webkit-transform: translate3d(450px, 0, 0);
-              transform: translate3d(450px, 0, 0); }
+      left: 450px; }
     .page-user .wrapper .list-user .button-add {
       float: right;
       margin-bottom: 10px; }

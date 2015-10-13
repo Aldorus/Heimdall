@@ -9,6 +9,10 @@ module.exports = function($scope, projects, account, builds) {
         $scope.projects = projects;
     });
 
+    $scope.getBuildByProjects = function getBuildByProjects(project) {
+
+    };
+
     /**
      * Open the panel for create project
      */

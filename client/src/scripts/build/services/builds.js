@@ -1,7 +1,7 @@
 'use strict';
 
 /*@ngInject*/
-module.exports = function($http, $q, WS_ROOT_URL) {
+module.exports = function ($http, $q, WS_ROOT_URL) {
     var service = {};
     var url = WS_ROOT_URL + 'builds/';
     var builds = [];
@@ -13,7 +13,7 @@ module.exports = function($http, $q, WS_ROOT_URL) {
     service.getBuildsByProject = function getBuildsByProject(project) {
         var deferred = $q.defer();
 
-        if(builds[project.id]) {
+        if (builds[project.id]) {
             deferred.resolve(builds[project.id]);
             return deferred.promise;
         }
@@ -22,13 +22,12 @@ module.exports = function($http, $q, WS_ROOT_URL) {
             method: 'GET',
             url: url,
             params: {
-                /*jshint camelcase:false*/
                 projectId: project.id
             }
-        }).then(function(response) {
+        }).then(function (response) {
             builds[project.id] = response.data;
             deferred.resolve(response.data);
-        }, function() {
+        }, function () {
 
         });
 
@@ -40,8 +39,7 @@ module.exports = function($http, $q, WS_ROOT_URL) {
      */
     service.getAllBuilds = function getAllBuilds() {
         var agreBuilds = [];
-
-        for(var i = 0; i<builds.length; i++) {
+        for (var i = 0; i < builds.length; i++) {
             agreBuilds.push(builds[i]);
         }
         return agreBuilds;
@@ -56,10 +54,10 @@ module.exports = function($http, $q, WS_ROOT_URL) {
             method: 'POST',
             url: url,
             data: build
-        }).then(function(response) {
+        }).then(function (response) {
             deferred.resolve(response.data);
             builds.push(response.data);
-        }, function() {
+        }, function () {
         });
 
         return deferred.promise;

@@ -23,13 +23,13 @@
             <div class="glyphicon glyphicon-plus"></div>
             <div class="new-project-label">{{'New Project' | translate}}</div>
         </a>
-        <div class="help-empty-project" ng-if="projects.length === 0">
+        <div class="help-empty-project helper-message" ng-if="projects.length === 0">
             <div class="arrow"></div>
             <div class="text" ng-bind-html="'Help Empty Project' | translate"></div>
         </div>
-        <div class="project" ng-repeat="project in projects" ng-click="goProject(project)">
+        <div class="project" ng-repeat="project in projects">
             <div class="desc"></div>
-            <h1 class="title">{{project.title}}</h1>
+            <h1 class="title">{{project}}</h1>
             <div class="list-build">
                 <div ng-repeat="build in project.builds" ng-click="goBuild(build)"></div>
             </div>

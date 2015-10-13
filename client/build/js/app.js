@@ -41,6 +41,10 @@ angular.module('heimdall', [
     }])
 ;
 
+angular.element(document).ready(function() {
+    angular.bootstrap(document, ['heimdall']);
+});
+
 
 },{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading":12}],2:[function(require,module,exports){
 'use strict';
@@ -223,7 +227,7 @@ module.exports = function() {
 'use strict';
 
 /*@ngInject*/
-module.exports = function($http, $q, WS_ROOT_URL) {
+module.exports = function ($http, $q, WS_ROOT_URL) {
     var service = {};
     var url = WS_ROOT_URL + 'builds/';
     var builds = [];
@@ -235,7 +239,7 @@ module.exports = function($http, $q, WS_ROOT_URL) {
     service.getBuildsByProject = function getBuildsByProject(project) {
         var deferred = $q.defer();
 
-        if(builds[project.id]) {
+        if (builds[project.id]) {
             deferred.resolve(builds[project.id]);
             return deferred.promise;
         }
@@ -244,13 +248,12 @@ module.exports = function($http, $q, WS_ROOT_URL) {
             method: 'GET',
             url: url,
             params: {
-                /*jshint camelcase:false*/
                 projectId: project.id
             }
-        }).then(function(response) {
+        }).then(function (response) {
             builds[project.id] = response.data;
             deferred.resolve(response.data);
-        }, function() {
+        }, function () {
 
         });
 
@@ -262,8 +265,7 @@ module.exports = function($http, $q, WS_ROOT_URL) {
      */
     service.getAllBuilds = function getAllBuilds() {
         var agreBuilds = [];
-
-        for(var i = 0; i<builds.length; i++) {
+        for (var i = 0; i < builds.length; i++) {
             agreBuilds.push(builds[i]);
         }
         return agreBuilds;
@@ -278,10 +280,10 @@ module.exports = function($http, $q, WS_ROOT_URL) {
             method: 'POST',
             url: url,
             data: build
-        }).then(function(response) {
+        }).then(function (response) {
             deferred.resolve(response.data);
             builds.push(response.data);
-        }, function() {
+        }, function () {
         });
 
         return deferred.promise;
@@ -299,8 +301,7 @@ module.exports = function ($state, loading) {
     return {
         restrict: 'E',
         replace: true,
-        link: function (scope) {
-
+        link: function (scope, element, attrs) {
             function testIfSecure(stateName) {
                 if (stateName !== 'auth' && stateName) {
                     scope.display = true;
@@ -469,12 +470,11 @@ module.exports = function ($q, account, projects, versions, builds, users) {
         var projectCpt = 0;
 
         for (var i = 0; i < projects.length; i++) {
-            var project = projects[i];
-            builds.getBuildsByProject(project)
+            builds.getBuildsByProject(projects[i])
                 .then(function () {
                     projectCpt++;
                     if (projectCpt >= projects.length) {
-                        console.log('Build are loaded');
+                        console.log('Builds are loaded');
                         deferred.resolve();
                     }
                 });
@@ -487,12 +487,11 @@ module.exports = function ($q, account, projects, versions, builds, users) {
         var projectCpt = 0;
 
         for (var i = 0; i < projects.length; i++) {
-            var project = projects[i];
-            versions.getVersionsByProjects(project)
+            versions.getVersionsByProjects(projects[i])
                 .then(function () {
                     projectCpt++;
                     if (projectCpt >= projects.length) {
-                        console.log('Version are loaded');
+                        console.log('Versions are loaded');
                         deferred.resolve();
                     }
                 });
@@ -503,6 +502,7 @@ module.exports = function ($q, account, projects, versions, builds, users) {
     service.loadUsers = function loadUsers() {
         var deferred = $q.defer();
         users.getUsers().then(function(){
+            console.log('Users are loaded');
             deferred.resolve();
         });
         return deferred.promise;
@@ -524,6 +524,7 @@ module.exports = function($scope, projects, versions, builds) {
         $scope.countProject = projects.length;
         if($scope.countProject) {
             $scope.countVersion = versions.getAllVersions().length / $scope.countProject * 100 / 100;
+            console.log('build', builds.getAllBuilds());
             $scope.countBuild = builds.getAllBuilds().length / $scope.countProject;
         } else {
             $scope.countVersion = 0;
@@ -626,6 +627,10 @@ module.exports = function($scope, projects, account, builds) {
     projects.getProjects(account.getUser()).then(function(projects){
         $scope.projects = projects;
     });
+
+    $scope.getBuildByProjects = function getBuildByProjects(project) {
+
+    };
 
     /**
      * Open the panel for create project
@@ -966,7 +971,7 @@ angular.module('user', [])
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
 module.exports=require(7)
-},{"C:\\cygwin64\\home\\Guillaume\\dev\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
+},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
