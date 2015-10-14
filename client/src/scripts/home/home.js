@@ -6,7 +6,8 @@ angular.module('home', [])
         $stateProvider.state('home', {
             url: '/home',
             templateUrl: 'home/partials/home.html',
-            controller: 'HomeController'
+            controller: 'HomeController',
+            data: {pageTitle: 'Home'}
         });
     })
 ;

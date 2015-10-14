@@ -1153,63 +1153,6 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
       .page-home .box.count-box:hover h2, .page-home .box.count-box:hover span {
         color: #FFFFFF; }
 
-.navigation {
-  background: #2b2f3e;
-  display: block;
-  float: left;
-  width: 240px;
-  height: 100%;
-  color: #FFFFFF;
-  box-shadow: inset -5px 0px 8px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: fixed; }
-  .navigation .icon-profile {
-    border: 2px solid #00AC6B;
-    border-radius: 10000px;
-    margin: 25px 0 10px 0;
-    display: inline-block; }
-    .navigation .icon-profile .glyphicon-user, .navigation .icon-profile img {
-      display: inline-block;
-      border-radius: 10000px;
-      width: 90px;
-      height: 90px;
-      padding: 5px;
-      font-size: 5rem;
-      position: relative;
-      top: 2px; }
-  .navigation ul {
-    margin-top: 55px;
-    list-style-type: none;
-    text-align: left; }
-    .navigation ul li {
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease; }
-      .navigation ul li a {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        padding: 10px 20px;
-        font-size: 1.2rem;
-        font-weight: 600; }
-      .navigation ul li .glyphicon {
-        margin-right: 10px;
-        -webkit-transition: all 0.1s ease;
-                transition: all 0.1s ease;
-        font-size: 0.8rem;
-        position: relative;
-        top: 0px; }
-      .navigation ul li:hover, .navigation ul li .active {
-        background: #00AC6B; }
-        .navigation ul li:hover .glyphicon, .navigation ul li .active .glyphicon {
-          margin-right: 15px; }
-  .navigation .version {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 5px;
-    font-size: 0.8rem;
-    opacity: 0.7; }
-
 .page-project .projects-container {
   position: relative; }
 .page-project .form-project {
@@ -1409,3 +1352,60 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
 
 .modal-remove-user .buttons {
   float: right; }
+
+.navigation {
+  background: #2b2f3e;
+  display: block;
+  float: left;
+  width: 240px;
+  height: 100%;
+  color: #FFFFFF;
+  box-shadow: inset -5px 0px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: fixed; }
+  .navigation .icon-profile {
+    border: 2px solid #00AC6B;
+    border-radius: 10000px;
+    margin: 25px 0 10px 0;
+    display: inline-block; }
+    .navigation .icon-profile .glyphicon-user, .navigation .icon-profile img {
+      display: inline-block;
+      border-radius: 10000px;
+      width: 90px;
+      height: 90px;
+      padding: 5px;
+      font-size: 5rem;
+      position: relative;
+      top: 2px; }
+  .navigation ul {
+    margin-top: 55px;
+    list-style-type: none;
+    text-align: left; }
+    .navigation ul li {
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease; }
+      .navigation ul li a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        font-weight: 600; }
+      .navigation ul li .glyphicon {
+        margin-right: 10px;
+        -webkit-transition: all 0.1s ease;
+                transition: all 0.1s ease;
+        font-size: 0.8rem;
+        position: relative;
+        top: 0px; }
+      .navigation ul li:hover, .navigation ul li .active {
+        background: #00AC6B; }
+        .navigation ul li:hover .glyphicon, .navigation ul li .active .glyphicon {
+          margin-right: 15px; }
+  .navigation .version {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.8rem;
+    opacity: 0.7; }

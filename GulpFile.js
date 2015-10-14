@@ -84,8 +84,7 @@ gulp.task('watch', function () {
         config.project + 'src/scripts/**/*.*css'
 
     ], ['envWatch', 'styles']);
-    gulp.watch(config.project + 'src/scripts/**/*.js', ['envWatch', 'scripts']);
-    gulp.watch(config.project + 'test/**/*.js', ['unitTest']);
+    gulp.watch(config.project + 'src/scripts/**/*.js', ['envWatch', 'scripts', 'unitTest']);
     gulp.watch(config.project + 'src/assets/**/*', ['envWatch', 'assets']);
     gulp.watch(config.project + 'src/scripts/**/*.html', ['envWatch', 'templates']);
     gulp.watch(config.project + 'src/index.html', ['envWatch', 'index']);

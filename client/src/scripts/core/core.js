@@ -20,7 +20,9 @@ angular.module('heimdall', [
     .directive('loader', require('./directives/loader'))
     .service('loading', require('./services/loading'))
     .factory('modal', require('./factories/modal'))
-
+    .run(function($rootScope, $state) {
+        $rootScope.$state = $state;
+    })
     .config(function ($urlRouterProvider, $translateProvider, $animateProvider) {
 
         // Remove animation on all ng-if and ng-repeat
@@ -39,18 +41,4 @@ angular.module('heimdall', [
         $translateProvider.preferredLanguage('fr_FR');
     })
 ;
-
-function loadingData() {
-    var initInjector = angular.injector(['ng']);
-    var loadingService = initInjector.get('loading');
-    return loadingService.init();
-}
-
-function bootstrapApplication() {
-    angular.element(document).ready(function() {
-        angular.bootstrap(document, ['heimdall']);
-    });
-}
-
-loadingData().then(bootstrapApplication);
 

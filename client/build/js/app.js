@@ -21,7 +21,9 @@ angular.module('heimdall', [
     .directive('loader', require('./directives/loader'))
     .service('loading', require('./services/loading'))
     .factory('modal', require('./factories/modal'))
-
+    .run(["$rootScope", "$state", function($rootScope, $state) {
+        $rootScope.$state = $state;
+    }])
     .config(["$urlRouterProvider", "$translateProvider", "$animateProvider", function ($urlRouterProvider, $translateProvider, $animateProvider) {
 
         // Remove animation on all ng-if and ng-repeat
@@ -40,20 +42,6 @@ angular.module('heimdall', [
         $translateProvider.preferredLanguage('fr_FR');
     }])
 ;
-
-function loadingData() {
-    var initInjector = angular.injector(['ng']);
-    var loadingService = initInjector.get('loading');
-    return loadingService.init();
-}
-
-function bootstrapApplication() {
-    angular.element(document).ready(function() {
-        angular.bootstrap(document, ['heimdall']);
-    });
-}
-
-loadingData().then(bootstrapApplication);
 
 
 },{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading":12}],2:[function(require,module,exports){
@@ -560,7 +548,8 @@ angular.module('home', [])
         $stateProvider.state('home', {
             url: '/home',
             templateUrl: 'home/partials/home.html',
-            controller: 'HomeController'
+            controller: 'HomeController',
+            data: {pageTitle: 'Home'}
         });
     }])
 ;
