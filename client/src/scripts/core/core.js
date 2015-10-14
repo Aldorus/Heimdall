@@ -40,7 +40,16 @@ angular.module('heimdall', [
     })
 ;
 
-angular.element(document).ready(function() {
-    angular.bootstrap(document, ['heimdall']);
-});
+loadingData().then(bootstrapApplication);
 
+function loadingData() {
+    var initInjector = angular.injector(["ng"]);
+    var loadingService = initInjector.get("loading");
+    return loadingService.init();
+}
+
+function bootstrapApplication() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ["myApplication"]);
+    });
+}

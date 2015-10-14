@@ -41,10 +41,19 @@ angular.module('heimdall', [
     }])
 ;
 
-angular.element(document).ready(function() {
-    angular.bootstrap(document, ['heimdall']);
-});
+loadingData().then(bootstrapApplication);
 
+function loadingData() {
+    var initInjector = angular.injector(["ng"]);
+    var loadingService = initInjector.get("loading");
+    return loadingService.init();
+}
+
+function bootstrapApplication() {
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ["myApplication"]);
+    });
+}
 
 },{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading":12}],2:[function(require,module,exports){
 'use strict';
@@ -424,6 +433,8 @@ module.exports = function ($q, account, projects, versions, builds, users) {
             if(usersLoaded) {
                 deferred.resolve();
             }
+        }, function(error) {
+            console.log(error)
         });
 
         service.loadUsers().then(function() {
@@ -970,8 +981,14 @@ angular.module('user', [])
 
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
-module.exports=require(7)
-},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function() {
+
+};
+
+},{}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/

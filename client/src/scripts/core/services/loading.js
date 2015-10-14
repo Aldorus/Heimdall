@@ -20,6 +20,8 @@ module.exports = function ($q, account, projects, versions, builds, users) {
             if(usersLoaded) {
                 deferred.resolve();
             }
+        }, function(error) {
+            console.log(error)
         });
 
         service.loadUsers().then(function() {
