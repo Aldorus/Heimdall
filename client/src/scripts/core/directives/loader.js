@@ -5,7 +5,7 @@ module.exports = function ($state, loading) {
     return {
         restrict: 'E',
         replace: true,
-        link: function (scope, element, attrs) {
+        link: function (scope) {
             function testIfSecure(stateName) {
                 if (stateName !== 'auth' && stateName) {
                     scope.display = true;

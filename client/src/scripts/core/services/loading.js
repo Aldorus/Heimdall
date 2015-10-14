@@ -20,8 +20,6 @@ module.exports = function ($q, account, projects, versions, builds, users) {
             if(usersLoaded) {
                 deferred.resolve();
             }
-        }, function(error) {
-            console.log(error)
         });
 
         service.loadUsers().then(function() {
@@ -63,11 +61,13 @@ module.exports = function ($q, account, projects, versions, builds, users) {
         return deferred.promise;
     };
 
+    /* jshint ignore:start */
     service.loadBuilds = function loadBuilds(projects) {
         var deferred = $q.defer();
-        var projectCpt = 0;
 
+        var projectCpt = 0;
         for (var i = 0; i < projects.length; i++) {
+
             builds.getBuildsByProject(projects[i])
                 .then(function () {
                     projectCpt++;
@@ -77,13 +77,16 @@ module.exports = function ($q, account, projects, versions, builds, users) {
                     }
                 });
         }
+
         return deferred.promise;
     };
+    /* jshint ignore:end */
 
+    /* jshint ignore:start */
     service.loadVersions = function loadVersions(projects) {
         var deferred = $q.defer();
-        var projectCpt = 0;
 
+        var projectCpt = 0;
         for (var i = 0; i < projects.length; i++) {
             versions.getVersionsByProjects(projects[i])
                 .then(function () {
@@ -93,9 +96,11 @@ module.exports = function ($q, account, projects, versions, builds, users) {
                         deferred.resolve();
                     }
                 });
+
         }
         return deferred.promise;
     };
+    /* jshint ignore:end */
 
     service.loadUsers = function loadUsers() {
         var deferred = $q.defer();

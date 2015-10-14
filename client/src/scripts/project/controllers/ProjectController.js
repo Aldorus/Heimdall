@@ -1,7 +1,7 @@
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, projects, account, builds) {
+module.exports = function($scope, $state, projects, account, builds) {
 
     $scope.newProject = {};
 
@@ -9,7 +9,7 @@ module.exports = function($scope, projects, account, builds) {
         $scope.projects = projects;
     });
 
-    $scope.getBuildByProjects = function getBuildByProjects(project) {
+    $scope.getBuildByProjects = function getBuildByProjects() {
 
     };
 
@@ -27,7 +27,7 @@ module.exports = function($scope, projects, account, builds) {
         $scope.open = false;
     };
 
-    $scope.goBuild = function(build) {
+    $scope.goBuild = function() {
         $state.go('build');
     };
 

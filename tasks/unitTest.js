@@ -35,7 +35,7 @@ module.exports = function (done) {
     listFiles.push('' + config.dist + 'js/**/app.js');
 
     // Get test files
-    listFiles.push('' + config.test + '**/*.js');
+    listFiles.push('' + config.test + 'unit/**/*.js');
 
     karma.start({
         configFile: __dirname + '/../karma.conf.js',

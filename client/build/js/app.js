@@ -41,19 +41,20 @@ angular.module('heimdall', [
     }])
 ;
 
-loadingData().then(bootstrapApplication);
-
 function loadingData() {
-    var initInjector = angular.injector(["ng"]);
-    var loadingService = initInjector.get("loading");
+    var initInjector = angular.injector(['ng']);
+    var loadingService = initInjector.get('loading');
     return loadingService.init();
 }
 
 function bootstrapApplication() {
     angular.element(document).ready(function() {
-        angular.bootstrap(document, ["myApplication"]);
+        angular.bootstrap(document, ['heimdall']);
     });
 }
+
+loadingData().then(bootstrapApplication);
+
 
 },{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading":12}],2:[function(require,module,exports){
 'use strict';
@@ -82,8 +83,8 @@ angular.module('auth', [])
 module.exports = function($scope, $state, account) {
 
     $scope.user = {
-        email: 'admin@peashooter.com',
-        password: 'admin'
+        //email: 'admin@peashooter.com',
+        //password: 'admin'
     };
 
     $scope.submit = function submit() {
@@ -310,7 +311,7 @@ module.exports = function ($state, loading) {
     return {
         restrict: 'E',
         replace: true,
-        link: function (scope, element, attrs) {
+        link: function (scope) {
             function testIfSecure(stateName) {
                 if (stateName !== 'auth' && stateName) {
                     scope.display = true;
@@ -433,8 +434,6 @@ module.exports = function ($q, account, projects, versions, builds, users) {
             if(usersLoaded) {
                 deferred.resolve();
             }
-        }, function(error) {
-            console.log(error)
         });
 
         service.loadUsers().then(function() {
@@ -476,11 +475,13 @@ module.exports = function ($q, account, projects, versions, builds, users) {
         return deferred.promise;
     };
 
+    /* jshint ignore:start */
     service.loadBuilds = function loadBuilds(projects) {
         var deferred = $q.defer();
-        var projectCpt = 0;
 
+        var projectCpt = 0;
         for (var i = 0; i < projects.length; i++) {
+
             builds.getBuildsByProject(projects[i])
                 .then(function () {
                     projectCpt++;
@@ -490,13 +491,16 @@ module.exports = function ($q, account, projects, versions, builds, users) {
                     }
                 });
         }
+
         return deferred.promise;
     };
+    /* jshint ignore:end */
 
+    /* jshint ignore:start */
     service.loadVersions = function loadVersions(projects) {
         var deferred = $q.defer();
-        var projectCpt = 0;
 
+        var projectCpt = 0;
         for (var i = 0; i < projects.length; i++) {
             versions.getVersionsByProjects(projects[i])
                 .then(function () {
@@ -506,9 +510,11 @@ module.exports = function ($q, account, projects, versions, builds, users) {
                         deferred.resolve();
                     }
                 });
+
         }
         return deferred.promise;
     };
+    /* jshint ignore:end */
 
     service.loadUsers = function loadUsers() {
         var deferred = $q.defer();
@@ -552,7 +558,7 @@ angular.module('home', [])
     .controller('HomeController', require('./controllers/HomeController'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('home', {
-            url: '/',
+            url: '/home',
             templateUrl: 'home/partials/home.html',
             controller: 'HomeController'
         });
@@ -631,7 +637,7 @@ angular.module('navigation', [])
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, projects, account, builds) {
+module.exports = function($scope, $state, projects, account, builds) {
 
     $scope.newProject = {};
 
@@ -639,7 +645,7 @@ module.exports = function($scope, projects, account, builds) {
         $scope.projects = projects;
     });
 
-    $scope.getBuildByProjects = function getBuildByProjects(project) {
+    $scope.getBuildByProjects = function getBuildByProjects() {
 
     };
 
@@ -657,7 +663,7 @@ module.exports = function($scope, projects, account, builds) {
         $scope.open = false;
     };
 
-    $scope.goBuild = function(build) {
+    $scope.goBuild = function() {
         $state.go('build');
     };
 
@@ -691,7 +697,7 @@ module.exports = function($scope, projects, account, builds) {
             });
     };
 };
-module.exports.$inject = ["$scope", "projects", "account", "builds"];
+module.exports.$inject = ["$scope", "$state", "projects", "account", "builds"];
 
 },{}],18:[function(require,module,exports){
 'use strict';
@@ -981,14 +987,8 @@ angular.module('user', [])
 
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function() {
-
-};
-
-},{}],25:[function(require,module,exports){
+module.exports=require(7)
+},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/

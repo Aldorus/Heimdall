@@ -43,6 +43,9 @@ gulp.task('envWatch', function () {
 gulp.task('unitTest', require('./tasks/unitTest'));
 gulp.task('e2e', ['serve', 'updateWebdriver'], require('./tasks/e2e'));
 
+//Launch the e2e and unit test
+gulp.task('test', ['unitTest', 'e2e']);
+
 gulp.task('updateWebdriver', protractor.webdriver_update);
 
 /*******
@@ -51,12 +54,9 @@ gulp.task('updateWebdriver', protractor.webdriver_update);
 //Production Build (normal build + git)
 gulp.task('prod', ['envProd', 'dev']);
 
-//Launch the e2e and unit test
-gulp.task('test', ['unitTest', 'e2e']);
-
 // Dev build
 gulp.task('dev', ['index', 'assets', 'vendor', 'templates', 'i18n', 'styles', 'scripts'], function() {
-//    gulp.start('test');
+    gulp.start('unitTest');
 });
 
 // Dev build + add the watch and the livereload on the sources
@@ -85,7 +85,7 @@ gulp.task('watch', function () {
 
     ], ['envWatch', 'styles']);
     gulp.watch(config.project + 'src/scripts/**/*.js', ['envWatch', 'scripts']);
-//    gulp.watch(config.project + 'test/**/*.js', ['test']);
+    gulp.watch(config.project + 'test/**/*.js', ['unitTest']);
     gulp.watch(config.project + 'src/assets/**/*', ['envWatch', 'assets']);
     gulp.watch(config.project + 'src/scripts/**/*.html', ['envWatch', 'templates']);
     gulp.watch(config.project + 'src/index.html', ['envWatch', 'index']);

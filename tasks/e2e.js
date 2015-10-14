@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     protractor = require('gulp-protractor').protractor,
     gutil = require('gulp-util'),
+    browserSync = require('browser-sync'),
     config = require('../GulpConfig');
 
 /**
@@ -9,13 +10,14 @@ var gulp = require('gulp'),
  * The favicon is copied in build root
  */
 module.exports = function() {
-    return gulp.src([config.project + 'test/e2e/**/*.js'])
+    gulp.src([config.project + 'test/e2e/**/*.js'])
         .pipe(protractor({
             'configFile': __dirname + '/../protractor.conf.js',
             'args': ['--baseUrl', 'http://localhost:8080/build']
         }))
         .on('error', function (err) {
             // Make sure failed tests cause gulp to exit non-zero
+            browserSync.exit();
             throw err;
         })
         .on('end', function () {
