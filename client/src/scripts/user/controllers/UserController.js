@@ -9,8 +9,6 @@ module.exports = function ($scope, users, account, modal) {
     });
 
     $scope.isCurrentUser = function isCurrentUser(user) {
-        console.log('is current');
-
         if (account.getUser().id === user.id) {
             return true;
         }

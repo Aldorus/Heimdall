@@ -9,8 +9,10 @@ module.exports = function($scope, $state, projects, account, builds) {
         $scope.projects = projects;
     });
 
-    $scope.getBuildByProjects = function getBuildByProjects() {
-
+    $scope.getBuildsByProject = function getBuildsByProject(project) {
+        builds.getBuildsByProject(project).then(function(builds) {
+            project.builds = builds;
+        });
     };
 
     /**
@@ -27,8 +29,10 @@ module.exports = function($scope, $state, projects, account, builds) {
         $scope.open = false;
     };
 
-    $scope.goBuild = function() {
-        $state.go('build');
+    $scope.goBuild = function(build) {
+        $state.go('build', {
+            buildId: build.id
+        });
     };
 
     /**

@@ -71,8 +71,8 @@ angular.module('auth', [])
 module.exports = function($scope, $state, account) {
 
     $scope.user = {
-        //email: 'admin@peashooter.com',
-        //password: 'admin'
+        email: 'admin@peashooter.com',
+        password: 'admin'
     };
 
     $scope.submit = function submit() {
@@ -205,9 +205,14 @@ angular.module('build', [])
     .service('builds', require('./services/builds'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('build', {
-            url: '/build',
+            url: '/build/:buildId',
             templateUrl: 'build/partials/build.html',
-            controller: 'BuildController'
+            controller: 'BuildController',
+            resolve: {
+                build: ["$stateParams", "builds", function ($stateParams, builds) {
+                    return builds.getBuildById($stateParams.buildId);
+                }]
+            }
         });
     }])
 ;
@@ -217,9 +222,24 @@ angular.module('build', [])
 'use strict';
 
 /*@ngInject*/
-module.exports = function() {
+module.exports = function($scope, build) {
+    $scope.build = build;
 
+    /**
+     * Open the panel for create project
+     */
+    $scope.newBuild = function newBuild() {
+        $scope.open = true;
+    };
+
+    /**
+     * Close the panel for create project
+     */
+    $scope.closeBuild = function closeBuild() {
+        $scope.open = false;
+    };
 };
+module.exports.$inject = ["$scope", "build"];
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -256,6 +276,40 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
         });
 
         return deferred.promise;
+    };
+
+    service.getBuildById = function getBuildById(buildId) {
+        var deferred = $q.defer();
+
+        // Search in cache
+        var cachedBuild = service.getBuildByIdInCache(buildId);
+
+        if (cachedBuild) {
+            console.log(cachedBuild);
+            deferred.resolve(cachedBuild);
+            return deferred.promise;
+        }
+
+        // Otherwise we call the API
+        $http({
+            method: 'GET',
+            url: url + buildId
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function () {
+
+        });
+
+        return deferred.promise;
+    };
+
+    service.getBuildByIdInCache = function getBuildByIdInCache(buildId) {
+        var builds = service.getAllBuilds();
+        for(var i = 0; i<builds.length; i++) {
+            if(builds[i].id === buildId) {
+                return builds[i];
+            }
+        }
     };
 
     /**
@@ -634,8 +688,10 @@ module.exports = function($scope, $state, projects, account, builds) {
         $scope.projects = projects;
     });
 
-    $scope.getBuildByProjects = function getBuildByProjects() {
-
+    $scope.getBuildsByProject = function getBuildsByProject(project) {
+        builds.getBuildsByProject(project).then(function(builds) {
+            project.builds = builds;
+        });
     };
 
     /**
@@ -652,8 +708,10 @@ module.exports = function($scope, $state, projects, account, builds) {
         $scope.open = false;
     };
 
-    $scope.goBuild = function() {
-        $state.go('build');
+    $scope.goBuild = function(build) {
+        $state.go('build', {
+            buildId: build.id
+        });
     };
 
     /**
@@ -802,8 +860,6 @@ module.exports = function ($scope, users, account, modal) {
     });
 
     $scope.isCurrentUser = function isCurrentUser(user) {
-        console.log('is current');
-
         if (account.getUser().id === user.id) {
             return true;
         }
@@ -976,8 +1032,14 @@ angular.module('user', [])
 
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
-module.exports=require(7)
-},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function() {
+
+};
+
+},{}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
