@@ -13,14 +13,14 @@ angular.module('heimdall', [
     'ngSanitize',
     'ui.router',
     'pascalprecht.translate',
-    'vButton','vModal',
+    'vButton', 'vModal',
     'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
     .service('loading', require('./services/loading'))
     .factory('modal', require('./factories/modal'))
-    .run(function($rootScope, $state) {
+    .run(function ($rootScope, $state) {
         $rootScope.$state = $state;
     })
     .config(function ($urlRouterProvider, $translateProvider, $animateProvider) {

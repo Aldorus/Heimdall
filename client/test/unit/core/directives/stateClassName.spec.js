@@ -5,29 +5,35 @@
 'use strict';
 
 describe('Directive:stateClassName', function () {
-    var elm, scope, $httpBackend;
+    var element, $rootScope, $httpBackend, $state, $compile;
 
     beforeEach(module('heimdall'));
 
-    beforeEach(inject(function (_$httpBackend_) {
+    beforeEach(inject(function (_$httpBackend_, _$state_, _$rootScope_, _$compile_) {
         $httpBackend = _$httpBackend_;
+        $state = _$state_;
+        $rootScope = _$rootScope_;
+        $compile = _$compile_;
         $httpBackend.when(
             'GET',
             'i18n/fr_FR.json'
-        ).respond({});
+        ).respond({test:'test'});
     }));
 
-    beforeEach(inject(function($rootScope, $compile, $injector) {
-        elm = angular.element('<div state-class-name></div>');
+    beforeEach(function() {
+        element = $compile("<div state-class-name></div>")($rootScope);
+        $rootScope.$digest();
 
-        scope = $rootScope;
-        scope.defined = false;
+        spyOn($rootScope.$new(), '$broadcast').andCallThrough();
+    });
 
-        $compile(elm)(scope);
-        scope.$digest();
-    }));
+    it('should be page-root', function() {
+        expect(element.hasClass('page-root')).toBe(true);
+    });
 
-    it('should not be initially defined', function() {
-        expect(elm.scope().$$childTail.isDefined()).toBe(false);
+    it('after redirect should be page-auth', function() {
+        $rootScope.$broadcast("$stateChangeStart", [{}, {name:'auth'}]);
+        console.log(element);
+        expect(element.hasClass('page-auth')).toBe(true);
     });
 });

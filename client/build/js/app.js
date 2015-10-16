@@ -14,14 +14,14 @@ angular.module('heimdall', [
     'ngSanitize',
     'ui.router',
     'pascalprecht.translate',
-    'vButton','vModal',
+    'vButton', 'vModal',
     'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
     .service('loading', require('./services/loading'))
     .factory('modal', require('./factories/modal'))
-    .run(["$rootScope", "$state", function($rootScope, $state) {
+    .run(["$rootScope", "$state", function ($rootScope, $state) {
         $rootScope.$state = $state;
     }])
     .config(["$urlRouterProvider", "$translateProvider", "$animateProvider", function ($urlRouterProvider, $translateProvider, $animateProvider) {
@@ -350,10 +350,10 @@ module.exports = function ($state) {
 
     return {
         restrict: 'A',
+        scope:true,
         link: function (scope, el, attr) {
 
-            el
-                .addClass(className($state.current.name, attr.stateClassName));
+            el.addClass(className($state.current.name, attr.stateClassName));
 
             /**
              * Listen when we change to another state
@@ -361,10 +361,11 @@ module.exports = function ($state) {
              */
             scope.$on('$stateChangeStart', function (e, toState, current, previousState) {
 
-                el
-                    .removeClass('page-root')
-                    .removeClass(className(previousState.name, attr.stateClassName))
-                    .addClass(className(toState.name, attr.stateClassName));
+                el.removeClass('page-root');
+                if(previousState) {
+                    el.removeClass(className(previousState.name, attr.stateClassName));
+                }
+                el.addClass(className(toState.name, attr.stateClassName));
 
             });
         }
@@ -976,8 +977,14 @@ angular.module('user', [])
 
 
 },{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
-module.exports=require(7)
-},{"C:\\cygwin64\\home\\Exod\\Heimdall\\client\\src\\scripts\\build\\controllers\\BuildController.js":7}],25:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function() {
+
+};
+
+},{}],25:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/

@@ -1153,6 +1153,148 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
       .page-home .box.count-box:hover h2, .page-home .box.count-box:hover span {
         color: #FFFFFF; }
 
+.navigation {
+  background: #2b2f3e;
+  display: block;
+  float: left;
+  width: 240px;
+  height: 100%;
+  color: #FFFFFF;
+  box-shadow: inset -5px 0px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: fixed; }
+  .navigation .icon-profile {
+    border: 2px solid #00AC6B;
+    border-radius: 10000px;
+    margin: 25px 0 10px 0;
+    display: inline-block; }
+    .navigation .icon-profile .glyphicon-user, .navigation .icon-profile img {
+      display: inline-block;
+      border-radius: 10000px;
+      width: 90px;
+      height: 90px;
+      padding: 5px;
+      font-size: 5rem;
+      position: relative;
+      top: 2px; }
+  .navigation ul {
+    margin-top: 55px;
+    list-style-type: none;
+    text-align: left; }
+    .navigation ul li {
+      -webkit-transition: all 0.3s ease;
+              transition: all 0.3s ease; }
+      .navigation ul li a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        font-weight: 600; }
+      .navigation ul li .glyphicon {
+        margin-right: 10px;
+        -webkit-transition: all 0.1s ease;
+                transition: all 0.1s ease;
+        font-size: 0.8rem;
+        position: relative;
+        top: 0px; }
+      .navigation ul li:hover, .navigation ul li .active {
+        background: #00AC6B; }
+        .navigation ul li:hover .glyphicon, .navigation ul li .active .glyphicon {
+          margin-right: 15px; }
+  .navigation .version {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.8rem;
+    opacity: 0.7; }
+
+.page-user .wrapper {
+  position: relative; }
+  .page-user .wrapper .list-user {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+    background: white;
+    padding: 20px 20px; }
+    .page-user .wrapper .list-user.open {
+      left: 450px; }
+    .page-user .wrapper .list-user .button-add {
+      float: right;
+      margin-bottom: 10px; }
+      .page-user .wrapper .list-user .button-add .glyphicon-plus {
+        padding-right: 15px; }
+    .page-user .wrapper .list-user h1 {
+      text-align: left;
+      color: #00AC6B; }
+    .page-user .wrapper .list-user table {
+      width: 100%; }
+      .page-user .wrapper .list-user table .header {
+        background: #00AC6B;
+        color: #FFFFFF;
+        border: 1px solid #00AC6B; }
+        .page-user .wrapper .list-user table .header th {
+          padding: 15px 0; }
+        .page-user .wrapper .list-user table .header .name {
+          width: 30%; }
+        .page-user .wrapper .list-user table .header .email {
+          width: 30%; }
+        .page-user .wrapper .list-user table .header .role {
+          width: 30%; }
+      .page-user .wrapper .list-user table td {
+        padding: 15px 0;
+        text-align: center;
+        border-left: 1px solid #00AC6B;
+        border-right: 1px solid #00AC6B;
+        border-bottom: 1px solid #00AC6B; }
+      .page-user .wrapper .list-user table .user-row .glyphicon {
+        color: #20815D;
+        margin: 0 5px;
+        font-size: 1.2rem;
+        cursor: pointer; }
+      .page-user .wrapper .list-user table .user-row.current-user td {
+        color: #E9003A; }
+  .page-user .wrapper .form-user {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    padding: 20px;
+    opacity: 0;
+    width: 450px;
+    -webkit-transition: all 1.5s ease;
+            transition: all 1.5s ease;
+    box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
+    .page-user .wrapper .form-user.open {
+      opacity: 1; }
+    .page-user .wrapper .form-user .glyphicon-remove {
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: #00AC6B;
+      font-size: 2rem;
+      border-radius: 5000px;
+      border: 2px solid #00AC6B;
+      padding: 5px 5px 3px 5px;
+      margin: 10px;
+      cursor: pointer; }
+    .page-user .wrapper .form-user h1 {
+      margin-bottom: 40px; }
+    .page-user .wrapper .form-user input {
+      width: 100%;
+      margin-bottom: 10px; }
+    .page-user .wrapper .form-user select {
+      width: 100%; }
+    .page-user .wrapper .form-user .form-button {
+      text-align: right;
+      margin-top: 10px; }
+
+.modal-remove-user .buttons {
+  float: right; }
+
 .page-project .projects-container {
   position: relative; }
 .page-project .form-project {
@@ -1267,145 +1409,3 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
         color: #FFFFFF; }
       .page-project .list-project .new-project:hover .new-project-label {
         color: #FFFFFF; }
-
-.page-user .wrapper {
-  position: relative; }
-  .page-user .wrapper .list-user {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-    background: white;
-    padding: 20px 20px; }
-    .page-user .wrapper .list-user.open {
-      left: 450px; }
-    .page-user .wrapper .list-user .button-add {
-      float: right;
-      margin-bottom: 10px; }
-      .page-user .wrapper .list-user .button-add .glyphicon-plus {
-        padding-right: 15px; }
-    .page-user .wrapper .list-user h1 {
-      text-align: left;
-      color: #00AC6B; }
-    .page-user .wrapper .list-user table {
-      width: 100%; }
-      .page-user .wrapper .list-user table .header {
-        background: #00AC6B;
-        color: #FFFFFF;
-        border: 1px solid #00AC6B; }
-        .page-user .wrapper .list-user table .header th {
-          padding: 15px 0; }
-        .page-user .wrapper .list-user table .header .name {
-          width: 30%; }
-        .page-user .wrapper .list-user table .header .email {
-          width: 30%; }
-        .page-user .wrapper .list-user table .header .role {
-          width: 30%; }
-      .page-user .wrapper .list-user table td {
-        padding: 15px 0;
-        text-align: center;
-        border-left: 1px solid #00AC6B;
-        border-right: 1px solid #00AC6B;
-        border-bottom: 1px solid #00AC6B; }
-      .page-user .wrapper .list-user table .user-row .glyphicon {
-        color: #20815D;
-        margin: 0 5px;
-        font-size: 1.2rem;
-        cursor: pointer; }
-      .page-user .wrapper .list-user table .user-row.current-user td {
-        color: #E9003A; }
-  .page-user .wrapper .form-user {
-    position: absolute;
-    left: 0;
-    height: 100%;
-    padding: 20px;
-    opacity: 0;
-    width: 450px;
-    -webkit-transition: all 1.5s ease;
-            transition: all 1.5s ease;
-    box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
-    .page-user .wrapper .form-user.open {
-      opacity: 1; }
-    .page-user .wrapper .form-user .glyphicon-remove {
-      position: absolute;
-      right: 0;
-      top: 0;
-      color: #00AC6B;
-      font-size: 2rem;
-      border-radius: 5000px;
-      border: 2px solid #00AC6B;
-      padding: 5px 5px 3px 5px;
-      margin: 10px;
-      cursor: pointer; }
-    .page-user .wrapper .form-user h1 {
-      margin-bottom: 40px; }
-    .page-user .wrapper .form-user input {
-      width: 100%;
-      margin-bottom: 10px; }
-    .page-user .wrapper .form-user select {
-      width: 100%; }
-    .page-user .wrapper .form-user .form-button {
-      text-align: right;
-      margin-top: 10px; }
-
-.modal-remove-user .buttons {
-  float: right; }
-
-.navigation {
-  background: #2b2f3e;
-  display: block;
-  float: left;
-  width: 240px;
-  height: 100%;
-  color: #FFFFFF;
-  box-shadow: inset -5px 0px 8px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  position: fixed; }
-  .navigation .icon-profile {
-    border: 2px solid #00AC6B;
-    border-radius: 10000px;
-    margin: 25px 0 10px 0;
-    display: inline-block; }
-    .navigation .icon-profile .glyphicon-user, .navigation .icon-profile img {
-      display: inline-block;
-      border-radius: 10000px;
-      width: 90px;
-      height: 90px;
-      padding: 5px;
-      font-size: 5rem;
-      position: relative;
-      top: 2px; }
-  .navigation ul {
-    margin-top: 55px;
-    list-style-type: none;
-    text-align: left; }
-    .navigation ul li {
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease; }
-      .navigation ul li a {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        padding: 10px 20px;
-        font-size: 1.2rem;
-        font-weight: 600; }
-      .navigation ul li .glyphicon {
-        margin-right: 10px;
-        -webkit-transition: all 0.1s ease;
-                transition: all 0.1s ease;
-        font-size: 0.8rem;
-        position: relative;
-        top: 0px; }
-      .navigation ul li:hover, .navigation ul li .active {
-        background: #00AC6B; }
-        .navigation ul li:hover .glyphicon, .navigation ul li .active .glyphicon {
-          margin-right: 15px; }
-  .navigation .version {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 5px;
-    font-size: 0.8rem;
-    opacity: 0.7; }
