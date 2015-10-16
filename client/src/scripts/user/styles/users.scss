@@ -3,31 +3,12 @@
 .page-user .wrapper {
     position: relative;
     .list-user {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: all 0.3s ease;
-        background: white;
-
-        &.open {
-            left: $widthForm;
-            //transform: translate3d($widthForm, 0, 0); No use transform because click hover doen't work properly
-        }
-
-        padding: 20px 20px;
-
         .button-add {
             float: right;
             margin-bottom: 10px;
             .glyphicon-plus {
                 padding-right: 15px;
             }
-        }
-
-        h1 {
-            text-align: left;
-            color: $primaryColor;
         }
 
         table {
@@ -77,51 +58,14 @@
         }
     }
 
-    .form-user {
-        position: absolute;
-        left: 0;
-        height: 100%;
-        padding: 20px;
-        opacity: 0;
-        width: $widthForm;
-        transition: all 1.5s ease;
-        box-shadow: inset -4px 0px 8px rgba(0,0,0,0.2);
-
-        &.open {
-            opacity: 1;
-
-        }
-
-        .glyphicon-remove {
-            position: absolute;
-            right: 0;
-            top: 0;
-            color: $primaryColor;
-            font-size: 2rem;
-            border-radius: 5000px;
-            border: 2px solid $primaryColor;
-            padding: 5px 5px 3px 5px;
-            margin: 10px;
-            cursor: pointer;
-        }
-
-        h1 {
-            margin-bottom:  40px;
-        }
-
-        input {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
+    .form-crud {
         select {
             width: 100%;
         }
-
-        .form-button {
-            text-align: right;
-            margin-top: 10px;
+        input {
+            margin-bottom: 10px;
         }
+
     }
 }
 

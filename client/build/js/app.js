@@ -204,25 +204,48 @@ module.exports.$inject = ["$rootScope", "$state", "account"];
 'use strict';
 
 angular.module('build', [])
-    .controller('BuildController', require('./controllers/BuildController'))
+    .controller('BuildController', require('./controllers/build.controller'))
     .service('builds', require('./services/builds'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('build', {
-            url: '/build',
+            url: '/build/:buildId',
             templateUrl: 'build/partials/build.html',
-            controller: 'BuildController'
+            controller: 'BuildController',
+            controllerAs: 'build',
+            resolve: {
+                build: ["$stateParams", "builds", function ($stateParams, builds) {
+                    return builds.getBuildById($stateParams.buildId);
+                }]
+            }
         });
     }])
 ;
 
 
-},{"./controllers/BuildController":7,"./services/builds":8}],7:[function(require,module,exports){
+},{"./controllers/build.controller":7,"./services/builds":8}],7:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
-module.exports = function() {
+module.exports = function(build) {
+    this.build = build;
 
+    /**
+     * Open the panel for create project
+     */
+    this.newBuild = function newBuild() {
+        this.open = true;
+    };
+
+    /**
+     * Close the panel for create project
+     */
+    this.closeBuild = function closeBuild() {
+        this.open = false;
+    };
+
+    return this;
 };
+module.exports.$inject = ["build"];
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -259,6 +282,40 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
         });
 
         return deferred.promise;
+    };
+
+    service.getBuildById = function getBuildById(buildId) {
+        var deferred = $q.defer();
+
+        // Search in cache
+        var cachedBuild = service.getBuildByIdInCache(buildId);
+
+        if (cachedBuild) {
+            console.log(cachedBuild);
+            deferred.resolve(cachedBuild);
+            return deferred.promise;
+        }
+
+        // Otherwise we call the API
+        $http({
+            method: 'GET',
+            url: url + buildId
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function () {
+
+        });
+
+        return deferred.promise;
+    };
+
+    service.getBuildByIdInCache = function getBuildByIdInCache(buildId) {
+        var builds = service.getAllBuilds();
+        for(var i = 0; i<builds.length; i++) {
+            if(builds[i].id === buildId) {
+                return builds[i];
+            }
+        }
     };
 
     /**
@@ -638,8 +695,10 @@ module.exports = function($scope, $state, projects, account, builds) {
         $scope.projects = projects;
     });
 
-    $scope.getBuildByProjects = function getBuildByProjects() {
-
+    $scope.getBuildsByProject = function getBuildsByProject(project) {
+        builds.getBuildsByProject(project).then(function(builds) {
+            project.builds = builds;
+        });
     };
 
     /**
@@ -656,8 +715,10 @@ module.exports = function($scope, $state, projects, account, builds) {
         $scope.open = false;
     };
 
-    $scope.goBuild = function() {
-        $state.go('build');
+    $scope.goBuild = function(build) {
+        $state.go('build', {
+            buildId: build.id
+        });
     };
 
     /**
@@ -806,8 +867,6 @@ module.exports = function ($scope, users, account, modal) {
     });
 
     $scope.isCurrentUser = function isCurrentUser(user) {
-        console.log('is current');
-
         if (account.getUser().id === user.id) {
             return true;
         }

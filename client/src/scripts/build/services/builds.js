@@ -34,6 +34,40 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
         return deferred.promise;
     };
 
+    service.getBuildById = function getBuildById(buildId) {
+        var deferred = $q.defer();
+
+        // Search in cache
+        var cachedBuild = service.getBuildByIdInCache(buildId);
+
+        if (cachedBuild) {
+            console.log(cachedBuild);
+            deferred.resolve(cachedBuild);
+            return deferred.promise;
+        }
+
+        // Otherwise we call the API
+        $http({
+            method: 'GET',
+            url: url + buildId
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function () {
+
+        });
+
+        return deferred.promise;
+    };
+
+    service.getBuildByIdInCache = function getBuildByIdInCache(buildId) {
+        var builds = service.getAllBuilds();
+        for(var i = 0; i<builds.length; i++) {
+            if(builds[i].id === buildId) {
+                return builds[i];
+            }
+        }
+    };
+
     /**
      * Only in cache memory
      */

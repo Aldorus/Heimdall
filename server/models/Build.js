@@ -26,7 +26,7 @@ Build.get = function get(buildId) {
 };
 
 Build.getByProject = function getByProject(projectId) {
-    return db('build').find({projectId: projectId});
+    return db('build').where({projectId: projectId});
 };
 
 Build.remove = function remove(buildId) {
