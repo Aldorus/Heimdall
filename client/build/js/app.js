@@ -48,9 +48,9 @@ angular.module('heimdall', [
 'use strict';
 
 angular.module('auth', [])
-    .controller('AuthController', require('./controllers/AuthController'))
-    .service('account', require('./services/account'))
-    .service('session', require('./services/session'))
+    .controller('AuthController', require('./controllers/auth.controller'))
+    .service('account', require('./services/account.service'))
+    .service('session', require('./services/session.service'))
     .run(["session", function(session) {
         session.init();
     }])
@@ -58,41 +58,44 @@ angular.module('auth', [])
         $stateProvider.state('auth', {
             url: '/auth',
             templateUrl: 'auth/partials/auth.html',
-            controller: 'AuthController'
+            controller: 'AuthController',
+            controllerAs: 'auth'
         });
     }])
 ;
 
 
-},{"./controllers/AuthController":3,"./services/account":4,"./services/session":5}],3:[function(require,module,exports){
+},{"./controllers/auth.controller":3,"./services/account.service":4,"./services/session.service":5}],3:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, $state, account) {
-
-    $scope.user = {
-        //email: 'admin@peashooter.com',
-        //password: 'admin'
+module.exports = function($state, account) {
+    this.user = {
+        email: 'admin@peashooter.com',
+        password: 'admin'
     };
 
-    $scope.submit = function submit() {
+
+    this.submit = function submit() {
         // Check if the form is valid
-        if($scope.authForm.$invalid) {
+        if(this.authForm.$invalid) {
             return;
         }
-        $scope.logInProgress = true;
-        account.authUser($scope.user.email, $scope.user.password)
+        this.logInProgress = true;
+        account.authUser(this.user.email, this.user.password)
             .then(function() {
                 $state.go('home');
-                $scope.logInProgress = false;
+                this.logInProgress = false;
             }, function() {
                 // Error case
-                $scope.logInProgress = false;
+                this.logInProgress = false;
             });
 
     };
+
+    return this;
 };
-module.exports.$inject = ["$scope", "$state", "account"];
+module.exports.$inject = ["$state", "account"];
 
 },{}],4:[function(require,module,exports){
 'use strict';
