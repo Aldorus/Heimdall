@@ -13,14 +13,16 @@ angular.module('heimdall', [
     'ngSanitize',
     'ui.router',
     'pascalprecht.translate',
-    'vButton','vModal',
+    'vButton', 'vModal',
     'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
-    .service('loading', require('./services/loading'))
+    .service('loading', require('./services/loading.service'))
     .factory('modal', require('./factories/modal'))
-
+    .run(function ($rootScope, $state) {
+        $rootScope.$state = $state;
+    })
     .config(function ($urlRouterProvider, $translateProvider, $animateProvider) {
 
         // Remove animation on all ng-if and ng-repeat
@@ -40,16 +42,3 @@ angular.module('heimdall', [
     })
 ;
 
-loadingData().then(bootstrapApplication);
-
-function loadingData() {
-    var initInjector = angular.injector(["ng"]);
-    var loadingService = initInjector.get("loading");
-    return loadingService.init();
-}
-
-function bootstrapApplication() {
-    angular.element(document).ready(function() {
-        angular.bootstrap(document, ["myApplication"]);
-    });
-}

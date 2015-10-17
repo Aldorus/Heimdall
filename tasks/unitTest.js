@@ -32,10 +32,11 @@ module.exports = function (done) {
     }
 
     // Get app files
-    listFiles.push('' + config.dist + 'js/**/app.js');
+    listFiles.push(config.dist + 'js/**/app.js');
+    listFiles.push(config.dist + 'js/**/templates.js');
 
     // Get test files
-    listFiles.push('' + config.test + '**/*.js');
+    listFiles.push(config.test + 'unit/**/*.js');
 
     karma.start({
         configFile: __dirname + '/../karma.conf.js',

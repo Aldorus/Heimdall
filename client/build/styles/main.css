@@ -109,6 +109,53 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
   font-family: "Gloria Hallelujah";
   color: #8a837e; }
 
+h1 {
+  color: #00AC6B;
+  margin-bottom: 15px; }
+
+.inner-container {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
+  background: white;
+  padding: 20px 20px; }
+  .inner-container.open {
+    left: 450px; }
+
+.form-crud {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  padding: 20px;
+  opacity: 0;
+  width: 450px;
+  -webkit-transition: all 1.5s ease;
+          transition: all 1.5s ease;
+  box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
+  .form-crud.open {
+    opacity: 1; }
+  .form-crud .glyphicon-remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #00AC6B;
+    font-size: 2rem;
+    border-radius: 5000px;
+    border: 2px solid #00AC6B;
+    padding: 5px 5px 3px 5px;
+    margin: 10px;
+    cursor: pointer; }
+  .form-crud p {
+    margin: 40px 0 10px 0; }
+  .form-crud input {
+    width: 100%; }
+  .form-crud .form-button {
+    text-align: right;
+    margin-top: 10px; }
+
 /* latin */
 @font-face {
   font-family: 'Raleway';
@@ -958,6 +1005,9 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
   content: "\e260"; }
 
 
+.page-build .builds-container {
+  position: relative; }
+
 .page-auth, .page-root {
   background: url('../assets/home.jpg');
   background-size: cover;
@@ -1212,200 +1262,111 @@ form.ng-submitted input.ng-invalid, form.ng-submitted select.ng-invalid, form.ng
 
 .page-project .projects-container {
   position: relative; }
-.page-project .form-project {
-  position: absolute;
-  left: 0;
-  height: 100%;
-  padding: 20px;
-  opacity: 0;
-  width: 450px;
-  -webkit-transition: all 1.5s ease;
-          transition: all 1.5s ease;
-  box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
-  .page-project .form-project.open {
-    opacity: 1; }
-  .page-project .form-project .glyphicon-remove {
-    position: absolute;
-    right: 0;
-    top: 0;
-    color: #00AC6B;
-    font-size: 2rem;
-    border-radius: 5000px;
-    border: 2px solid #00AC6B;
-    padding: 5px 5px 3px 5px;
-    margin: 10px;
-    cursor: pointer; }
-  .page-project .form-project p {
-    margin: 40px 0 10px 0; }
-  .page-project .form-project input {
-    width: 100%; }
-  .page-project .form-project .form-button {
-    text-align: right;
-    margin-top: 10px; }
-.page-project .list-project {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
+.page-project .list-project .project {
+  width: 250px;
+  height: 250px;
+  float: left;
+  margin: 0 20px 20px 0;
+  border: 1px solid #00AC6B;
   background: white;
-  padding: 20px 20px; }
-  .page-project .list-project.open {
-    left: 450px; }
-  .page-project .list-project h1 {
-    color: #00AC6B;
-    position: relative;
-    left: -1px;
-    margin-bottom: 15px; }
-  .page-project .list-project .project {
-    width: 250px;
-    height: 250px;
-    float: left;
-    margin: 0 20px 20px 0;
-    border: 1px solid #00AC6B;
-    background: white;
-    border-radius: 3px;
-    position: relative; }
-    .page-project .list-project .project .desc {
-      font-size: 8rem;
-      color: #00AC6B; }
-    .page-project .list-project .project .title {
-      width: 101%;
-      text-align: center;
-      background: #00AC6B;
-      color: #FFFFFF;
-      text-transform: uppercase;
-      padding: 20px 0;
-      font-size: 1rem;
-      font-weight: 700;
-      position: absolute;
-      bottom: 0;
-      margin: 0; }
-  .page-project .list-project .help-empty-project {
-    position: absolute;
-    top: 150px;
-    left: 35%; }
-    .page-project .list-project .help-empty-project .arrow {
-      width: 70px;
-      height: 70px;
-      background: #8a837e;
-      -webkit-transform: rotate(200deg);
-          -ms-transform: rotate(200deg);
-              transform: rotate(200deg);
-      -webkit-mask: url(../assets/arrow-35.svg) center/contain no-repeat; }
-    .page-project .list-project .help-empty-project .text {
-      margin-left: 50px;
-      margin-top: 10px; }
-  .page-project .list-project .new-project {
+  border-radius: 3px;
+  position: relative; }
+  .page-project .list-project .project .desc {
+    font-size: 8rem;
+    color: #00AC6B; }
+  .page-project .list-project .project .title {
+    width: 101%;
     text-align: center;
+    background: #00AC6B;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    padding: 20px 0;
+    font-size: 1rem;
+    font-weight: 700;
+    position: absolute;
+    bottom: 0;
+    margin: 0; }
+.page-project .list-project .help-empty-project {
+  position: absolute;
+  top: 150px;
+  left: 35%; }
+  .page-project .list-project .help-empty-project .arrow {
+    width: 70px;
+    height: 70px;
+    background: #8a837e;
+    -webkit-transform: rotate(200deg);
+        -ms-transform: rotate(200deg);
+            transform: rotate(200deg);
+    -webkit-mask: url(../assets/arrow-35.svg) center/contain no-repeat; }
+  .page-project .list-project .help-empty-project .text {
+    margin-left: 50px;
+    margin-top: 10px; }
+.page-project .list-project .new-project {
+  text-align: center;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease; }
+  .page-project .list-project .new-project .glyphicon-plus {
+    border-radius: 50px;
+    border: 2px solid #00AC6B;
+    color: #00AC6B;
+    font-size: 3rem;
+    padding: 20px;
+    margin-top: 70px;
     -webkit-transition: all 0.3s ease;
             transition: all 0.3s ease; }
-    .page-project .list-project .new-project .glyphicon-plus {
-      border-radius: 50px;
-      border: 2px solid #00AC6B;
-      color: #00AC6B;
-      font-size: 3rem;
-      padding: 20px;
-      margin-top: 70px;
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease; }
-    .page-project .list-project .new-project .new-project-label {
-      color: #00AC6B;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-top: 10px;
-      -webkit-transition: all 0.3s ease;
-              transition: all 0.3s ease; }
-    .page-project .list-project .new-project:hover {
-      background: #00AC6B; }
-      .page-project .list-project .new-project:hover .glyphicon-plus {
-        border: 1px solid #FFFFFF;
-        color: #FFFFFF; }
-      .page-project .list-project .new-project:hover .new-project-label {
-        color: #FFFFFF; }
+  .page-project .list-project .new-project .new-project-label {
+    color: #00AC6B;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 10px;
+    -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease; }
+  .page-project .list-project .new-project:hover {
+    background: #00AC6B; }
+    .page-project .list-project .new-project:hover .glyphicon-plus {
+      border: 2px solid #FFFFFF;
+      color: #FFFFFF; }
+    .page-project .list-project .new-project:hover .new-project-label {
+      color: #FFFFFF; }
 
 .page-user .wrapper {
   position: relative; }
-  .page-user .wrapper .list-user {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-    background: white;
-    padding: 20px 20px; }
-    .page-user .wrapper .list-user.open {
-      left: 450px; }
-    .page-user .wrapper .list-user .button-add {
-      float: right;
-      margin-bottom: 10px; }
-      .page-user .wrapper .list-user .button-add .glyphicon-plus {
-        padding-right: 15px; }
-    .page-user .wrapper .list-user h1 {
-      text-align: left;
-      color: #00AC6B; }
-    .page-user .wrapper .list-user table {
-      width: 100%; }
-      .page-user .wrapper .list-user table .header {
-        background: #00AC6B;
-        color: #FFFFFF;
-        border: 1px solid #00AC6B; }
-        .page-user .wrapper .list-user table .header th {
-          padding: 15px 0; }
-        .page-user .wrapper .list-user table .header .name {
-          width: 30%; }
-        .page-user .wrapper .list-user table .header .email {
-          width: 30%; }
-        .page-user .wrapper .list-user table .header .role {
-          width: 30%; }
-      .page-user .wrapper .list-user table td {
-        padding: 15px 0;
-        text-align: center;
-        border-left: 1px solid #00AC6B;
-        border-right: 1px solid #00AC6B;
-        border-bottom: 1px solid #00AC6B; }
-      .page-user .wrapper .list-user table .user-row .glyphicon {
-        color: #20815D;
-        margin: 0 5px;
-        font-size: 1.2rem;
-        cursor: pointer; }
-      .page-user .wrapper .list-user table .user-row.current-user td {
-        color: #E9003A; }
-  .page-user .wrapper .form-user {
-    position: absolute;
-    left: 0;
-    height: 100%;
-    padding: 20px;
-    opacity: 0;
-    width: 450px;
-    -webkit-transition: all 1.5s ease;
-            transition: all 1.5s ease;
-    box-shadow: inset -4px 0px 8px rgba(0, 0, 0, 0.2); }
-    .page-user .wrapper .form-user.open {
-      opacity: 1; }
-    .page-user .wrapper .form-user .glyphicon-remove {
-      position: absolute;
-      right: 0;
-      top: 0;
-      color: #00AC6B;
-      font-size: 2rem;
-      border-radius: 5000px;
-      border: 2px solid #00AC6B;
-      padding: 5px 5px 3px 5px;
-      margin: 10px;
+  .page-user .wrapper .list-user .button-add {
+    float: right;
+    margin-bottom: 10px; }
+    .page-user .wrapper .list-user .button-add .glyphicon-plus {
+      padding-right: 15px; }
+  .page-user .wrapper .list-user table {
+    width: 100%; }
+    .page-user .wrapper .list-user table .header {
+      background: #00AC6B;
+      color: #FFFFFF;
+      border: 1px solid #00AC6B; }
+      .page-user .wrapper .list-user table .header th {
+        padding: 15px 0; }
+      .page-user .wrapper .list-user table .header .name {
+        width: 30%; }
+      .page-user .wrapper .list-user table .header .email {
+        width: 30%; }
+      .page-user .wrapper .list-user table .header .role {
+        width: 30%; }
+    .page-user .wrapper .list-user table td {
+      padding: 15px 0;
+      text-align: center;
+      border-left: 1px solid #00AC6B;
+      border-right: 1px solid #00AC6B;
+      border-bottom: 1px solid #00AC6B; }
+    .page-user .wrapper .list-user table .user-row .glyphicon {
+      color: #20815D;
+      margin: 0 5px;
+      font-size: 1.2rem;
       cursor: pointer; }
-    .page-user .wrapper .form-user h1 {
-      margin-bottom: 40px; }
-    .page-user .wrapper .form-user input {
-      width: 100%;
-      margin-bottom: 10px; }
-    .page-user .wrapper .form-user select {
-      width: 100%; }
-    .page-user .wrapper .form-user .form-button {
-      text-align: right;
-      margin-top: 10px; }
+    .page-user .wrapper .list-user table .user-row.current-user td {
+      color: #E9003A; }
+  .page-user .wrapper .form-crud select {
+    width: 100%; }
+  .page-user .wrapper .form-crud input {
+    margin-bottom: 10px; }
 
 .modal-remove-user .buttons {
   float: right; }

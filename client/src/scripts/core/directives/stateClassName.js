@@ -21,10 +21,10 @@ module.exports = function ($state) {
 
     return {
         restrict: 'A',
+        scope:true,
         link: function (scope, el, attr) {
 
-            el
-                .addClass(className($state.current.name, attr.stateClassName));
+            el.addClass(className($state.current.name, attr.stateClassName));
 
             /**
              * Listen when we change to another state
@@ -32,10 +32,11 @@ module.exports = function ($state) {
              */
             scope.$on('$stateChangeStart', function (e, toState, current, previousState) {
 
-                el
-                    .removeClass('page-root')
-                    .removeClass(className(previousState.name, attr.stateClassName))
-                    .addClass(className(toState.name, attr.stateClassName));
+                el.removeClass('page-root');
+                if(previousState) {
+                    el.removeClass(className(previousState.name, attr.stateClassName));
+                }
+                el.addClass(className(toState.name, attr.stateClassName));
 
             });
         }
