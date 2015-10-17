@@ -73,8 +73,8 @@ module.exports = function($state, account) {
     var self = this;
 
     self.user = {
-        email: 'admin@peashooter.com',
-        password: 'admin'
+        //email: 'admin@peashooter.com',
+        //password: 'admin'
     };
 
 
@@ -213,7 +213,7 @@ angular.module('build', [])
             url: '/build/:buildId',
             templateUrl: 'build/partials/build.html',
             controller: 'BuildController',
-            controllerAs: 'build',
+            controllerAs: 'buildCtrl',
             resolve: {
                 build: ["$stateParams", "builds", function ($stateParams, builds) {
                     return builds.getBuildById($stateParams.buildId);

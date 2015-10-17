@@ -5,8 +5,8 @@ module.exports = function($state, account) {
     var self = this;
 
     self.user = {
-        email: 'admin@peashooter.com',
-        password: 'admin'
+        //email: 'admin@peashooter.com',
+        //password: 'admin'
     };
 
 

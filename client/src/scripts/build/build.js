@@ -8,7 +8,7 @@ angular.module('build', [])
             url: '/build/:buildId',
             templateUrl: 'build/partials/build.html',
             controller: 'BuildController',
-            controllerAs: 'build',
+            controllerAs: 'buildCtrl',
             resolve: {
                 build: function ($stateParams, builds) {
                     return builds.getBuildById($stateParams.buildId);

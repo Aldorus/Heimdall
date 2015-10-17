@@ -1,23 +1,23 @@
 <div class="builds-container full-screen">
-    <div class="form-crud" ng-class="{'open':build.open}">
-        <span class="glyphicon glyphicon-remove" ng-click="build.open=false"></span>
+    <div class="form-crud" ng-class="{'open':buildCtrl.open}">
+        <span class="glyphicon glyphicon-remove" ng-click="buildCtrl.open=false"></span>
 
         <h1>{{'Create New Build' | translate}}</h1>
 
-        <form novalidate name="build.newBuildForm">
+        <form novalidate name="buildCtrl.newBuildForm">
 
             <div class="form-button">
-                <button ng-click="build.cancelEditBuild()" type="button" ng-if="newUser.id" v-pressable>Cancel</button>
-                <button v-busy="createLoading" ng-click="build.validEditBuild()" ng-if="newUser.id" v-pressable>Edit Build</button>
-                <button v-busy="createLoading" ng-click="build.createBuild()" ng-if="!newUser.id" v-pressable>Create Build</button>
+                <button ng-click="buildCtrl.cancelEditBuild()" type="button" ng-if="buildCtrl.newBuild.id" v-pressable>Cancel</button>
+                <button v-busy="createLoading" ng-click="buildCtrl.validEditBuild()" ng-if="buildCtrl.newBuild.id" v-pressable>Edit Build</button>
+                <button v-busy="createLoading" ng-click="buildCtrl.createBuild()" ng-if="!buildCtrl.newBuild.id" v-pressable>Create Build</button>
             </div>
         </form>
     </div>
-    <div class="full-screen inner-container" ng-class="{'open':build.open}">
+    <div class="full-screen inner-container" ng-class="{'open':buildCtrl.open}">
 
         <h1>{{'Build' | translate }}</h1>
 
-        <a href="#" class="project new-project" ng-click="build.newBuild()">
+        <a href="#" class="project new-project" ng-click="buildCtrl.newBuild()">
             <div class="glyphicon glyphicon-plus"></div>
             <div class="new-project-label">{{'New build' | translate}}</div>
         </a>

@@ -9,8 +9,8 @@ describe('Auth a user - ', function() {
 
     it('redirect ok', function () {
 
-        element(by.model('user.email')).sendKeys('admin@peashooter.com');
-        element(by.model('user.password')).sendKeys('admin');
+        element(by.model('authCtrl.user.email')).sendKeys('admin@peashooter.com');
+        element(by.model('authCtrl.user.password')).sendKeys('admin');
         element(by.css('.form-button button')).click();
         browser.driver.wait(function() {
             return browser.driver.getCurrentUrl().then(function(url) {
