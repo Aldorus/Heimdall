@@ -14,14 +14,14 @@ angular.module('heimdall', [
     'ngSanitize',
     'ui.router',
     'pascalprecht.translate',
-    'vButton','vModal',
+    'vButton', 'vModal',
     'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
-    .service('loading', require('./services/loading'))
+    .service('loading', require('./services/loading.service'))
     .factory('modal', require('./factories/modal'))
-    .run(["$rootScope", "$state", function($rootScope, $state) {
+    .run(["$rootScope", "$state", function ($rootScope, $state) {
         $rootScope.$state = $state;
     }])
     .config(["$urlRouterProvider", "$translateProvider", "$animateProvider", function ($urlRouterProvider, $translateProvider, $animateProvider) {
@@ -44,13 +44,13 @@ angular.module('heimdall', [
 ;
 
 
-},{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading":12}],2:[function(require,module,exports){
+},{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading.service":12}],2:[function(require,module,exports){
 'use strict';
 
 angular.module('auth', [])
-    .controller('AuthController', require('./controllers/AuthController'))
-    .service('account', require('./services/account'))
-    .service('session', require('./services/session'))
+    .controller('AuthController', require('./controllers/auth.controller'))
+    .service('account', require('./services/account.service'))
+    .service('session', require('./services/session.service'))
     .run(["session", function(session) {
         session.init();
     }])
@@ -58,41 +58,46 @@ angular.module('auth', [])
         $stateProvider.state('auth', {
             url: '/auth',
             templateUrl: 'auth/partials/auth.html',
-            controller: 'AuthController'
+            controller: 'AuthController',
+            controllerAs: 'authCtrl'
         });
     }])
 ;
 
 
-},{"./controllers/AuthController":3,"./services/account":4,"./services/session":5}],3:[function(require,module,exports){
+},{"./controllers/auth.controller":3,"./services/account.service":4,"./services/session.service":5}],3:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, $state, account) {
+module.exports = function($state, account) {
+    var self = this;
 
-    $scope.user = {
+    self.user = {
         email: 'admin@peashooter.com',
         password: 'admin'
     };
 
-    $scope.submit = function submit() {
+
+    self.submit = function submit() {
         // Check if the form is valid
-        if($scope.authForm.$invalid) {
+        if(self.authForm.$invalid) {
             return;
         }
-        $scope.logInProgress = true;
-        account.authUser($scope.user.email, $scope.user.password)
+        self.logInProgress = true;
+        account.authUser(self.user.email, self.user.password)
             .then(function() {
                 $state.go('home');
-                $scope.logInProgress = false;
+                self.logInProgress = false;
             }, function() {
                 // Error case
-                $scope.logInProgress = false;
+                self.logInProgress = false;
             });
 
     };
+
+    return self;
 };
-module.exports.$inject = ["$scope", "$state", "account"];
+module.exports.$inject = ["$state", "account"];
 
 },{}],4:[function(require,module,exports){
 'use strict';
@@ -201,13 +206,14 @@ module.exports.$inject = ["$rootScope", "$state", "account"];
 'use strict';
 
 angular.module('build', [])
-    .controller('BuildController', require('./controllers/BuildController'))
+    .controller('BuildController', require('./controllers/build.controller'))
     .service('builds', require('./services/builds'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('build', {
             url: '/build/:buildId',
             templateUrl: 'build/partials/build.html',
             controller: 'BuildController',
+            controllerAs: 'build',
             resolve: {
                 build: ["$stateParams", "builds", function ($stateParams, builds) {
                     return builds.getBuildById($stateParams.buildId);
@@ -218,28 +224,30 @@ angular.module('build', [])
 ;
 
 
-},{"./controllers/BuildController":7,"./services/builds":8}],7:[function(require,module,exports){
+},{"./controllers/build.controller":7,"./services/builds":8}],7:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, build) {
-    $scope.build = build;
+module.exports = function(build) {
+    this.build = build;
 
     /**
      * Open the panel for create project
      */
-    $scope.newBuild = function newBuild() {
-        $scope.open = true;
+    this.newBuild = function newBuild() {
+        this.open = true;
     };
 
     /**
      * Close the panel for create project
      */
-    $scope.closeBuild = function closeBuild() {
-        $scope.open = false;
+    this.closeBuild = function closeBuild() {
+        this.open = false;
     };
+
+    return this;
 };
-module.exports.$inject = ["$scope", "build"];
+module.exports.$inject = ["build"];
 
 },{}],8:[function(require,module,exports){
 'use strict';
@@ -404,10 +412,10 @@ module.exports = function ($state) {
 
     return {
         restrict: 'A',
+        scope:true,
         link: function (scope, el, attr) {
 
-            el
-                .addClass(className($state.current.name, attr.stateClassName));
+            el.addClass(className($state.current.name, attr.stateClassName));
 
             /**
              * Listen when we change to another state
@@ -415,10 +423,11 @@ module.exports = function ($state) {
              */
             scope.$on('$stateChangeStart', function (e, toState, current, previousState) {
 
-                el
-                    .removeClass('page-root')
-                    .removeClass(className(previousState.name, attr.stateClassName))
-                    .addClass(className(toState.name, attr.stateClassName));
+                el.removeClass('page-root');
+                if(previousState) {
+                    el.removeClass(className(previousState.name, attr.stateClassName));
+                }
+                el.addClass(className(toState.name, attr.stateClassName));
 
             });
         }
@@ -576,40 +585,43 @@ module.exports.$inject = ["$q", "account", "projects", "versions", "builds", "us
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, projects, versions, builds) {
-
+module.exports = function(projects, versions, builds) {
+    var self = this;
     // Get count project
     projects.getProjects().then(function(projects) {
-        $scope.countProject = projects.length;
-        if($scope.countProject) {
-            $scope.countVersion = versions.getAllVersions().length / $scope.countProject * 100 / 100;
-            console.log('build', builds.getAllBuilds());
-            $scope.countBuild = builds.getAllBuilds().length / $scope.countProject;
+        console.log('here');
+        self.countProject = projects.length;
+        if(self.countProject) {
+            self.countVersion = versions.getAllVersions().length / self.countProject * 100 / 100;
+            self.countBuild = builds.getAllBuilds().length / self.countProject;
         } else {
-            $scope.countVersion = 0;
-            $scope.countBuild = 0;
+            self.countVersion = 0;
+            self.countBuild = 0;
         }
     });
+
+    return self;
 };
-module.exports.$inject = ["$scope", "projects", "versions", "builds"];
+module.exports.$inject = ["projects", "versions", "builds"];
 
 },{}],14:[function(require,module,exports){
 'use strict';
 
 angular.module('home', [])
-    .controller('HomeController', require('./controllers/HomeController'))
+    .controller('HomeController', require('./controllers/home.controller'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('home', {
             url: '/home',
             templateUrl: 'home/partials/home.html',
             controller: 'HomeController',
+            controllerAs: 'homeCtrl',
             data: {pageTitle: 'Home'}
         });
     }])
 ;
 
 
-},{"./controllers/HomeController":13}],15:[function(require,module,exports){
+},{"./controllers/home.controller":13}],15:[function(require,module,exports){
 'use strict';
 /*@ngInject*/
 module.exports = function (account) {
@@ -671,24 +683,25 @@ module.exports.$inject = ["account"];
 'use strict';
 
 angular.module('navigation', [])
-    .directive('heimdallNavigation', require('./directives/heimdallNavigation'))
+    .directive('heimdallNavigation', require('./directives/heimdallNavigation.directive'))
 
 ;
 
 
-},{"./directives/heimdallNavigation":15}],17:[function(require,module,exports){
+},{"./directives/heimdallNavigation.directive":15}],17:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, $state, projects, account, builds) {
+module.exports = function($state, projects, account, builds) {
+    var self = this;
 
-    $scope.newProject = {};
+    self.newProject = {};
 
     projects.getProjects(account.getUser()).then(function(projects){
-        $scope.projects = projects;
+        self.projects = projects;
     });
 
-    $scope.getBuildsByProject = function getBuildsByProject(project) {
+    self.getBuildsByProject = function getBuildsByProject(project) {
         builds.getBuildsByProject(project).then(function(builds) {
             project.builds = builds;
         });
@@ -697,18 +710,18 @@ module.exports = function($scope, $state, projects, account, builds) {
     /**
      * Open the panel for create project
      */
-    $scope.newProject = function newProject() {
-        $scope.open = true;
+    self.newProject = function newProject() {
+        self.open = true;
     };
 
     /**
      * Close the panel for create project
      */
-    $scope.closeProject = function closeProject() {
-        $scope.open = false;
+    self.closeProject = function closeProject() {
+        self.open = false;
     };
 
-    $scope.goBuild = function(build) {
+    self.goBuild = function(build) {
         $state.go('build', {
             buildId: build.id
         });
@@ -717,14 +730,14 @@ module.exports = function($scope, $state, projects, account, builds) {
     /**
      * Create project
      */
-    $scope.createProject = function createProject() {
+    self.createProject = function createProject() {
 
-        if($scope.newProjectForm.$invalid) {
+        if(self.newProjectForm.$invalid) {
             return;
         }
 
-        $scope.createLoading = true;
-        projects.createProject($scope.newProject, account.getUser())
+        self.createLoading = true;
+        projects.createProject(self.newProject, account.getUser())
             .then(function(project) {
 
                 // Build the build object to save
@@ -733,36 +746,39 @@ module.exports = function($scope, $state, projects, account, builds) {
                     config: ''
                 };
                 builds.createBuild(build, project).then(function() {
-                    $scope.createLoading = false;
-                    $scope.open = false;
+                    self.createLoading = false;
+                    self.open = false;
 
                 }, function() {
-                    $scope.createLoading = false;
+                    self.createLoading = false;
                 });
             }, function() {
-                $scope.createLoading = false;
+                self.createLoading = false;
             });
     };
+
+    return self;
 };
-module.exports.$inject = ["$scope", "$state", "projects", "account", "builds"];
+module.exports.$inject = ["$state", "projects", "account", "builds"];
 
 },{}],18:[function(require,module,exports){
 'use strict';
 
 angular.module('project', [])
-    .controller('ProjectController', require('./controllers/ProjectController'))
+    .controller('ProjectController', require('./controllers/project.controller'))
     .service('projects', require('./services/projects'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('project', {
             url: '/project',
             templateUrl: 'project/partials/project.html',
-            controller: 'ProjectController'
+            controller: 'ProjectController',
+            controllerAs: 'projectCtrl'
         });
     }])
 ;
 
 
-},{"./controllers/ProjectController":17,"./services/projects":19}],19:[function(require,module,exports){
+},{"./controllers/project.controller":17,"./services/projects":19}],19:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/

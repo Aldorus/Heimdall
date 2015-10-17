@@ -15,9 +15,6 @@ module.exports = function(config) {
             reportEachFailure: true,
             reportSuccess: true
         },
-        frameworks: ['jasmine'],
-        exclude: [
-            'i18n/fr_FR.json'
-        ]
+        frameworks: ['jasmine']
     });
 };

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('auth', [])
-    .controller('AuthController', require('./controllers/AuthController'))
-    .service('account', require('./services/account'))
-    .service('session', require('./services/session'))
+    .controller('AuthController', require('./controllers/auth.controller'))
+    .service('account', require('./services/account.service'))
+    .service('session', require('./services/session.service'))
     .run(function(session) {
         session.init();
     })
@@ -11,7 +11,8 @@ angular.module('auth', [])
         $stateProvider.state('auth', {
             url: '/auth',
             templateUrl: 'auth/partials/auth.html',
-            controller: 'AuthController'
+            controller: 'AuthController',
+            controllerAs: 'authCtrl'
         });
     })
 ;
