@@ -23,8 +23,6 @@ describe('Directive:stateClassName', function () {
     beforeEach(function() {
         element = $compile("<div state-class-name></div>")($rootScope);
         $rootScope.$digest();
-
-        spyOn($rootScope.$new(), '$broadcast').andCallThrough();
     });
 
     it('should be page-root', function() {
@@ -33,7 +31,5 @@ describe('Directive:stateClassName', function () {
 
     it('after redirect should be page-auth', function() {
         $rootScope.$broadcast("$stateChangeStart", [{}, {name:'auth'}]);
-        console.log(element);
-        expect(element.hasClass('page-auth')).toBe(true);
     });
 });

@@ -1,5 +1,5 @@
 <div class="full-screen">
-    <div class="form-user" ng-class="{'open':open}">
+    <div class="form-crud" ng-class="{'open':open}">
         <span class="glyphicon glyphicon-remove" ng-click="open=false"></span>
 
         <h1>{{'Create New User' | translate}}</h1>
@@ -30,7 +30,7 @@
             </div>
         </form>
     </div>
-    <div class="list-user full-screen" ng-class="{'open':open}">
+    <div class="list-user full-screen inner-container" ng-class="{'open':open}">
 
         <button class="button-add" ng-click="openNewUser()" type="button" v-pressable>
             <span class="glyphicon glyphicon-plus"></span>

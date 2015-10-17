@@ -1,37 +1,37 @@
 <div class="projects-container full-screen">
-    <div class="form-project" ng-class="{'open':open}">
-        <span class="glyphicon glyphicon-remove" ng-click="closeProject()"></span>
+    <div class="form-crud" ng-class="{'open':projectCtrl.open}">
+        <span class="glyphicon glyphicon-remove" ng-click="projectCtrl.closeProject()"></span>
 
         <h1>{{'Create New Project' | translate}}</h1>
 
         <p>{{'Create Project Help' | translate}}</p>
 
-        <form novalidate name="newProjectForm">
-            <input type="text" id="title" name="title" ng-model="newProject.title"
+        <form novalidate name="project.newProjectForm">
+            <input type="text" id="title" name="title" ng-model="project.newProject.title"
                    placeholder="{{'Project Name' | translate}}" required/>
 
             <div class="form-button">
-                <button v-busy="createLoading" ng-click="createProject()" v-pressable>Create Project</button>
+                <button v-busy="projectCtrl.createLoading" ng-click="projectCtrl.createProject()" v-pressable>Create Project</button>
             </div>
         </form>
     </div>
-    <div class="list-project full-screen" ng-class="{'open':open}">
+    <div class="list-project full-screen inner-container" ng-class="{'open':projectCtrl.open}">
 
         <h1>{{'Projects' | translate }}</h1>
 
-        <a href="#" class="project new-project" ng-click="newProject()">
+        <a href="#" class="project new-project" ng-click="projectCtrl.newProject()">
             <div class="glyphicon glyphicon-plus"></div>
             <div class="new-project-label">{{'New Project' | translate}}</div>
         </a>
-        <div class="help-empty-project helper-message" ng-if="projects.length === 0">
+        <div class="help-empty-project helper-message" ng-if="projectCtrl.projects.length === 0">
             <div class="arrow"></div>
             <div class="text" ng-bind-html="'Help Empty Project' | translate"></div>
         </div>
-        <div class="project" ng-repeat="project in projects">
+        <div class="project" ng-repeat="project in projectCtrl.projects" ng-init="projectCtrl.getBuildsByProject(project)">
             <div class="desc"></div>
-            <h1 class="title">{{project}}</h1>
+            <h1 class="title">{{project.title}}</h1>
             <div class="list-build">
-                <div ng-repeat="build in project.builds" ng-click="goBuild(build)"></div>
+                <a href="" ng-repeat="build in project.builds" ng-click="projectCtrl.goBuild(build)">{{build.name}}</a>
             </div>
         </div>
     </div>
