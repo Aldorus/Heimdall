@@ -2,28 +2,30 @@
 
 /*@ngInject*/
 module.exports = function($state, account) {
-    this.user = {
+    var self = this;
+
+    self.user = {
         email: 'admin@peashooter.com',
         password: 'admin'
     };
 
 
-    this.submit = function submit() {
+    self.submit = function submit() {
         // Check if the form is valid
-        if(this.authForm.$invalid) {
+        if(self.authForm.$invalid) {
             return;
         }
-        this.logInProgress = true;
-        account.authUser(this.user.email, this.user.password)
+        self.logInProgress = true;
+        account.authUser(self.user.email, self.user.password)
             .then(function() {
                 $state.go('home');
-                this.logInProgress = false;
+                self.logInProgress = false;
             }, function() {
                 // Error case
-                this.logInProgress = false;
+                self.logInProgress = false;
             });
 
     };
 
-    return this;
+    return self;
 };

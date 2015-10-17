@@ -18,7 +18,7 @@ angular.module('heimdall', [
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
-    .service('loading', require('./services/loading'))
+    .service('loading', require('./services/loading.service'))
     .factory('modal', require('./factories/modal'))
     .run(function ($rootScope, $state) {
         $rootScope.$state = $state;

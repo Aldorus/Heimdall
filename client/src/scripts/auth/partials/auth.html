@@ -2,16 +2,16 @@
     <h1>Peashooter</h1>
 
     <span class="generality" ng-bind-html="'Generality' | translate"></span>
-    <form novalidate name="auth.authForm">
+    <form novalidate name="authCtrl.authForm">
         <div class="form-group">
-            <input type="email" id="email" name="email" ng-model="auth.user.email" required placeholder="{{'Email *' | translate}}"/>
+            <input type="email" id="email" name="email" ng-model="authCtrl.user.email" required placeholder="{{'Email *' | translate}}"/>
         </div>
         <div class="form-group">
-            <input type="password" id="password" name="password" ng-model="auth.user.password" required placeholder="{{'Password * ' | translate}}"/>
+            <input type="password" id="password" name="password" ng-model="authCtrl.user.password" required placeholder="{{'Password * ' | translate}}"/>
         </div>
         <div class="form-button">
             <div class="no-account">{{'No Account' | translate}}</div>
-            <button type="submit" ng-click="auth.submit()" v-busy="auth.logInProgress" v-pressable>Sign In</button>
+            <button type="submit" ng-click="authCtrl.submit()" v-busy="authCtrl.logInProgress" v-pressable>Sign In</button>
         </div>
     </form>
 </div>

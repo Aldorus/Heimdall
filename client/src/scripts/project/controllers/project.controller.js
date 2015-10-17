@@ -1,15 +1,16 @@
 'use strict';
 
 /*@ngInject*/
-module.exports = function($scope, $state, projects, account, builds) {
+module.exports = function($state, projects, account, builds) {
+    var self = this;
 
-    $scope.newProject = {};
+    self.newProject = {};
 
     projects.getProjects(account.getUser()).then(function(projects){
-        $scope.projects = projects;
+        self.projects = projects;
     });
 
-    $scope.getBuildsByProject = function getBuildsByProject(project) {
+    self.getBuildsByProject = function getBuildsByProject(project) {
         builds.getBuildsByProject(project).then(function(builds) {
             project.builds = builds;
         });
@@ -18,18 +19,18 @@ module.exports = function($scope, $state, projects, account, builds) {
     /**
      * Open the panel for create project
      */
-    $scope.newProject = function newProject() {
-        $scope.open = true;
+    self.newProject = function newProject() {
+        self.open = true;
     };
 
     /**
      * Close the panel for create project
      */
-    $scope.closeProject = function closeProject() {
-        $scope.open = false;
+    self.closeProject = function closeProject() {
+        self.open = false;
     };
 
-    $scope.goBuild = function(build) {
+    self.goBuild = function(build) {
         $state.go('build', {
             buildId: build.id
         });
@@ -38,14 +39,14 @@ module.exports = function($scope, $state, projects, account, builds) {
     /**
      * Create project
      */
-    $scope.createProject = function createProject() {
+    self.createProject = function createProject() {
 
-        if($scope.newProjectForm.$invalid) {
+        if(self.newProjectForm.$invalid) {
             return;
         }
 
-        $scope.createLoading = true;
-        projects.createProject($scope.newProject, account.getUser())
+        self.createLoading = true;
+        projects.createProject(self.newProject, account.getUser())
             .then(function(project) {
 
                 // Build the build object to save
@@ -54,14 +55,16 @@ module.exports = function($scope, $state, projects, account, builds) {
                     config: ''
                 };
                 builds.createBuild(build, project).then(function() {
-                    $scope.createLoading = false;
-                    $scope.open = false;
+                    self.createLoading = false;
+                    self.open = false;
 
                 }, function() {
-                    $scope.createLoading = false;
+                    self.createLoading = false;
                 });
             }, function() {
-                $scope.createLoading = false;
+                self.createLoading = false;
             });
     };
+
+    return self;
 };

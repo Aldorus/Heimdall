@@ -12,7 +12,7 @@ angular.module('auth', [])
             url: '/auth',
             templateUrl: 'auth/partials/auth.html',
             controller: 'AuthController',
-            controllerAs: 'auth'
+            controllerAs: 'authCtrl'
         });
     })
 ;
