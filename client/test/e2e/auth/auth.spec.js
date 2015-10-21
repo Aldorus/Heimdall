@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Auth a user - ', function() {
     beforeEach(function() {
         browser.get('/index.html');

@@ -24,6 +24,15 @@
         "document": false,
         "window": false,
         "CryptoJS": false,
-        "localStorage": false
+        "localStorage": false,
+        "beforeEach": false,
+        "it": false,
+        "expect": false,
+        "browser": false,
+        "by": false,
+        "element": false,
+        "describe": false,
+        "inject": false,
+        "spyOn": false
     }
 }

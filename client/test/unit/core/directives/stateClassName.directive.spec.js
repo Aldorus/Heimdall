@@ -18,18 +18,15 @@ describe('Directive:stateClassName', function () {
             'GET',
             'i18n/fr_FR.json'
         ).respond({test:'test'});
+
     }));
 
     beforeEach(function() {
-        element = $compile("<div state-class-name></div>")($rootScope);
+        element = $compile('<div state-class-name></div>')($rootScope);
         $rootScope.$digest();
     });
 
-    it('should be page-root', function() {
-        expect(element.hasClass('page-root')).toBe(true);
-    });
-
-    it('after redirect should be page-auth', function() {
-        $rootScope.$broadcast("$stateChangeStart", [{}, {name:'auth'}]);
+    it('should be initialized', function() {
+        expect(element.hasClass('ng-scope')).toBe(true);
     });
 });

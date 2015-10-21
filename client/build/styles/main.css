@@ -156,6 +156,9 @@ h1 {
     text-align: right;
     margin-top: 10px; }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
 /* latin */
 @font-face {
   font-family: 'Raleway';
@@ -1005,9 +1008,6 @@ h1 {
   content: "\e260"; }
 
 
-.page-build .builds-container {
-  position: relative; }
-
 .page-auth, .page-root {
   background: url('../assets/home.jpg');
   background-size: cover;
@@ -1057,6 +1057,9 @@ h1 {
           font-size: 1rem;
           text-align: left;
           float: left; }
+
+.page-build .builds-container {
+  position: relative; }
 
 .loader {
   position: absolute;

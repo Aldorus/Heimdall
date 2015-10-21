@@ -8,7 +8,7 @@ var gulp = require('gulp'),
  * Create a single file app.js with all js dependencies (we use bowerify who read the require word in file for making the link between files)
  */
 module.exports = function () {
-    return gulp.src([config.project +  'src/scripts/**/*.js'])
+    return gulp.src([config.project +  'src/scripts/**/*.js', config.test + '**/*.js'])
         .pipe(jshint())
         .pipe(notify(function (file) {
             if (file.jshint.success) {

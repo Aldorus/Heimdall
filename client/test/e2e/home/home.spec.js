@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Homepage ', function() {
     beforeEach(function() {
         browser.get('/#/home');

@@ -151,6 +151,7 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
      * @param userToSave
      */
     service.saveLocalStorage = function saveLocalStorage(userToSave) {
+        delete userToSave.password;
         user = userToSave;
         localStorage.setItem('user', JSON.stringify(userToSave));
     };
