@@ -70,7 +70,7 @@ module.exports = function ($scope, users, account, modal) {
         modal.user = user;
         modal.view({
             controller: 'RemoveUserController',
-            templateUrl: 'user/partials/remove-user.html'
+            templateUrl: '../partials/remove-user.html'
         }).activate();
     };
 };

@@ -56,7 +56,7 @@ gulp.task('prod', ['envProd', 'dev']);
 
 // Dev build
 gulp.task('dev', ['index', 'assets', 'vendor', 'templates', 'i18n', 'styles', 'scripts'], function() {
-    gulp.start('unitTest');
+//    gulp.start('unitTest');
 });
 
 // Dev build + add the watch and the livereload on the sources

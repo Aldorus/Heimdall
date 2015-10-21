@@ -38,6 +38,7 @@ angular.module('heimdall', [
             prefix: 'i18n/',
             suffix: '.json'
         });
+
         $translateProvider.useSanitizeValueStrategy('escaped');
         $translateProvider.preferredLanguage('fr_FR');
     }])
@@ -69,10 +70,10 @@ angular.module('auth', [])
 'use strict';
 
 /*@ngInject*/
-module.exports = function($state, account) {
+module.exports = function($scope, $state, account) {
     var self = this;
 
-    self.user = {
+    $scope.user = {
         //email: 'admin@peashooter.com',
         //password: 'admin'
     };
@@ -80,11 +81,11 @@ module.exports = function($state, account) {
 
     self.submit = function submit() {
         // Check if the form is valid
-        if(self.authForm.$invalid) {
+        if($scope.authForm.$invalid) {
             return;
         }
         self.logInProgress = true;
-        account.authUser(self.user.email, self.user.password)
+        account.authUser($scope.user.email, $scope.user.password)
             .then(function() {
                 $state.go('home');
                 self.logInProgress = false;
@@ -97,7 +98,7 @@ module.exports = function($state, account) {
 
     return self;
 };
-module.exports.$inject = ["$state", "account"];
+module.exports.$inject = ["$scope", "$state", "account"];
 
 },{}],4:[function(require,module,exports){
 'use strict';
@@ -128,7 +129,6 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
      */
     service.authUser = function authUser(email, password) {
         var deferred = $q.defer();
-
         $http({
             method: 'POST',
             url: urlAuh,

@@ -26,7 +26,6 @@ module.exports = function ($http, $q, WS_ROOT_URL) {
      */
     service.authUser = function authUser(email, password) {
         var deferred = $q.defer();
-
         $http({
             method: 'POST',
             url: urlAuh,

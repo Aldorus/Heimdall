@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('home', [])
-    .controller('HomeController', require('./controllers/home.controller'))
+    .controller('HomeController', require('./controllers/home.controller.js'))
     .config(function ($stateProvider) {
         $stateProvider.state('home', {
             url: '/home',
-            templateUrl: 'home/partials/home.html',
+            templateUrl: 'partials/home.html',
             controller: 'HomeController',
             controllerAs: 'homeCtrl',
             data: {pageTitle: 'Home'}

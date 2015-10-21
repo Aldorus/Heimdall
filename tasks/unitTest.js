@@ -42,7 +42,6 @@ module.exports = function (done) {
         configFile: __dirname + '/../karma.conf.js',
         files: listFiles
     }, function (e) {
-        console.log('Here');
         if(e > 0) {
             notify().write('Test failed ('+ e + ' errors)');
         }

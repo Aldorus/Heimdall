@@ -1,12 +1,12 @@
 'use strict';
 
-require('../auth/auth');
-require('../home/home');
-require('../project/project');
-require('../version/version');
-require('../build/build');
-require('../user/user');
-require('../navigation/navigation');
+require('../app/auth');
+require('../../app/home');
+require('../../app/project');
+require('../../app/version');
+require('../../app/build');
+require('../../app/user');
+require('../../components/navigation');
 
 angular.module('heimdall', [
     'ngTouch',
@@ -18,7 +18,7 @@ angular.module('heimdall', [
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
-    .service('loading', require('./services/loading.service'))
+    .service('loading', require('./services/loading.service.js'))
     .factory('modal', require('./factories/modal'))
     .run(function ($rootScope, $state) {
         $rootScope.$state = $state;
@@ -37,6 +37,7 @@ angular.module('heimdall', [
             prefix: 'i18n/',
             suffix: '.json'
         });
+
         $translateProvider.useSanitizeValueStrategy('escaped');
         $translateProvider.preferredLanguage('fr_FR');
     })

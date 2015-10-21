@@ -1,10 +1,10 @@
 'use strict';
 
 /*@ngInject*/
-module.exports = function($state, account) {
+module.exports = function($scope, $state, account) {
     var self = this;
 
-    self.user = {
+    $scope.user = {
         //email: 'admin@peashooter.com',
         //password: 'admin'
     };
@@ -12,11 +12,11 @@ module.exports = function($state, account) {
 
     self.submit = function submit() {
         // Check if the form is valid
-        if(self.authForm.$invalid) {
+        if($scope.authForm.$invalid) {
             return;
         }
         self.logInProgress = true;
-        account.authUser(self.user.email, self.user.password)
+        account.authUser($scope.user.email, $scope.user.password)
             .then(function() {
                 $state.go('home');
                 self.logInProgress = false;

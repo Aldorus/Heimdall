@@ -27,6 +27,6 @@ module.exports = function ($state, loading) {
                 testIfSecure(toState.name);
             });
         },
-        templateUrl: 'core/partials/loader.html'
+        templateUrl: '../partials/loader.html'
     };
 };

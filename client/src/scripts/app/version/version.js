@@ -6,7 +6,7 @@ angular.module('version', [])
     .config(function ($stateProvider) {
         $stateProvider.state('version', {
             url: '/version',
-            templateUrl: 'version/partials/version.html',
+            templateUrl: 'partials/version.html',
             controller: 'VersionController'
         });
     })
