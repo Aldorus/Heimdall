@@ -22,7 +22,7 @@ describe('Controller : Auth - auth', function() {
 
         controller = $controller('AuthController', {$scope: scope, $state: $state, account: account});
 
-        var templateHtml = $templateCache.get('auth/partials/auth.html');
+        var templateHtml = $templateCache.get('app/auth/partials/auth.html');
         var formElem = angular.element('<div>' + templateHtml + '</div>');
 
         $compile(formElem)(scope);

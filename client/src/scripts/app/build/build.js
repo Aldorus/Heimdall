@@ -6,7 +6,7 @@ angular.module('build', [])
     .config(function ($stateProvider) {
         $stateProvider.state('build', {
             url: '/build/:buildId',
-            templateUrl: 'partials/build.html',
+            templateUrl: 'app/build/partials/build.html',
             controller: 'BuildController',
             controllerAs: 'buildCtrl',
             resolve: {

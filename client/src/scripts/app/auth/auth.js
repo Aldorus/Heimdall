@@ -10,7 +10,7 @@ angular.module('auth', [])
     .config(function ($stateProvider) {
         $stateProvider.state('auth', {
             url: '/auth',
-            templateUrl: 'partials/auth.html',
+            templateUrl: 'app/auth/partials/auth.html',
             controller: 'AuthController',
             controllerAs: 'authCtrl'
         });

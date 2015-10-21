@@ -5,7 +5,7 @@ angular.module('home', [])
     .config(function ($stateProvider) {
         $stateProvider.state('home', {
             url: '/home',
-            templateUrl: 'partials/home.html',
+            templateUrl: 'app/home/partials/home.html',
             controller: 'HomeController',
             controllerAs: 'homeCtrl',
             data: {pageTitle: 'Home'}

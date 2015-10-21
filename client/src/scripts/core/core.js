@@ -1,12 +1,12 @@
 'use strict';
 
-require('../app/auth');
-require('../../app/home');
-require('../../app/project');
-require('../../app/version');
-require('../../app/build');
-require('../../app/user');
-require('../../components/navigation');
+require('../app/auth/auth');
+require('../app/home/home');
+require('../app/project/project');
+require('../app/version/version');
+require('../app/build/build');
+require('../app/user/user');
+require('../components/navigation/navigation');
 
 angular.module('heimdall', [
     'ngTouch',

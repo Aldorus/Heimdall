@@ -7,7 +7,7 @@ angular.module('user', [])
     .config(function ($stateProvider) {
         $stateProvider.state('user', {
             url: '/user',
-            templateUrl: 'partials/user.html',
+            templateUrl: 'app/user/partials/user.html',
             controller: 'UserController'
         });
     })

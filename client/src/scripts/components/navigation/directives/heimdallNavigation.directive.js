@@ -50,6 +50,6 @@ module.exports = function (account) {
             };
 
         },
-        templateUrl: 'navigation/partials/heimdall-navigation.html'
+        templateUrl: 'components/navigation/partials/heimdall-navigation.html'
     };
 };

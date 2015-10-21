@@ -1,13 +1,13 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-require('../auth/auth');
-require('../home/home');
-require('../project/project');
-require('../version/version');
-require('../build/build');
-require('../user/user');
-require('../navigation/navigation');
+require('../app/auth/auth');
+require('../app/home/home');
+require('../app/project/project');
+require('../app/version/version');
+require('../app/build/build');
+require('../app/user/user');
+require('../components/navigation/navigation');
 
 angular.module('heimdall', [
     'ngTouch',
@@ -19,7 +19,7 @@ angular.module('heimdall', [
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
-    .service('loading', require('./services/loading.service'))
+    .service('loading', require('./services/loading.service.js'))
     .factory('modal', require('./factories/modal'))
     .run(["$rootScope", "$state", function ($rootScope, $state) {
         $rootScope.$state = $state;
@@ -45,20 +45,20 @@ angular.module('heimdall', [
 ;
 
 
-},{"../auth/auth":2,"../build/build":6,"../home/home":14,"../navigation/navigation":16,"../project/project":18,"../user/user":23,"../version/version":26,"./directives/loader":9,"./directives/stateClassName":10,"./factories/modal":11,"./services/loading.service":12}],2:[function(require,module,exports){
+},{"../app/auth/auth":2,"../app/build/build":6,"../app/home/home":10,"../app/project/project":12,"../app/user/user":17,"../app/version/version":20,"../components/navigation/navigation":22,"./directives/loader":23,"./directives/stateClassName":24,"./factories/modal":25,"./services/loading.service.js":26}],2:[function(require,module,exports){
 'use strict';
 
 angular.module('auth', [])
-    .controller('AuthController', require('./controllers/auth.controller'))
-    .service('account', require('./services/account.service'))
-    .service('session', require('./services/session.service'))
+    .controller('AuthController', require('./controllers/auth.controller.js'))
+    .service('account', require('./services/account.service.js'))
+    .service('session', require('./services/session.service.js'))
     .run(["session", function(session) {
         session.init();
     }])
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('auth', {
             url: '/auth',
-            templateUrl: 'auth/partials/auth.html',
+            templateUrl: 'app/auth/partials/auth.html',
             controller: 'AuthController',
             controllerAs: 'authCtrl'
         });
@@ -66,7 +66,7 @@ angular.module('auth', [])
 ;
 
 
-},{"./controllers/auth.controller":3,"./services/account.service":4,"./services/session.service":5}],3:[function(require,module,exports){
+},{"./controllers/auth.controller.js":3,"./services/account.service.js":4,"./services/session.service.js":5}],3:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
@@ -207,12 +207,12 @@ module.exports.$inject = ["$rootScope", "$state", "account"];
 'use strict';
 
 angular.module('build', [])
-    .controller('BuildController', require('./controllers/build.controller'))
+    .controller('BuildController', require('./controllers/build.controller.js'))
     .service('builds', require('./services/builds'))
     .config(["$stateProvider", function ($stateProvider) {
         $stateProvider.state('build', {
             url: '/build/:buildId',
-            templateUrl: 'build/partials/build.html',
+            templateUrl: 'app/build/partials/build.html',
             controller: 'BuildController',
             controllerAs: 'buildCtrl',
             resolve: {
@@ -225,7 +225,7 @@ angular.module('build', [])
 ;
 
 
-},{"./controllers/build.controller":7,"./services/builds":8}],7:[function(require,module,exports){
+},{"./controllers/build.controller.js":7,"./services/builds":8}],7:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
@@ -358,6 +358,550 @@ module.exports.$inject = ["$http", "$q", "WS_ROOT_URL"];
 'use strict';
 
 /*@ngInject*/
+module.exports = function(projects, versions, builds) {
+    var self = this;
+    // Get count project
+    projects.getProjects().then(function(projects) {
+        console.log('here');
+        self.countProject = projects.length;
+        if(self.countProject) {
+            self.countVersion = versions.getAllVersions().length / self.countProject * 100 / 100;
+            self.countBuild = builds.getAllBuilds().length / self.countProject;
+        } else {
+            self.countVersion = 0;
+            self.countBuild = 0;
+        }
+    });
+
+    return self;
+};
+module.exports.$inject = ["projects", "versions", "builds"];
+
+},{}],10:[function(require,module,exports){
+'use strict';
+
+angular.module('home', [])
+    .controller('HomeController', require('./controllers/home.controller.js'))
+    .config(["$stateProvider", function ($stateProvider) {
+        $stateProvider.state('home', {
+            url: '/home',
+            templateUrl: 'app/home/partials/home.html',
+            controller: 'HomeController',
+            controllerAs: 'homeCtrl',
+            data: {pageTitle: 'Home'}
+        });
+    }])
+;
+
+
+},{"./controllers/home.controller.js":9}],11:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function($state, projects, account, builds) {
+    var self = this;
+
+    self.newProject = {};
+
+    projects.getProjects(account.getUser()).then(function(projects){
+        self.projects = projects;
+    });
+
+    self.getBuildsByProject = function getBuildsByProject(project) {
+        builds.getBuildsByProject(project).then(function(builds) {
+            project.builds = builds;
+        });
+    };
+
+    /**
+     * Open the panel for create project
+     */
+    self.newProject = function newProject() {
+        self.open = true;
+    };
+
+    /**
+     * Close the panel for create project
+     */
+    self.closeProject = function closeProject() {
+        self.open = false;
+    };
+
+    self.goBuild = function(build) {
+        $state.go('build', {
+            buildId: build.id
+        });
+    };
+
+    /**
+     * Create project
+     */
+    self.createProject = function createProject() {
+
+        if(self.newProjectForm.$invalid) {
+            return;
+        }
+
+        self.createLoading = true;
+        projects.createProject(self.newProject, account.getUser())
+            .then(function(project) {
+
+                // Build the build object to save
+                var build = {
+                    name: 'Default',
+                    config: ''
+                };
+                builds.createBuild(build, project).then(function() {
+                    self.createLoading = false;
+                    self.open = false;
+
+                }, function() {
+                    self.createLoading = false;
+                });
+            }, function() {
+                self.createLoading = false;
+            });
+    };
+
+    return self;
+};
+module.exports.$inject = ["$state", "projects", "account", "builds"];
+
+},{}],12:[function(require,module,exports){
+'use strict';
+
+angular.module('project', [])
+    .controller('ProjectController', require('./controllers/project.controller.js'))
+    .service('projects', require('./services/projects'))
+    .config(["$stateProvider", function ($stateProvider) {
+        $stateProvider.state('project', {
+            url: '/project',
+            templateUrl: 'app/project/partials/project.html',
+            controller: 'ProjectController',
+            controllerAs: 'projectCtrl'
+        });
+    }])
+;
+
+
+},{"./controllers/project.controller.js":11,"./services/projects":13}],13:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function($http, $q, WS_ROOT_URL, account) {
+    var service = {};
+    var url = WS_ROOT_URL + 'projects/';
+    var projects;
+
+    service.getProjects = function getProjects(user) {
+        var deferred = $q.defer();
+
+        if(!user) {
+            user = account.getUser();
+        }
+
+        if(projects) {
+            deferred.resolve(projects);
+            return deferred.promise;
+        }
+
+        $http({
+            method: 'GET',
+            url: url,
+            data: {
+                /*jshint camelcase:false*/
+                user_id: user.id
+            }
+        }).then(function(response) {
+            projects = response.data;
+            deferred.resolve(response.data);
+        }, function() {
+
+        });
+
+        return deferred.promise;
+    };
+
+    service.createProject = function createProject(project, user) {
+        var deferred = $q.defer();
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: {
+                /*jshint camelcase:false*/
+                admin_id: user.id,
+                title: project.title
+            }
+        }).then(function(response) {
+
+            projects.push(response.data);
+            deferred.resolve(response.data);
+
+        }, function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+    return service;
+};
+module.exports.$inject = ["$http", "$q", "WS_ROOT_URL", "account"];
+
+},{}],14:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function($scope, modal, users) {
+
+    /**
+     * The user has close the modal without any action
+     */
+    $scope.close = function close() {
+        modal.view().deactivate();
+    };
+
+    $scope.confirm = function confirm() {
+        users.deleteUser(modal.user).then(function() {
+            modal.view().deactivate();
+        });
+    };
+};
+module.exports.$inject = ["$scope", "modal", "users"];
+
+},{}],15:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function ($scope, users, account, modal) {
+    $scope.newUser = {};
+
+    users.getUsers().then(function (users) {
+        $scope.users = users;
+    });
+
+    $scope.isCurrentUser = function isCurrentUser(user) {
+        if (account.getUser().id === user.id) {
+            return true;
+        }
+        return false;
+    };
+
+    $scope.createUser = function createUser() {
+        if ($scope.newUserForm.$invalid) {
+            return;
+        }
+        $scope.createLoading = true;
+        users.createUser($scope.newUser)
+            .then(function () {
+                $scope.createLoading = false;
+                $scope.open = false;
+            }, function () {
+                $scope.createLoading = false;
+            });
+    };
+
+    $scope.editUser = function editUser(user) {
+        $scope.open = true;
+        $scope.newUser = angular.copy(user);
+    };
+
+    $scope.openNewUser = function openNewUser() {
+        $scope.open = true;
+        // Reset validation
+        $scope.newUserForm.$setPristine();
+        $scope.newUser = {};
+    };
+
+    $scope.validEditUser = function validEditUser() {
+        if ($scope.newUserForm.$invalid) {
+            return;
+        }
+
+        $scope.createLoading = true;
+        users.updateUser($scope.newUser).then(function (user) {
+            $scope.createLoading = false;
+            $scope.open = false;
+
+            // Update the scope
+            for (var i = 0; i < $scope.users.length; i++) {
+                if($scope.users[i].id === $scope.newUser.id) {
+                    $scope.users[i] = user;
+                }
+            }
+        }, function () {
+            $scope.createLoading = false;
+        });
+    };
+
+    $scope.cancelEditUser = function cancelEditUser() {
+        $scope.open = false;
+    };
+
+    $scope.removeUser = function removeUser(user) {
+        modal.user = user;
+        modal.view({
+            controller: 'RemoveUserController',
+            templateUrl: '../partials/remove-user.html'
+        }).activate();
+    };
+};
+module.exports.$inject = ["$scope", "users", "account", "modal"];
+
+},{}],16:[function(require,module,exports){
+'use strict';
+
+module.exports = function($http, $q, WS_ROOT_URL) {
+    var url = WS_ROOT_URL + 'users/';
+    var service = {};
+    var users;
+
+    service.getUsers = function getUsers() {
+        var deferred = $q.defer();
+
+        if(users) {
+            deferred.resolve(users);
+            return deferred.promise;
+        }
+
+        $http({
+            method: 'GET',
+            url: url
+        }).then(function(response) {
+            users = response.data;
+            deferred.resolve(response.data);
+        }, function() {
+            deferred.reject();
+        });
+
+        return deferred.promise;
+    };
+
+
+    service.createUser = function createUser(user) {
+        var deferred = $q.defer();
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: user
+        }).then(function(response) {
+            deferred.resolve(response.data);
+            users.push(response.data);
+        }, function() {
+        });
+
+        return deferred.promise;
+    };
+
+    service.updateUser = function updateUser(user) {
+        var deferred = $q.defer();
+
+        $http({
+            method: 'PUT',
+            url: url + user.id,
+            data: user
+        }).then(function(response) {
+
+            var position = users.indexOf(user);
+            users[position] = response.data;
+            deferred.resolve(response.data);
+
+        }, function() {
+        });
+
+        return deferred.promise;
+    };
+
+
+    service.deleteUser = function deleteUser(user) {
+        var deferred = $q.defer();
+
+        $http({
+            method: 'DELETE',
+            url: url + user.id
+        }).then(function(response) {
+
+            var position = users.indexOf(user);
+            users.splice(position, 1);
+            deferred.resolve(response.data);
+
+        }, function() {
+        });
+
+        return deferred.promise;
+    };
+
+    return service;
+};
+
+},{}],17:[function(require,module,exports){
+'use strict';
+
+angular.module('user', [])
+    .controller('UserController', require('./controllers/UserController'))
+    .controller('RemoveUserController', require('./controllers/RemoveUserController'))
+    .service('users', require('./services/users'))
+    .config(["$stateProvider", function ($stateProvider) {
+        $stateProvider.state('user', {
+            url: '/user',
+            templateUrl: 'app/user/partials/user.html',
+            controller: 'UserController'
+        });
+    }])
+;
+
+
+},{"./controllers/RemoveUserController":14,"./controllers/UserController":15,"./services/users":16}],18:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function() {
+
+};
+
+},{}],19:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
+module.exports = function($http, $q, WS_ROOT_URL) {
+    var service = {};
+    var url = WS_ROOT_URL + 'versions/';
+    var versions = [];
+
+    /**
+     * Get all versions for the project in params
+     * @param project
+     */
+    service.getVersionsByProjects = function getVersionsByProjects(project) {
+        var deferred = $q.defer();
+
+        if(versions[project.id]) {
+            deferred.resolve(versions[project.id]);
+            return deferred.promise;
+        }
+
+        $http({
+            method: 'GET',
+            url: url,
+            params: {
+                /*jshint camelcase:false*/
+                projectId: project.id
+            }
+        }).then(function(response) {
+            versions[project.id] = response.data;
+            deferred.resolve(response.data);
+        }, function() {
+
+        });
+
+        return deferred.promise;
+    };
+
+    /**
+     * Only in cache memory
+     */
+    service.getAllVersions = function getAllVersions() {
+        var agreVersions = [];
+
+        for(var i = 0; i<versions.length; i++) {
+            agreVersions.push(versions[i]);
+        }
+        return agreVersions;
+    };
+
+    return service;
+};
+module.exports.$inject = ["$http", "$q", "WS_ROOT_URL"];
+
+},{}],20:[function(require,module,exports){
+'use strict';
+
+angular.module('version', [])
+    .controller('VersionController', require('./controllers/VersionController'))
+    .service('versions', require('./services/versions'))
+    .config(["$stateProvider", function ($stateProvider) {
+        $stateProvider.state('version', {
+            url: '/version',
+            templateUrl: 'app/version/partials/version.html',
+            controller: 'VersionController'
+        });
+    }])
+;
+
+
+},{"./controllers/VersionController":18,"./services/versions":19}],21:[function(require,module,exports){
+'use strict';
+/*@ngInject*/
+module.exports = function (account) {
+    return {
+        replace: true,
+        controllerAs: 'NavigationController',
+        controller: function($scope, $state){
+
+            /**
+             * Test if the menu navigation must be displayed on this state
+             * @returns {boolean}
+             */
+            $scope.navigationActive = function navigationActive() {
+                return !$state.is('auth');
+            };
+
+            /**
+             * Logout the user, destroy the session and redirect to the auth page
+             */
+            $scope.logout = function logout() {
+                account.logout();
+                $state.go('auth');
+            };
+
+            /**
+             * Check if the item in the menu is linked to a state
+             * @param item
+             * @returns {boolean}
+             */
+            $scope.itemIsSelected = function itemIsSelected(item) {
+                return $state.current.name.indexOf(item) >= 0;
+            };
+
+            /**
+             * When the menu appear
+             */
+            $scope.appear = function appear() {
+                var user = account.getUser();
+                $scope.account = user;
+            };
+
+            /**
+             * Get the avatar from gravatar
+             * @returns {string}
+             */
+            $scope.getAvatar = function getAvatar() {
+                if($scope.account) {
+                    return 'https://secure.gravatar.com/avatar/' + CryptoJS.MD5($scope.account.email) + '?d=mm';
+                }
+            };
+
+        },
+        templateUrl: 'components/navigation/partials/heimdall-navigation.html'
+    };
+};
+module.exports.$inject = ["account"];
+
+},{}],22:[function(require,module,exports){
+'use strict';
+
+angular.module('navigation', [])
+    .directive('heimdallNavigation', require('./directives/heimdallNavigation.directive.js'))
+
+;
+
+
+},{"./directives/heimdallNavigation.directive.js":21}],23:[function(require,module,exports){
+'use strict';
+
+/*@ngInject*/
 module.exports = function ($state, loading) {
     return {
         restrict: 'E',
@@ -384,12 +928,12 @@ module.exports = function ($state, loading) {
                 testIfSecure(toState.name);
             });
         },
-        templateUrl: 'core/partials/loader.html'
+        templateUrl: '../partials/loader.html'
     };
 };
 module.exports.$inject = ["$state", "loading"];
 
-},{}],10:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /**
  * stateClassName directive
  * Bind a custom class based on the current state
@@ -436,7 +980,7 @@ module.exports = function ($state) {
 };
 module.exports.$inject = ["$state"];
 
-},{}],11:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 /*@ngInject*/
 module.exports = function (vModal) {
@@ -463,7 +1007,7 @@ module.exports = function (vModal) {
 };
 module.exports.$inject = ["vModal"];
 
-},{}],12:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
@@ -582,551 +1126,7 @@ module.exports = function ($q, account, projects, versions, builds, users) {
 module.exports.$inject = ["$q", "account", "projects", "versions", "builds", "users"];
 
 
-},{}],13:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function(projects, versions, builds) {
-    var self = this;
-    // Get count project
-    projects.getProjects().then(function(projects) {
-        console.log('here');
-        self.countProject = projects.length;
-        if(self.countProject) {
-            self.countVersion = versions.getAllVersions().length / self.countProject * 100 / 100;
-            self.countBuild = builds.getAllBuilds().length / self.countProject;
-        } else {
-            self.countVersion = 0;
-            self.countBuild = 0;
-        }
-    });
-
-    return self;
-};
-module.exports.$inject = ["projects", "versions", "builds"];
-
-},{}],14:[function(require,module,exports){
-'use strict';
-
-angular.module('home', [])
-    .controller('HomeController', require('./controllers/home.controller'))
-    .config(["$stateProvider", function ($stateProvider) {
-        $stateProvider.state('home', {
-            url: '/home',
-            templateUrl: 'home/partials/home.html',
-            controller: 'HomeController',
-            controllerAs: 'homeCtrl',
-            data: {pageTitle: 'Home'}
-        });
-    }])
-;
-
-
-},{"./controllers/home.controller":13}],15:[function(require,module,exports){
-'use strict';
-/*@ngInject*/
-module.exports = function (account) {
-    return {
-        replace: true,
-        controllerAs: 'NavigationController',
-        controller: function($scope, $state){
-
-            /**
-             * Test if the menu navigation must be displayed on this state
-             * @returns {boolean}
-             */
-            $scope.navigationActive = function navigationActive() {
-                return !$state.is('auth');
-            };
-
-            /**
-             * Logout the user, destroy the session and redirect to the auth page
-             */
-            $scope.logout = function logout() {
-                account.logout();
-                $state.go('auth');
-            };
-
-            /**
-             * Check if the item in the menu is linked to a state
-             * @param item
-             * @returns {boolean}
-             */
-            $scope.itemIsSelected = function itemIsSelected(item) {
-                return $state.current.name.indexOf(item) >= 0;
-            };
-
-            /**
-             * When the menu appear
-             */
-            $scope.appear = function appear() {
-                var user = account.getUser();
-                $scope.account = user;
-            };
-
-            /**
-             * Get the avatar from gravatar
-             * @returns {string}
-             */
-            $scope.getAvatar = function getAvatar() {
-                if($scope.account) {
-                    return 'https://secure.gravatar.com/avatar/' + CryptoJS.MD5($scope.account.email) + '?d=mm';
-                }
-            };
-
-        },
-        templateUrl: 'navigation/partials/heimdall-navigation.html'
-    };
-};
-module.exports.$inject = ["account"];
-
-},{}],16:[function(require,module,exports){
-'use strict';
-
-angular.module('navigation', [])
-    .directive('heimdallNavigation', require('./directives/heimdallNavigation.directive'))
-
-;
-
-
-},{"./directives/heimdallNavigation.directive":15}],17:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function($state, projects, account, builds) {
-    var self = this;
-
-    self.newProject = {};
-
-    projects.getProjects(account.getUser()).then(function(projects){
-        self.projects = projects;
-    });
-
-    self.getBuildsByProject = function getBuildsByProject(project) {
-        builds.getBuildsByProject(project).then(function(builds) {
-            project.builds = builds;
-        });
-    };
-
-    /**
-     * Open the panel for create project
-     */
-    self.newProject = function newProject() {
-        self.open = true;
-    };
-
-    /**
-     * Close the panel for create project
-     */
-    self.closeProject = function closeProject() {
-        self.open = false;
-    };
-
-    self.goBuild = function(build) {
-        $state.go('build', {
-            buildId: build.id
-        });
-    };
-
-    /**
-     * Create project
-     */
-    self.createProject = function createProject() {
-
-        if(self.newProjectForm.$invalid) {
-            return;
-        }
-
-        self.createLoading = true;
-        projects.createProject(self.newProject, account.getUser())
-            .then(function(project) {
-
-                // Build the build object to save
-                var build = {
-                    name: 'Default',
-                    config: ''
-                };
-                builds.createBuild(build, project).then(function() {
-                    self.createLoading = false;
-                    self.open = false;
-
-                }, function() {
-                    self.createLoading = false;
-                });
-            }, function() {
-                self.createLoading = false;
-            });
-    };
-
-    return self;
-};
-module.exports.$inject = ["$state", "projects", "account", "builds"];
-
-},{}],18:[function(require,module,exports){
-'use strict';
-
-angular.module('project', [])
-    .controller('ProjectController', require('./controllers/project.controller'))
-    .service('projects', require('./services/projects'))
-    .config(["$stateProvider", function ($stateProvider) {
-        $stateProvider.state('project', {
-            url: '/project',
-            templateUrl: 'project/partials/project.html',
-            controller: 'ProjectController',
-            controllerAs: 'projectCtrl'
-        });
-    }])
-;
-
-
-},{"./controllers/project.controller":17,"./services/projects":19}],19:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function($http, $q, WS_ROOT_URL, account) {
-    var service = {};
-    var url = WS_ROOT_URL + 'projects/';
-    var projects;
-
-    service.getProjects = function getProjects(user) {
-        var deferred = $q.defer();
-
-        if(!user) {
-            user = account.getUser();
-        }
-
-        if(projects) {
-            deferred.resolve(projects);
-            return deferred.promise;
-        }
-
-        $http({
-            method: 'GET',
-            url: url,
-            data: {
-                /*jshint camelcase:false*/
-                user_id: user.id
-            }
-        }).then(function(response) {
-            projects = response.data;
-            deferred.resolve(response.data);
-        }, function() {
-
-        });
-
-        return deferred.promise;
-    };
-
-    service.createProject = function createProject(project, user) {
-        var deferred = $q.defer();
-
-        $http({
-            method: 'POST',
-            url: url,
-            data: {
-                /*jshint camelcase:false*/
-                admin_id: user.id,
-                title: project.title
-            }
-        }).then(function(response) {
-
-            projects.push(response.data);
-            deferred.resolve(response.data);
-
-        }, function() {
-            deferred.reject();
-        });
-
-        return deferred.promise;
-    };
-
-    return service;
-};
-module.exports.$inject = ["$http", "$q", "WS_ROOT_URL", "account"];
-
-},{}],20:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function($scope, modal, users) {
-
-    /**
-     * The user has close the modal without any action
-     */
-    $scope.close = function close() {
-        modal.view().deactivate();
-    };
-
-    $scope.confirm = function confirm() {
-        users.deleteUser(modal.user).then(function() {
-            modal.view().deactivate();
-        });
-    };
-};
-module.exports.$inject = ["$scope", "modal", "users"];
-
-},{}],21:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function ($scope, users, account, modal) {
-    $scope.newUser = {};
-
-    users.getUsers().then(function (users) {
-        $scope.users = users;
-    });
-
-    $scope.isCurrentUser = function isCurrentUser(user) {
-        if (account.getUser().id === user.id) {
-            return true;
-        }
-        return false;
-    };
-
-    $scope.createUser = function createUser() {
-        if ($scope.newUserForm.$invalid) {
-            return;
-        }
-        $scope.createLoading = true;
-        users.createUser($scope.newUser)
-            .then(function () {
-                $scope.createLoading = false;
-                $scope.open = false;
-            }, function () {
-                $scope.createLoading = false;
-            });
-    };
-
-    $scope.editUser = function editUser(user) {
-        $scope.open = true;
-        $scope.newUser = angular.copy(user);
-    };
-
-    $scope.openNewUser = function openNewUser() {
-        $scope.open = true;
-        // Reset validation
-        $scope.newUserForm.$setPristine();
-        $scope.newUser = {};
-    };
-
-    $scope.validEditUser = function validEditUser() {
-        if ($scope.newUserForm.$invalid) {
-            return;
-        }
-
-        $scope.createLoading = true;
-        users.updateUser($scope.newUser).then(function (user) {
-            $scope.createLoading = false;
-            $scope.open = false;
-
-            // Update the scope
-            for (var i = 0; i < $scope.users.length; i++) {
-                if($scope.users[i].id === $scope.newUser.id) {
-                    $scope.users[i] = user;
-                }
-            }
-        }, function () {
-            $scope.createLoading = false;
-        });
-    };
-
-    $scope.cancelEditUser = function cancelEditUser() {
-        $scope.open = false;
-    };
-
-    $scope.removeUser = function removeUser(user) {
-        modal.user = user;
-        modal.view({
-            controller: 'RemoveUserController',
-            templateUrl: 'user/partials/remove-user.html'
-        }).activate();
-    };
-};
-module.exports.$inject = ["$scope", "users", "account", "modal"];
-
-},{}],22:[function(require,module,exports){
-'use strict';
-
-module.exports = function($http, $q, WS_ROOT_URL) {
-    var url = WS_ROOT_URL + 'users/';
-    var service = {};
-    var users;
-
-    service.getUsers = function getUsers() {
-        var deferred = $q.defer();
-
-        if(users) {
-            deferred.resolve(users);
-            return deferred.promise;
-        }
-
-        $http({
-            method: 'GET',
-            url: url
-        }).then(function(response) {
-            users = response.data;
-            deferred.resolve(response.data);
-        }, function() {
-            deferred.reject();
-        });
-
-        return deferred.promise;
-    };
-
-
-    service.createUser = function createUser(user) {
-        var deferred = $q.defer();
-
-        $http({
-            method: 'POST',
-            url: url,
-            data: user
-        }).then(function(response) {
-            deferred.resolve(response.data);
-            users.push(response.data);
-        }, function() {
-        });
-
-        return deferred.promise;
-    };
-
-    service.updateUser = function updateUser(user) {
-        var deferred = $q.defer();
-
-        $http({
-            method: 'PUT',
-            url: url + user.id,
-            data: user
-        }).then(function(response) {
-
-            var position = users.indexOf(user);
-            users[position] = response.data;
-            deferred.resolve(response.data);
-
-        }, function() {
-        });
-
-        return deferred.promise;
-    };
-
-
-    service.deleteUser = function deleteUser(user) {
-        var deferred = $q.defer();
-
-        $http({
-            method: 'DELETE',
-            url: url + user.id
-        }).then(function(response) {
-
-            var position = users.indexOf(user);
-            users.splice(position, 1);
-            deferred.resolve(response.data);
-
-        }, function() {
-        });
-
-        return deferred.promise;
-    };
-
-    return service;
-};
-
-},{}],23:[function(require,module,exports){
-'use strict';
-
-angular.module('user', [])
-    .controller('UserController', require('./controllers/UserController'))
-    .controller('RemoveUserController', require('./controllers/RemoveUserController'))
-    .service('users', require('./services/users'))
-    .config(["$stateProvider", function ($stateProvider) {
-        $stateProvider.state('user', {
-            url: '/user',
-            templateUrl: 'user/partials/user.html',
-            controller: 'UserController'
-        });
-    }])
-;
-
-
-},{"./controllers/RemoveUserController":20,"./controllers/UserController":21,"./services/users":22}],24:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function() {
-
-};
-
-},{}],25:[function(require,module,exports){
-'use strict';
-
-/*@ngInject*/
-module.exports = function($http, $q, WS_ROOT_URL) {
-    var service = {};
-    var url = WS_ROOT_URL + 'versions/';
-    var versions = [];
-
-    /**
-     * Get all versions for the project in params
-     * @param project
-     */
-    service.getVersionsByProjects = function getVersionsByProjects(project) {
-        var deferred = $q.defer();
-
-        if(versions[project.id]) {
-            deferred.resolve(versions[project.id]);
-            return deferred.promise;
-        }
-
-        $http({
-            method: 'GET',
-            url: url,
-            params: {
-                /*jshint camelcase:false*/
-                projectId: project.id
-            }
-        }).then(function(response) {
-            versions[project.id] = response.data;
-            deferred.resolve(response.data);
-        }, function() {
-
-        });
-
-        return deferred.promise;
-    };
-
-    /**
-     * Only in cache memory
-     */
-    service.getAllVersions = function getAllVersions() {
-        var agreVersions = [];
-
-        for(var i = 0; i<versions.length; i++) {
-            agreVersions.push(versions[i]);
-        }
-        return agreVersions;
-    };
-
-    return service;
-};
-module.exports.$inject = ["$http", "$q", "WS_ROOT_URL"];
-
-},{}],26:[function(require,module,exports){
-'use strict';
-
-angular.module('version', [])
-    .controller('VersionController', require('./controllers/VersionController'))
-    .service('versions', require('./services/versions'))
-    .config(["$stateProvider", function ($stateProvider) {
-        $stateProvider.state('version', {
-            url: '/version',
-            templateUrl: 'version/partials/version.html',
-            controller: 'VersionController'
-        });
-    }])
-;
-
-
-},{"./controllers/VersionController":24,"./services/versions":25}]},{},[1])
+},{}]},{},[1])
 
 
 //# sourceMappingURL=app.js.map

@@ -6,7 +6,7 @@ angular.module('project', [])
     .config(function ($stateProvider) {
         $stateProvider.state('project', {
             url: '/project',
-            templateUrl: 'partials/project.html',
+            templateUrl: 'app/project/partials/project.html',
             controller: 'ProjectController',
             controllerAs: 'projectCtrl'
         });
