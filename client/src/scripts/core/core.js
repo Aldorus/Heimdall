@@ -7,6 +7,7 @@ require('../app/version/version');
 require('../app/build/build');
 require('../app/user/user');
 require('../components/navigation/navigation');
+require('../components/bubblePan/bubblePan');
 
 angular.module('heimdall', [
     'ngTouch',
@@ -14,7 +15,8 @@ angular.module('heimdall', [
     'ui.router',
     'pascalprecht.translate',
     'vButton', 'vModal',
-    'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
+    'home', 'version', 'build', 'auth', 'project', 'user',
+    'bubblePan', 'navigation'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))

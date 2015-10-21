@@ -3,9 +3,10 @@
  */
 html {
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
   font-size: 14px;
-  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
   margin: 0;
   height: 100%;
   width: 100%; }
@@ -155,6 +156,14 @@ h1 {
   .form-crud .form-button {
     text-align: right;
     margin-top: 10px; }
+
+.v-align {
+  display: table;
+  width: 100%;
+  height: 100%; }
+  .v-align > span {
+    display: table-cell;
+    vertical-align: middle; }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }
@@ -1316,6 +1325,23 @@ h1 {
 
 .modal-remove-user .buttons {
   float: right; }
+
+.bubble {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+  .bubble .bubble-node {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    border-radius: 8000px;
+    background: #00AC6B;
+    border: 1px solid #00AC6B;
+    box-shadow: 0px 1px 3px #8a837e;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer; }
 
 .navigation {
   background: #2b2f3e;

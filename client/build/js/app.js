@@ -8,6 +8,7 @@ require('../app/version/version');
 require('../app/build/build');
 require('../app/user/user');
 require('../components/navigation/navigation');
+require('../components/bubblePan/bubblePan');
 
 angular.module('heimdall', [
     'ngTouch',
@@ -15,7 +16,8 @@ angular.module('heimdall', [
     'ui.router',
     'pascalprecht.translate',
     'vButton', 'vModal',
-    'home', 'version', 'build', 'auth', 'project', 'navigation', 'user'])
+    'home', 'version', 'build', 'auth', 'project', 'user',
+    'bubblePan', 'navigation'])
     .constant('WS_ROOT_URL', 'http://localhost:3000/api/')
     .directive('stateClassName', require('./directives/stateClassName'))
     .directive('loader', require('./directives/loader'))
@@ -45,7 +47,7 @@ angular.module('heimdall', [
 ;
 
 
-},{"../app/auth/auth":2,"../app/build/build":6,"../app/home/home":10,"../app/project/project":12,"../app/user/user":17,"../app/version/version":20,"../components/navigation/navigation":22,"./directives/loader":23,"./directives/stateClassName":24,"./factories/modal":25,"./services/loading.service.js":26}],2:[function(require,module,exports){
+},{"../app/auth/auth":2,"../app/build/build":6,"../app/home/home":10,"../app/project/project":12,"../app/user/user":17,"../app/version/version":20,"../components/bubblePan/bubblePan":21,"../components/navigation/navigation":25,"./directives/loader":26,"./directives/stateClassName":27,"./factories/modal":28,"./services/loading.service.js":29}],2:[function(require,module,exports){
 'use strict';
 
 angular.module('auth', [])
@@ -231,6 +233,35 @@ angular.module('build', [])
 /*@ngInject*/
 module.exports = function(build) {
     this.build = build;
+
+    // TODO Mock
+    this.build.config = {
+        nodes: [
+            {
+                id: 1,
+                name: 'Test1',
+                output: 2
+            },
+            {
+                id: 2,
+                name: 'Test2',
+                output: 3,
+                parent: 1
+            },
+            {
+                id: 3,
+                name: 'Test3',
+                output: 0,
+                parent: 2
+            },
+            {
+                id: 4,
+                name: 'Test4',
+                output: 0,
+                parent: 1
+            }
+        ]
+    };
 
     /**
      * Open the panel for create project
@@ -833,6 +864,59 @@ angular.module('version', [])
 
 },{"./controllers/VersionController":18,"./services/versions":19}],21:[function(require,module,exports){
 'use strict';
+
+angular.module('bubblePan', [])
+    .directive('bubblePan', require('./directives/bubblePan.directive.js'))
+    .directive('bubbleNode', require('./directives/bubbleNode.directive.js'))
+
+;
+
+
+
+},{"./directives/bubbleNode.directive.js":22,"./directives/bubblePan.directive.js":23}],22:[function(require,module,exports){
+'use strict';
+/*@ngInject*/
+module.exports = function () {
+    return {
+        replace: true,
+        controllerAs: 'bubbleNodeCtrl',
+        scope: {
+            node: '='
+        },
+        controller: function () {
+            this.bubbleTouched = function bubbleTouched(ev) {
+                console.log('touched');
+                var element = ev.target;
+                debugger;
+                element.addEventListener('dragstart', function(e) {
+                    console.log('test');
+                }, false);
+            };
+        },
+        templateUrl: 'components/bubblePan/partials/bubble-node.html'
+    };
+};
+
+},{}],23:[function(require,module,exports){
+'use strict';
+/*@ngInject*/
+module.exports = function () {
+    return {
+        replace: true,
+        controllerAs: 'BubblePanCtrl',
+        scope: {
+            nodes: '='
+        },
+        controller: function () {
+
+
+        },
+        templateUrl: 'components/bubblePan/partials/bubble-pan.html'
+    };
+};
+
+},{}],24:[function(require,module,exports){
+'use strict';
 /*@ngInject*/
 module.exports = function (account) {
     return {
@@ -889,7 +973,7 @@ module.exports = function (account) {
 };
 module.exports.$inject = ["account"];
 
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 angular.module('navigation', [])
@@ -897,8 +981,7 @@ angular.module('navigation', [])
 
 ;
 
-
-},{"./directives/heimdallNavigation.directive.js":21}],23:[function(require,module,exports){
+},{"./directives/heimdallNavigation.directive.js":24}],26:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
@@ -933,7 +1016,7 @@ module.exports = function ($state, loading) {
 };
 module.exports.$inject = ["$state", "loading"];
 
-},{}],24:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /**
  * stateClassName directive
  * Bind a custom class based on the current state
@@ -980,7 +1063,7 @@ module.exports = function ($state) {
 };
 module.exports.$inject = ["$state"];
 
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 /*@ngInject*/
 module.exports = function (vModal) {
@@ -1007,7 +1090,7 @@ module.exports = function (vModal) {
 };
 module.exports.$inject = ["vModal"];
 
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 /*@ngInject*/
