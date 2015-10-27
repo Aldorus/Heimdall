@@ -21,7 +21,7 @@ body{
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 a {
@@ -54,7 +54,7 @@ h1 {
 #wrapper {
     margin-left: $menuWidth;
     display: block;
-    height: 100%;
+    height: 100vh;
     overflow-x: hidden;
 }
 
@@ -142,10 +142,9 @@ h1 {
     position: absolute;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     transition: all 0.3s ease;
     background: white;
-
     &.open {
         left: $widthForm;
     }

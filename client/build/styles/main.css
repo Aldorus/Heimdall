@@ -17,7 +17,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%; }
+  height: 100vh; }
 
 a {
   background-color: transparent;
@@ -43,7 +43,7 @@ h1 {
 #wrapper {
   margin-left: 240px;
   display: block;
-  height: 100%;
+  height: 100vh;
   overflow-x: hidden; }
 
 .full-screen {
@@ -118,7 +118,7 @@ h1 {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
   background: white;
@@ -1172,6 +1172,12 @@ h1 {
 
 .page-build .builds-container {
   position: relative; }
+.page-build .bubble-container {
+  position: absolute;
+  bottom: 20px;
+  top: 60px;
+  left: 20px;
+  right: 20px; }
 
 .page-home .box {
   float: left;
@@ -1330,7 +1336,22 @@ h1 {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none; }
+          user-select: none;
+  position: relative;
+  width: 100%;
+  height: 100%; }
+  .bubble .bubble-tootlbox {
+    position: absolute;
+    bottom: 0;
+    z-index: 99; }
+    .bubble .bubble-tootlbox button {
+      border-radius: 200px;
+      height: 60px;
+      width: 60px; }
+  .bubble .bubble-pan {
+    width: 100%;
+    height: 100%;
+    position: relative; }
   .bubble .bubble-node {
     height: 150px;
     width: 150px;
@@ -1348,7 +1369,7 @@ h1 {
   display: block;
   float: left;
   width: 240px;
-  height: 100%;
+  height: 100vh;
   color: #FFFFFF;
   box-shadow: inset -5px 0px 8px rgba(0, 0, 0, 0.3);
   text-align: center;

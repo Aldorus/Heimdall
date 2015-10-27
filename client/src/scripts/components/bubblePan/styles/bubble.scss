@@ -2,9 +2,26 @@
 
 .bubble {
     user-select: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .bubble-tootlbox {
+      position: absolute;
+      bottom: 0;
+      z-index: 99;
+
+      button {
+        border-radius: 200px;
+        height: 60px;
+        width: 60px;
+      }
+    }
 
     .bubble-pan {
-
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
 
     .bubble-node {
@@ -19,5 +36,6 @@
         color: $lightTextColor;
         cursor: pointer;
     }
+
 }
 

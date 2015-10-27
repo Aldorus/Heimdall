@@ -8,14 +8,6 @@ module.exports = function () {
             node: '='
         },
         controller: function () {
-            this.bubbleTouched = function bubbleTouched(ev) {
-                console.log('touched');
-                var element = ev.target;
-                debugger;
-                element.addEventListener('dragstart', function(e) {
-                    console.log('test');
-                }, false);
-            };
         },
         templateUrl: 'components/bubblePan/partials/bubble-node.html'
     };

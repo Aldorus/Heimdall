@@ -42,8 +42,9 @@ router.post('/auth', function(req, res) {
     var user = models.User.getByEmail(req.body.email);
     if(user && user.password === req.body.password) {
         // We remove the password to response
-        delete user.password;
-        res.json(user);
+        var userWithoutPassword = user;
+        delete userWithoutPassword.password;
+        res.json(userWithoutPassword);
     } else {
         res.status(403).json({message: 'failed'});
     }

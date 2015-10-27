@@ -2,22 +2,23 @@
 /*@ngInject*/
 module.exports = function (account) {
     return {
-        replace: true,
-        controllerAs: 'NavigationController',
-        controller: function($scope, $state){
+        replace: false,
+        restrict: 'E',
+        controllerAs: 'navigationCtrl',
+        controller: function($state){
 
             /**
              * Test if the menu navigation must be displayed on this state
              * @returns {boolean}
              */
-            $scope.navigationActive = function navigationActive() {
+            this.navigationActive = function navigationActive() {
                 return !$state.is('auth');
             };
 
             /**
              * Logout the user, destroy the session and redirect to the auth page
              */
-            $scope.logout = function logout() {
+            this.logout = function logout() {
                 account.logout();
                 $state.go('auth');
             };
@@ -27,25 +28,25 @@ module.exports = function (account) {
              * @param item
              * @returns {boolean}
              */
-            $scope.itemIsSelected = function itemIsSelected(item) {
+            this.itemIsSelected = function itemIsSelected(item) {
                 return $state.current.name.indexOf(item) >= 0;
             };
 
             /**
              * When the menu appear
              */
-            $scope.appear = function appear() {
+            this.appear = function appear() {
                 var user = account.getUser();
-                $scope.account = user;
+                this.account = user;
             };
 
             /**
-             * Get the avatar from gravatar
+             * Get the avatar from gravatar service
              * @returns {string}
              */
-            $scope.getAvatar = function getAvatar() {
-                if($scope.account) {
-                    return 'https://secure.gravatar.com/avatar/' + CryptoJS.MD5($scope.account.email) + '?d=mm';
+            this.getAvatar = function getAvatar() {
+                if(this.account) {
+                    return 'https://secure.gravatar.com/avatar/' + CryptoJS.MD5(this.account.email) + '?d=mm';
                 }
             };
 

@@ -1,15 +1,14 @@
-<nav class="navigation" ng-if="navigationActive()" ng-init="appear()">
+<nav class="navigation" ng-if="navigationCtrl.navigationActive()" ng-init="navigationCtrl.appear()">
 
     <!--<div class="icon-profile"><span class="glyphicon glyphicon-user"></span></div>-->
-    <div class="icon-profile"><img ng-src="{{getAvatar()}}"></div>
-    <div>{{account.firstname}} {{account.name}} | <a href="#" ng-click="logout()">{{'Logout' | translate}}</a></div>
+    <div class="icon-profile"><img ng-src="{{navigationCtrl.getAvatar()}}"></div>
+    <div>{{navigationCtrl.account.firstname}} {{navigationCtrl.account.name}} | <a href="#" ng-click="navigationCtrl.logout()">{{'Logout' | translate}}</a></div>
 
     <ul>
-        <li><a ui-sref="home" ng-class="{'active': itemIsSelected('home')}"><span class="glyphicon glyphicon-home"></span>{{'Home' | translate}}</a></li>
-        <li><a ui-sref="project" ng-class="{'active': itemIsSelected('project')}"><span class="glyphicon glyphicon-star"></span>{{'Projects' | translate}}</a></li>
-        <!--<li><a ui-sref="version" ng-class="{'active': itemIsSelected('version')}"><span class="glyphicon glyphicon-briefcase"></span>{{'Version' | translate}}</a></li>-->
-        <li><a ui-sref="user" ng-class="{'active': itemIsSelected('user')}"><span class="glyphicon glyphicon-user"></span>{{'Users' | translate}}</a></li>
-        <li><a ui-sref="help" ng-class="{'active': itemIsSelected('help')}"><span class="glyphicon glyphicon-heart"></span>{{'Help' | translate}}</a></li>
+        <li><a ui-sref="home" ng-class="{'active': navigationCtrl.itemIsSelected('home')}"><span class="glyphicon glyphicon-home"></span>{{'Home' | translate}}</a></li>
+        <li><a ui-sref="project" ng-class="{'active': navigationCtrl.itemIsSelected('project')}"><span class="glyphicon glyphicon-star"></span>{{'Projects' | translate}}</a></li>
+        <li><a ui-sref="user" ng-class="{'active': navigationCtrl.itemIsSelected('user')}"><span class="glyphicon glyphicon-user"></span>{{'Users' | translate}}</a></li>
+        <li><a ui-sref="help" ng-class="{'active': navigationCtrl.itemIsSelected('help')}"><span class="glyphicon glyphicon-heart"></span>{{'Help' | translate}}</a></li>
     </ul>
 
     <div class="version">v1.0.0 - Copyright 2015</div>
