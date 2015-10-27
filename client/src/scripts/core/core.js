@@ -25,6 +25,7 @@ angular.module('heimdall', [
     .run(function ($rootScope, $state) {
         $rootScope.$state = $state;
     })
+
     .config(function ($urlRouterProvider, $translateProvider, $animateProvider) {
 
         // Remove animation on all ng-if and ng-repeat

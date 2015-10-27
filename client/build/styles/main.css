@@ -1120,6 +1120,15 @@ h1 {
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
 
+.page-build .builds-container {
+  position: relative; }
+.page-build .bubble-container {
+  position: absolute;
+  bottom: 20px;
+  top: 60px;
+  left: 20px;
+  right: 20px; }
+
 .page-auth, .page-root {
   background: url('../assets/home.jpg');
   background-size: cover;
@@ -1169,15 +1178,6 @@ h1 {
           font-size: 1rem;
           text-align: left;
           float: left; }
-
-.page-build .builds-container {
-  position: relative; }
-.page-build .bubble-container {
-  position: absolute;
-  bottom: 20px;
-  top: 60px;
-  left: 20px;
-  right: 20px; }
 
 .page-home .box {
   float: left;
