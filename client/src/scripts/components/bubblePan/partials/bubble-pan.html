@@ -2,7 +2,12 @@
     <div class="bubble-tootlbox">
         <button v-button><span class="glyphicon glyphicon-plus"></span></button>
     </div>
+
     <div class="bubble-pan">
-        <bubble-node ng-repeat="node in nodes"></bubble-node>
     </div>
+
+    <bubble-node
+            ng-repeat="node in nodes"
+            node="node"></bubble-node>
+
 </div>

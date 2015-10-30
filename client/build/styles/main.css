@@ -1120,15 +1120,6 @@ h1 {
     transform: perspective(140px) rotateY(180deg);
     opacity: 0; } }
 
-.page-build .builds-container {
-  position: relative; }
-.page-build .bubble-container {
-  position: absolute;
-  bottom: 20px;
-  top: 60px;
-  left: 20px;
-  right: 20px; }
-
 .page-auth, .page-root {
   background: url('../assets/home.jpg');
   background-size: cover;
@@ -1178,6 +1169,15 @@ h1 {
           font-size: 1rem;
           text-align: left;
           float: left; }
+
+.page-build .builds-container {
+  position: relative; }
+.page-build .bubble-container {
+  position: absolute;
+  bottom: 20px;
+  top: 60px;
+  left: 20px;
+  right: 20px; }
 
 .page-home .box {
   float: left;
@@ -1290,48 +1290,6 @@ h1 {
     .page-project .list-project .new-project:hover .new-project-label {
       color: #FFFFFF; }
 
-.page-user .wrapper {
-  position: relative; }
-  .page-user .wrapper .list-user .button-add {
-    float: right;
-    margin-bottom: 10px; }
-    .page-user .wrapper .list-user .button-add .glyphicon-plus {
-      padding-right: 15px; }
-  .page-user .wrapper .list-user table {
-    width: 100%; }
-    .page-user .wrapper .list-user table .header {
-      background: #00AC6B;
-      color: #FFFFFF;
-      border: 1px solid #00AC6B; }
-      .page-user .wrapper .list-user table .header th {
-        padding: 15px 0; }
-      .page-user .wrapper .list-user table .header .name {
-        width: 30%; }
-      .page-user .wrapper .list-user table .header .email {
-        width: 30%; }
-      .page-user .wrapper .list-user table .header .role {
-        width: 30%; }
-    .page-user .wrapper .list-user table td {
-      padding: 15px 0;
-      text-align: center;
-      border-left: 1px solid #00AC6B;
-      border-right: 1px solid #00AC6B;
-      border-bottom: 1px solid #00AC6B; }
-    .page-user .wrapper .list-user table .user-row .glyphicon {
-      color: #20815D;
-      margin: 0 5px;
-      font-size: 1.2rem;
-      cursor: pointer; }
-    .page-user .wrapper .list-user table .user-row.current-user td {
-      color: #E9003A; }
-  .page-user .wrapper .form-crud select {
-    width: 100%; }
-  .page-user .wrapper .form-crud input {
-    margin-bottom: 10px; }
-
-.modal-remove-user .buttons {
-  float: right; }
-
 .bubble {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -1353,15 +1311,11 @@ h1 {
     height: 100%;
     position: relative; }
   .bubble .bubble-node {
+    position: absolute;
+    top: 0;
     height: 150px;
     width: 150px;
-    position: absolute;
-    border-radius: 8000px;
-    background: #00AC6B;
-    border: 1px solid #00AC6B;
-    box-shadow: 0px 1px 3px #8a837e;
     text-align: center;
-    color: #FFFFFF;
     cursor: pointer; }
 
 .navigation {
@@ -1420,3 +1374,45 @@ h1 {
     bottom: 5px;
     font-size: 0.8rem;
     opacity: 0.7; }
+
+.page-user .wrapper {
+  position: relative; }
+  .page-user .wrapper .list-user .button-add {
+    float: right;
+    margin-bottom: 10px; }
+    .page-user .wrapper .list-user .button-add .glyphicon-plus {
+      padding-right: 15px; }
+  .page-user .wrapper .list-user table {
+    width: 100%; }
+    .page-user .wrapper .list-user table .header {
+      background: #00AC6B;
+      color: #FFFFFF;
+      border: 1px solid #00AC6B; }
+      .page-user .wrapper .list-user table .header th {
+        padding: 15px 0; }
+      .page-user .wrapper .list-user table .header .name {
+        width: 30%; }
+      .page-user .wrapper .list-user table .header .email {
+        width: 30%; }
+      .page-user .wrapper .list-user table .header .role {
+        width: 30%; }
+    .page-user .wrapper .list-user table td {
+      padding: 15px 0;
+      text-align: center;
+      border-left: 1px solid #00AC6B;
+      border-right: 1px solid #00AC6B;
+      border-bottom: 1px solid #00AC6B; }
+    .page-user .wrapper .list-user table .user-row .glyphicon {
+      color: #20815D;
+      margin: 0 5px;
+      font-size: 1.2rem;
+      cursor: pointer; }
+    .page-user .wrapper .list-user table .user-row.current-user td {
+      color: #E9003A; }
+  .page-user .wrapper .form-crud select {
+    width: 100%; }
+  .page-user .wrapper .form-crud input {
+    margin-bottom: 10px; }
+
+.modal-remove-user .buttons {
+  float: right; }
